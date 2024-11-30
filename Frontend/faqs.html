@@ -244,8 +244,8 @@
         faqData.forEach((item, index) => {
             faqAccordion.innerHTML += `
                 <div class="mb-3 border-bottom border-3 module-item border-white">
-                    <h5 class="text-dark" data-bs-toggle="collapse" data-bs-target="#faq${index + 1}" aria-expanded="false">
-                        <i class="${item.icon} faq-icon"></i>
+                    <h5 class="text-dark d-flex" data-bs-toggle="collapse" data-bs-target="#faq${index + 1}" aria-expanded="false">
+                        <i class="${item.icon} faq-icon me-3"></i>
                         ${item.question}
                     </h5>
                     <div id="faq${index + 1}" class="collapse" data-bs-parent="#faqAccordion">
