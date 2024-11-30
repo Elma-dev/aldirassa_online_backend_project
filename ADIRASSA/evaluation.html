@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+        defer></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <title>AdIrassa</title>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav d-flex justify-content-between">
+            <div class="nav__data ms-md-5 ms-2">
+                <div class="d-flex flex-column align-items-center nav__logo">
+                    <h4 class="mb-0">
+                        AdIrassa
+                    </h4>
+                    <small>
+                        online
+                    </small>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-menu-line nav__toggle-menu"></i>
+                    <i class="ri-close-line nav__toggle-close"></i>
+                </div>
+            </div>
+    
+            <!--=============== NAV MENU ===============-->
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <!-- Home Link -->
+                    <li>
+                        <a href="index.html" class="nav__link">Home</a>
+                    </li>
+    
+                    <!-- Courses Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            Courses <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-book-open-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Available Courses</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine Learning</a>
+                                        </li>
+                                        <li>
+                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine Learning</a>
+                                        </li>
+                                        <li>
+                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine Learning</a>
+                                        </li>
+                                        <li>
+                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of Machine Learning</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+    
+                    <!-- Resources Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            Resources <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-links-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Learning Materials</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="articles.html" class="dropdown__link">Articles</a>
+                                        </li>
+                                        <li>
+                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube Tutorials</a>
+                                        </li>
+                                        <li>
+                                            <a href="research_papers.html" class="dropdown__link">Research Papers</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+    
+                    <!-- My Progress Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            My Progress <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-road-map-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Learning Tools</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="learning_path.html" class="dropdown__link">My Learning Path</a>
+                                        </li>
+                                        <li>
+                                            <a href="exercises.html" class="dropdown__link">Exercises</a>
+                                        </li>
+                                        <li>
+                                            <a href="evaluation.html" class="dropdown__link">Evaluation</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-question-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Quizzes</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="ongoing_quizzes.html" class="dropdown__link">Ongoing Quizzes</a>
+                                        </li>
+                                        <li>
+                                            <a href="final_quiz.html" class="dropdown__link">Final Quiz</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+    
+                    <!-- Help/Support -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            Help & Support <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-chat-3-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Support</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="contact.html" class="dropdown__link">Chat with us</a>
+                                        </li>
+                                        <li>
+                                            <a href="faqs.html" class="dropdown__link">FAQs</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+    
+            <div class="nav__data">
+                <div class="nav__background">
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    
+    <section class="section d-flex flex-column justify-content-center align-items-center position-relative">
+        <h1 class="mb-4 text-center text-primary" id="quizTitle">AdIrassa Online</h1>
+        <!-- Quiz Container -->
+        <div id="quizContainer" class="col-lg-8 col-11">
+            <!-- The quiz content will be populated here by JavaScript -->
+        </div>
+        <!-- Submit Button -->
+        <div id="submitContainer" class="text-center mt-4">
+            <!-- Submit button will be added dynamically if the quiz is loaded -->
+        </div>
+    </section>
+    
+    <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4 pb-0">
+                <div class="modal-header border-light border-2 pt-0">
+                    <h4 class="modal-title text-primary">Your Quiz Results</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body position-relative">
+                    <div class="text-dark">
+                        <p class="mb-2"><strong class="text-primary">Score:</strong> <span id="scorePlaceholder">Loading...</span></p>
+                        <p class="mb-2"><strong class="text-primary">Strengths:</strong> Probability, Linear Algebra</p>
+                        <p class="mb-2"><strong class="text-primary">Weaknesses:</strong> Programming, etc.</p>
+                    </div>
+                    <div class="mt-4 d-flex justify-content-center">
+                        <a href="preview.html" class="btn btn-dark mb-2 d-flex align-items-center">See My Learning Path<i class="ri-route-fill ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        // Function to populate a single question
+        function populateQuestion(quizData, questionIndex) {
+            const quizContainer = document.getElementById('quizContainer');
+            const question = quizData.questions[questionIndex];
+
+            // Clear the container and add the question content
+            quizContainer.innerHTML = `
+                <h3 class="mb-4 text-center">${quizData.quiz_title}</h3>
+                <div class="mb-3 p-4 border rounded-4 border-white border-4">
+                    <h5 class="text-dark">Q${question.id}: ${question.question}</h5>
+                    <p class="text-secondary">${question.description}</p>
+                    <div class="mb-3">
+                        ${question.options.map(option => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="quizOption${question.id}" id="option${option.id}" value="${option.id}">
+                                <label class="form-check-label text-secondary" for="option${option.id}">
+                                    ${option.id}) ${option.text}
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-dark px-3 py-2" id="prevBtn" ${questionIndex === 0 ? 'disabled' : ''}>Previous</button>
+                    <button class="btn btn-dark px-3 py-2" id="nextBtn">${questionIndex === quizData.questions.length - 1 ? 'Submit' : 'Next'}</button>
+                </div>
+            `;
+
+            // Add event listeners for navigation buttons
+            document.getElementById('prevBtn').addEventListener('click', () => {
+                populateQuestion(quizData, questionIndex - 1);
+            });
+
+            document.getElementById('nextBtn').addEventListener('click', () => {
+                if (questionIndex === quizData.questions.length - 1) {
+                    submitQuiz(quizData);
+                } else {
+                    populateQuestion(quizData, questionIndex + 1);
+                }
+            });
+        }
+
+        // Function to handle quiz submission
+        function submitQuiz(quizData) {
+            const answers = {};
+            let allAnswered = true;
+
+            quizData.questions.forEach(question => {
+                const selectedOption = document.querySelector(`input[name="quizOption${question.id}"]:checked`);
+                if (!selectedOption) {
+                    allAnswered = false;
+                }
+                answers[question.id] = selectedOption ? selectedOption.value : null;
+            });
+
+            if (!allAnswered) {
+
+                const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+                resultsModal.show();
+                return;
+            }
+
+            let score = 0;
+            quizData.questions.forEach(question => {
+                if (answers[question.id] === question.correct_option) {
+                    score++;
+                }
+            });
+
+            // Update the modal content dynamically
+            const modalBody = document.querySelector('#resultsModal .modal-body');
+            modalBody.innerHTML = `
+                <p class="mb-2"><strong>Score:</strong> ${score}/${quizData.questions.length}</p>
+                <p class="mb-2"><strong>Strengths:</strong> Probability, Linear Algebra</p>
+                <p class="mb-2"><strong>Weaknesses:</strong> Programming, etc.</p>
+            `;
+
+            // Show the modal with results
+            const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+            resultsModal.show();
+        }
+
+        // Fetch the external JSON file and populate the first question
+        fetch('data/quiz_data.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Quiz Data:", data);
+                populateQuestion(data, 0); // Start with the first question
+            })
+            .catch(error => {
+                console.error("Error loading quiz data:", error);
+                document.getElementById('quizContainer').innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        Failed to load quiz data. Please try again later.
+                    </div>
+                `;
+            });
+    </script>
+  
+
+    <!--=============== MAIN JS ===============-->
+    <script src="assets/js/main.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <title>AdIrassa</title>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav d-flex justify-content-between">
+            <div class="nav__data ms-md-5 ms-2">
+                <div class="d-flex flex-column align-items-center nav__logo">
+                    <h4 class="mb-0">
+                        AdIrassa
+                    </h4>
+                    <small>
+                        online
+                    </small>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-menu-line nav__toggle-menu"></i>
+                    <i class="ri-close-line nav__toggle-close"></i>
+                </div>
+            </div>
+    
+            <!--=============== NAV MENU ===============-->
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <!-- Home Link -->
+                    <li>
+                        <a href="index.html" class="nav__link">Home</a>
+                    </li>
+    
+                    <!-- Courses Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            Courses <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-book-open-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Available Courses</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine Learning</a>
+                                        </li>
+                                        <li>
+                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine Learning</a>
+                                        </li>
+                                        <li>
+                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine Learning</a>
+                                        </li>
+                                        <li>
+                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of Machine Learning</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+    
+                    <!-- Resources Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            Resources <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-links-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Learning Materials</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="articles.html" class="dropdown__link">Articles</a>
+                                        </li>
+                                        <li>
+                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube Tutorials</a>
+                                        </li>
+                                        <li>
+                                            <a href="research_papers.html" class="dropdown__link">Research Papers</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+    
+                    <!-- My Progress Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            My Progress <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-road-map-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Learning Tools</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="learning_path.html" class="dropdown__link">My Learning Path</a>
+                                        </li>
+                                        <li>
+                                            <a href="exercises.html" class="dropdown__link">Exercises</a>
+                                        </li>
+                                        <li>
+                                            <a href="evaluation.html" class="dropdown__link">Evaluation</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-question-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Quizzes</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="ongoing_quizzes.html" class="dropdown__link">Ongoing Quizzes</a>
+                                        </li>
+                                        <li>
+                                            <a href="final_quiz.html" class="dropdown__link">Final Quiz</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+    
+                    <!-- Help/Support -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            Help & Support <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-chat-3-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Support</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="contact.html" class="dropdown__link">Chat with us</a>
+                                        </li>
+                                        <li>
+                                            <a href="faqs.html" class="dropdown__link">FAQs</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+    
+            <div class="nav__data">
+                <div class="nav__background">
+                </div>
+            </div>
+        </nav>
+    </header>
+      
+    <section class="section container mt-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 id="sectionTitle" class="text-primary"></h1>
+                <h4 id="sectionSubtitle" class="text-secondary mb-4"></h4>
+            </div>
+    
+            <div class="col-12">
+                <div id="contentContainer" class="p-4 border rounded-3 bg-light">
+                    <!-- Content will be dynamically loaded -->
+                </div>
+            </div>
+    
+            <div class="col-12 mt-4 text-center">
+                <h5>Ressources:</h5>
+                <div id="resourcesContainer" class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+                    <!-- Resources will be dynamically added -->
+                </div>
+            </div>
+    
+            <div class="col-12 text-center mt-4">
+                <button class="btn btn-primary px-4 py-2" id="exerciseButton">Exercises</button>
+            </div>
+        </div>
+    
+        <!-- Chatbot Toggle Button -->
+        <button id="chatbotToggle" class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 shadow">
+            <i class="ri-chat-3-line"></i>
+        </button>
+    
+        <!-- Chatbot -->
+        <div class="chatbot position-fixed bottom-0 end-0 m-3 bg-light border rounded-3 p-3 shadow d-none" id="chatbot">
+            <div class="chatbot-header d-flex justify-content-between align-items-center mb-2">
+                <strong>Chat with us</strong>
+                <button class="btn btn-sm btn-danger" id="closeChatbot">&times;</button>
+            </div>
+            <div id="chatMessages" class="chatbot-messages mb-3" style="max-height: 150px; overflow-y: auto;">
+                <!-- Messages will appear here -->
+            </div>
+            <div class="chatbot-input d-flex">
+                <input type="text" id="chatInput" class="form-control" placeholder="Type your message..." />
+                <button id="sendChat" class="btn btn-primary ms-2">Send</button>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Fetch data from external JSON file and populate the section
+        fetch('data/section_data.json')
+            .then((response) => response.json())
+            .then((data) => {
+                populateSection(data);
+            })
+            .catch((error) => console.error("Error loading section data:", error));
+    
+        // Populate section content dynamically
+        function populateSection(data) {
+            // Title and subtitle
+            document.getElementById("sectionTitle").textContent = data.title;
+            document.getElementById("sectionSubtitle").textContent = data.title;
+    
+            // Descriptions
+            const contentContainer = document.getElementById("contentContainer");
+            contentContainer.innerHTML = data.description
+                .map(
+                    (item) => `
+                    <div class="mb-4">
+                        <h5 class="text-primary">${item.heading}</h5>
+                        <p class="text-secondary">${item.content}</p>
+                    </div>
+                `
+                )
+                .join("");
+    
+            // Resources
+            const resourcesContainer = document.getElementById("resourcesContainer");
+            resourcesContainer.innerHTML = data.resources
+                .map(
+                    (resource) => `
+                    <a href="${resource.link}" target="_blank" class="btn btn-light border rounded-3 shadow-sm d-flex align-items-center gap-2">
+                        <i class="${resource.icon}"></i> ${resource.name}
+                    </a>
+                `
+                )
+                .join("");
+        }
+    
+        // Chatbot Logic
+        const chatbotToggle = document.getElementById("chatbotToggle");
+        const chatbot = document.getElementById("chatbot");
+        const closeChatbot = document.getElementById("closeChatbot");
+        const chatInput = document.getElementById("chatInput");
+        const chatMessages = document.getElementById("chatMessages");
+        const sendChat = document.getElementById("sendChat");
+    
+        // Toggle chatbot visibility
+        chatbotToggle.addEventListener("click", () => {
+            chatbot.classList.toggle("d-none");
+        });
+    
+        // Close chatbot
+        closeChatbot.addEventListener("click", () => {
+            chatbot.classList.add("d-none");
+        });
+    
+        // Send chat message
+        sendChat.addEventListener("click", () => {
+            const message = chatInput.value.trim();
+            if (message) {
+                // Add user message
+                chatMessages.innerHTML += `<div class="text-end text-primary mb-2"><strong>You:</strong> ${message}</div>`;
+    
+                // Simulate bot response
+                setTimeout(() => {
+                    chatMessages.innerHTML += `<div class="text-start text-secondary mb-2"><strong>Bot:</strong> I’ll get back to you soon.</div>`;
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+    
+                chatInput.value = "";
+            }
+        });
+    </script>
+    
+    <style>
+        /* Chatbot Styling */
+        .chatbot {
+            width: 300px;
+        }
+    
+        .chatbot-header {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            padding: 5px;
+        }
+    
+        .chatbot-messages {
+            background-color: #ffffff;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    
+        .chatbot-input input {
+            flex: 1;
+        }
+    
+        /* Chatbot Toggle Button */
+        #chatbotToggle {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    
+
+    <!--=============== MAIN JS ===============-->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
