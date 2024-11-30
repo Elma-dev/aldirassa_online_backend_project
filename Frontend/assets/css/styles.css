@@ -29,7 +29,7 @@
 
 
 ::selection {
-  background-color: var(--text-color)!important;
+  background-color: var(--text-color) !important;
   color: white;
   width: 0px;
 }
@@ -431,9 +431,15 @@ section {
   border-color: var(--first-color) !important;
 }
 
-.form-check-input:focus,.form-control:focus {
+.form-check-input:focus,
+.form-control:focus {
   outline: 0px;
   box-shadow: #635c5332 0px 0px 0px 0.25rem;
+}
+
+.chat-input:focus {
+  outline: 0px;
+  box-shadow:inset!important;
 }
 
 /* Styling the modal content */
@@ -443,7 +449,8 @@ section {
   background: #dfdddc;
   position: relative;
 }
-.custom-bg-top{
+
+.custom-bg-top {
   overflow: hidden;
   background: #e4e3e3;
   position: relative;
@@ -461,7 +468,7 @@ section {
   background-image: url('../media/morocco1.jpg');
   background-size: cover;
   background-position: center;
-  z-index:0;
+  z-index: 0;
   opacity: 0.9;
 }
 
@@ -488,7 +495,8 @@ section {
   position: relative;
   z-index: 2;
 }
-.faqs{
+
+.faqs {
   position: relative;
   z-index: 2;
 }
@@ -501,4 +509,24 @@ section {
 
 .module-item:hover {
   transform: translateY(-3px);
+}
+
+.chatbot {
+  width: 300px;
+  background-color: #ffffff;
+}
+
+.chatbot-messages {
+  overflow-y: auto;
+  padding: 10px;
+  height: 300px;
+}
+
+#chatbotToggle {
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
