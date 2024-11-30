@@ -439,7 +439,7 @@ section {
 
 .chat-input:focus {
   outline: 0px;
-  box-shadow:inset!important;
+  box-shadow: inset !important;
 }
 
 /* Styling the modal content */
@@ -529,4 +529,25 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.custom-bg-chat {
+  overflow: hidden;
+  background: #e4e3e3;
+  position: relative;
+}
+
+.custom-bg-chat::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -50px;
+  width: 300px;
+  height: 300px;
+  rotate: -25deg;
+  background-image: url('../media/morocco1.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  opacity: 0.05;
 }

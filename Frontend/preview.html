@@ -213,23 +213,27 @@
         </button>
 
         <!-- Chatbot -->
-        <div class="chatbot position-fixed bottom-0 end-0 m-3 border border-white border-4 rounded-3 bg-light p-2 d-none"
+        <div class="chatbot position-fixed custom-bg-chat bottom-0 end-0 m-3 border border-white border-4 rounded-3 bg-light p-2 d-none"
             id="chatbot">
-            <div class="chatbot-header d-flex justify-content-between align-items-center mb-2 mx-2">
-                <strong>Chat with us</strong>
-                <button class="border-0 btn-danger btn px-2 rounded-2" id="closeChatbot">
-                    <i class="ri-close-line"></i>
-                </button>
+            <div class="modal-body m-0 p-0">
+                <div class="chatbot-header d-flex justify-content-between align-items-center mb-2 mx-2">
+                    <strong>Chat with us</strong>
+                    <button class="border-0 btn-danger btn px-2 rounded-2" id="closeChatbot">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </div>
+                <div id="chatMessages" class="chatbot-messages" style="max-height: 250px; overflow-y: auto;">
+                </div>
+                <div
+                    class="input-group border-3 border border-gpt border rounded-3 bg-light position-absolute bottom-0 start-0">
+                    <input type="text" class="form-control py-2 px-3 bg-light border-0 " placeholder="Type a message..."
+                        id="chatInput" autocomplete="off" />
+                    <button class="border-0 btn-dark btn px-2 rounded-3 m-1" id="sendChat">
+                        <i class="ri-arrow-up-line"></i>
+                    </button>
+                </div>
             </div>
-            <div id="chatMessages" class="chatbot-messages mb-3" style="max-height: 250px; overflow-y: auto;">
-            </div>
-            <div class="input-group border-3 border border-gpt border rounded-3 bg-light position-absolute bottom-0 start-0">
-                <input type="text" class="form-control py-2 px-3 bg-light border-0 "
-                    placeholder="Type a message..." id="chatInput" autocomplete="off"/>
-                <button class="border-0 btn-dark btn px-2 rounded-3 m-1" id="sendChat">
-                    <i class="ri-arrow-up-line"></i>
-                </button>
-            </div>
+
         </div>
 
     </section>
