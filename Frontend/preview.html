@@ -315,36 +315,56 @@
             }
         });
 
-        function sendMessage() {
-            const message = chatInput.value.trim();
-            if (message) {
-                // Add user message
-                chatMessages.innerHTML += `<div class="text-end text-primary mb-2">${message}</div>`;
-                chatMessages.scrollTop = chatMessages.scrollHeight;
+    async function sendMessage() {
+    const message = chatInput.value.trim(); // Get user input
+    if (message) {
+        // Display user message in the chat
+        chatMessages.innerHTML += `<div class="text-end text-primary mb-2">${message}</div>`;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
 
-                // Simulate bot response
-                setTimeout(() => {
-                    displayBotResponse("Hi! How can I assist you?");
-                }, 1000);
+        // Clear the input field
+        chatInput.value = "";
 
-                chatInput.value = "";
+        // Call the backend API
+        try {
+            const response = await fetch("http://127.0.0.1:8000/ask", {
+             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+             },
+                body: JSON.stringify({ question: message }),
+                });
+
+            if (response.ok) {
+                const data = await response.json();
+                // Display the bot response letter by letter
+                displayBotResponse(data.response);
+            } else {
+                const errorData = await response.json();
+                displayBotResponse("Sorry, I encountered an error: " + errorData.detail);
             }
+        } catch (error) {
+            // Handle network or other errors
+            displayBotResponse("Sorry, something went wrong. Please try again later.");
         }
+    }
+}
 
         // Display bot response letter by letter
         function displayBotResponse(response) {
             let index = 0;
             const interval = setInterval(() => {
-                if (index < response.length) {
-                    chatMessages.innerHTML += response.charAt(index);
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                    index++;
-                } else {
-                    clearInterval(interval);
-                    chatMessages.innerHTML += `<br/>`;
-                }
-            }, 50);
+        if (index < response.length) {
+            chatMessages.innerHTML += response.charAt(index);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            index++;
+        } else {
+            clearInterval(interval);
+            chatMessages.innerHTML += `<br/>`; // Add a line break after the response
         }
+    }, 50); // Adjust typing speed here
+}
+
     </script>
 
 

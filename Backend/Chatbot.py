@@ -21,7 +21,7 @@ openai_api_key = os.getenv("OPENAI_API_KEY")
 if not openai_api_key:
     raise ValueError("OPENAI_API_KEY environment variable not set")
 
-model = ChatOpenAI(model_name="gpt.4o-mini")
+model = ChatOpenAI(model_name="gpt-4o-mini")
 
 class Topic(BaseModel):
   topic_name:str=Field(description='Topic Name')
