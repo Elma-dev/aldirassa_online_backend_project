@@ -175,7 +175,7 @@
             </div>
 
             <div class="nav__data">
-                <div class="nav__background">
+                <div class="nav__background" style="background-image: url('assets/media/twitermorocco.jpg');">
                 </div>
             </div>
         </nav>
@@ -237,6 +237,10 @@
         </div>
 
     </section>
+    <div class="custom-bg-top::before" style="background-image: url('assets/media/morocco1.jpg');">
+    </div>
+    <div class="custom-bg::after" style="background-image: url('assets/media/moroccoreversed.jpg');">
+    </div>
     <script>
         // Initialize Bootstrap Tooltip
         const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -327,7 +331,7 @@
 
         // Call the backend API
         try {
-            const response = await fetch("http://127.0.0.1:8000/ask", {
+            const response = await fetch("/ask", {
              method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -338,7 +342,7 @@
             if (response.ok) {
                 const data = await response.json();
                 // Display the bot response letter by letter
-                displayBotResponse(data.response);
+                displayBotResponse(data.answer);
             } else {
                 const errorData = await response.json();
                 displayBotResponse("Sorry, I encountered an error: " + errorData.detail);
