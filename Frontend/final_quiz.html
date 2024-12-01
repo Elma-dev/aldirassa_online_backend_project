@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include the same head content as evaluation.html -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Add CodeMirror for code editor -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <title>Exercises - AIDirassa</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav d-flex justify-content-between">
+            <div class="nav__data ms-md-5 ms-2">
+                <div class="d-flex flex-column align-items-center nav__logo">
+                    <h4 class="mb-0">
+                        AIDirassa
+                    </h4>
+                    <small>
+                        online
+                    </small>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-menu-line nav__toggle-menu"></i>
+                    <i class="ri-close-line nav__toggle-close"></i>
+                </div>
+            </div>
+
+            <!--=============== NAV MENU ===============-->
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <!-- Home Link -->
+                    <li>
+                        <a href="index.html" class="nav__link">Home</a>
+                    </li>
+
+                    <!-- Courses Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            Courses <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-book-open-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Available Courses</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine Learning</a>
+                                        </li>
+                                        <li>
+                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine Learning</a>
+                                        </li>
+                                        <li>
+                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine Learning</a>
+                                        </li>
+                                        <li>
+                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of Machine Learning</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Resources Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            Resources <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-links-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Learning Materials</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="articles.html" class="dropdown__link">Articles</a>
+                                        </li>
+                                        <li>
+                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube Tutorials</a>
+                                        </li>
+                                        <li>
+                                            <a href="research_papers.html" class="dropdown__link">Research Papers</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- My Progress Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            My Progress <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-road-map-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Learning Tools</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="learning_path.html" class="dropdown__link">My Learning Path</a>
+                                        </li>
+                                        <li>
+                                            <a href="exercises.html" class="dropdown__link">Exercises</a>
+                                        </li>
+                                        <li>
+                                            <a href="evaluation.html" class="dropdown__link">Evaluation</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-question-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Quizzes</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="ongoing_quizzes.html" class="dropdown__link">Ongoing Quizzes</a>
+                                        </li>
+                                        <li>
+                                            <a href="final_quiz.html" class="dropdown__link">Final Quiz</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Help/Support -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button">
+                            Help & Support <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                        </div>
+                        <div class="dropdown__container">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-chat-3-line"></i>
+                                    </div>
+                                    <span class="dropdown__title">Support</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="contact.html" class="dropdown__link">Chat with us</a>
+                                        </li>
+                                        <li>
+                                            <a href="faqs.html" class="dropdown__link">FAQs</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav__data">
+                <div class="nav__background">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="section d-flex flex-col umn justify-content-center align-items-center position-relative reveal_top">
+        <h1 class="mb-4 text-center text-primary arabic">Final Quiz</h1>
+        
+        <div class="col-lg-8 col-11">
+            <div id="quizContent" class="p-4 border border-4 border-white rounded-4 bg-glass-dark">
+                <!-- Quiz questions will be loaded here -->
+            </div>
+            
+            <div id="quizNavigation" class="text-center mt-4">
+                <button class="btn btn-dark px-4 me-2" id="prevBtn" disabled>Previous</button>
+                <button class="btn btn-dark px-4" id="nextBtn">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Modal -->
+    <div class="modal fade" id="resultsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4">
+                <div class="modal-header border-light border-2">
+                    <h4 class="modal-title text-primary">Quiz Results</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>Overall Score: <span id="overallScore"></span>%</h5>
+                    <div id="moduleScores"></div>
+                    <div class="mt-4 text-center">
+                        <a href="learning_path.html" class="btn btn-dark">Return to Learning Path</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let quizData = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+
+        async function loadQuiz() {
+            const coursePlanData = JSON.parse(localStorage.getItem('coursePlanData'));
+            const quizInputs = coursePlanData.learning_path.map(module => ({
+                module_name: module.module_name,
+                course_name: coursePlanData.course_name,
+                topics: module.topics
+            }));
+
+            try {
+                const response = await fetch('http://localhost:8000/generate_quiz', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(quizInputs)
+                });
+                
+                quizData = await response.json();
+                showQuestion(0);
+            } catch (error) {
+                console.error('Error generating quiz:', error);
+                document.getElementById('quizContent').innerHTML = `
+                    <div class="alert alert-danger">Failed to load quiz. Please try again.</div>
+                `;
+            }
+        }
+
+        function showQuestion(index) {
+            const currentModule = quizData[Math.floor(index / 5)];
+            const question = currentModule.questions[index % 5];
+            
+            document.getElementById('quizContent').innerHTML = `
+                <h4 class="mb-4">${currentModule.module_name}</h4>
+                <div class="question mb-4">
+                    <h5 class="mb-3">Question ${index + 1}</h5>
+                    <p>${question.question}</p>
+                </div>
+                <div class="options">
+                    ${question.options.map((option, i) => `
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="option${i}" value="${option}"
+                                ${(userAnswers[index] || []).includes(option) ? 'checked' : ''}>
+                            <label class="form-check-label" for="option${i}">${option}</label>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').textContent = 
+                index === getTotalQuestions() - 1 ? 'Submit' : 'Next';
+        }
+
+        function getTotalQuestions() {
+            return quizData.reduce((total, module) => total + module.questions.length, 0);
+        }
+
+        function saveCurrentAnswers() {
+            const selectedOptions = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(input => input.value);
+            userAnswers[currentQuestionIndex] = selectedOptions;
+        }
+
+        async function submitQuiz() {
+            try {
+                const response = await fetch('http://localhost:8000/correct-quiz', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userAnswers)
+                });
+                
+                const results = await response.json();
+                showResults(results);
+            } catch (error) {
+                console.error('Error submitting quiz:', error);
+            }
+        }
+
+        function showResults(results) {
+            document.getElementById('overallScore').textContent = results.overall_score.toFixed(1);
+            
+            const moduleScoresHtml = Object.entries(results.module_scores)
+                .map(([module, score]) => `
+                    <div class="mb-2">
+                        <strong>${module}:</strong> ${score.toFixed(1)}%
+                    </div>
+                `).join('');
+            
+            document.getElementById('moduleScores').innerHTML = moduleScoresHtml;
+            
+            const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+            resultsModal.show();
+        }
+
+        // Event Listeners
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            saveCurrentAnswers();
+            currentQuestionIndex--;
+            showQuestion(currentQuestionIndex);
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', async () => {
+            saveCurrentAnswers();
+            if (currentQuestionIndex < getTotalQuestions() - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            } else {
+                await submitQuiz();
+            }
+        });
+
+        // Initialize quiz when page loads
+        document.addEventListener('DOMContentLoaded', loadQuiz);
+    </script>
+
+    <!-- Main JS -->
+    <script src="assets/js/main.js" defer></script>
+</body>
+</html>

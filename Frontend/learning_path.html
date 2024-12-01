@@ -222,7 +222,7 @@
                     : '<p>No modules available.</p>'}
             </div>
             <div class="mt-4 col-12 d-flex justify-content-end">
-                <button data-bs-toggle="modal" data-bs-target="#finalquizModal" class="d-flex btn btn-dark px-4 py-2">Final Quiz <i class="ri-question-mark ms-2"></i></button>
+                <button id="startFinalQuiz" class="d-flex btn btn-dark px-4 py-2 arabic">الامتحان النهائي<i class="ri-question-mark ms-2"></i></button>
             </div>
         `;
 
@@ -296,43 +296,6 @@
             }
         });
     </script>
-
-<!-- Final Quiz Modal -->
-<div class="modal fade" id="finalquizModal" tabindex="-1" aria-labelledby="finalquizModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4">
-            <div class="modal-header border-light border-2">
-                <h4 class="modal-title text-primary" id="quizTitle">Final Quiz</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div id="quizContent">
-                    <!-- Quiz questions will be loaded here -->
-                </div>
-                <div id="quizNavigation" class="text-center mt-4" style="display: none;">
-                    <button class="btn btn-dark" id="prevQuestionBtn">Previous</button>
-                    <button class="btn btn-dark" id="nextQuestionBtn">Next</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Quiz Results Modal -->
-<div class="modal fade" id="quizResultsModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4">
-            <div class="modal-header border-light border-2">
-                <h4 class="modal-title text-primary">Quiz Results</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <h5>Overall Score: <span id="overallScore"></span>%</h5>
-                <div id="moduleScores"></div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
 // Add this after your existing JavaScript code
@@ -464,6 +427,28 @@ function showResults(results) {
 
 // Add event listener to the Final Quiz button
 document.querySelector('[data-bs-target="#finalquizModal"]').addEventListener('click', startFinalQuiz);
+</script>
+
+<script>
+    // Update the Final Quiz button click handler
+    document.querySelector('[data-bs-target="#finalquizModal"]').addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = 'final_quiz.html';
+    });
+</script>
+
+<script>
+// Replace existing quiz-related code with this handler
+document.getElementById('startFinalQuiz').addEventListener('click', () => {
+    // Store current course data for the quiz
+    const coursePlanData = JSON.parse(localStorage.getItem('coursePlanData'));
+    if (coursePlanData) {
+        localStorage.setItem('quizCoursePlan', JSON.stringify(coursePlanData));
+        window.location.href = 'final_quiz.html';
+    } else {
+        alert('Course plan data not found. Please complete the evaluation first.');
+    }
+});
 </script>
 
     <!--=============== MAIN JS ===============-->
