@@ -77,7 +77,7 @@ addEventListener('resize', removeStyle)
 const sr = ScrollReveal({
     distance: '30px',
     duration: 1800,
-    reset: true,
+    reset: false,
 });
 sr.reveal(`.reveal_top`, {
     origin: 'top',
