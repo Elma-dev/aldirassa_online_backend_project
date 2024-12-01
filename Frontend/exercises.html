@@ -178,6 +178,10 @@
     
     <section class="section d-flex flex-column justify-content-center align-items-center position-relative">
         <h1 class="mb-4 text-center text-primary">Exercises</h1>
+        <div class="col-md-12 text-center">
+            <img id="query-preloader" class="img-fluid mb-2" src="assets/media/preloader.gif" style="display: none;height: 40px;">
+            <h5 class="mb-3" id="query-state"></h5>
+        </div>
         
         <!-- Exercise Container -->
         <div id="exerciseContainer" class="col-lg-8 col-11">
@@ -222,6 +226,9 @@
             }
 
             try {
+                document.getElementById('query-state').innerText = "Loading exercises...";
+                document.getElementById('query-preloader').style.display = 'inline';
+
                 const response = await fetch('http://localhost:8000/generate-exercises', {
                     method: 'POST',
                     headers: { 
@@ -237,6 +244,8 @@
                 exercises = await response.json();
                 showExercise(0);
                 document.getElementById('submitExercises').classList.remove('d-none');
+                document.getElementById('query-preloader').style.display = 'none';
+                document.getElementById('query-state').innerText = "";
             } catch (error) {
                 console.error('Error fetching exercises:', error);
                 document.getElementById('exerciseContainer').innerHTML = `
@@ -244,6 +253,8 @@
                         Error loading exercises. Please try again later.
                     </div>
                 `;
+                document.getElementById('query-preloader').style.display = 'none';
+                document.getElementById('query-state').innerText = "Error loading exercises.";
             }
         });
 
