@@ -32,7 +32,7 @@
                     <i class="ri-close-line nav__toggle-close"></i>
                 </div>
             </div>
-    
+
             <!--=============== NAV MENU ===============-->
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
@@ -40,7 +40,7 @@
                     <li>
                         <a href="index.html" class="nav__link">Home</a>
                     </li>
-    
+
                     <!-- Courses Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -55,23 +55,27 @@
                                     <span class="dropdown__title">Available Courses</span>
                                     <ul class="dropdown__list ps-0">
                                         <li>
-                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine Learning</a>
+                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine Learning</a>
+                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine Learning</a>
+                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of Machine Learning</a>
+                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of
+                                                Machine Learning</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- Resources Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -89,7 +93,8 @@
                                             <a href="articles.html" class="dropdown__link">Articles</a>
                                         </li>
                                         <li>
-                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube Tutorials</a>
+                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube
+                                                Tutorials</a>
                                         </li>
                                         <li>
                                             <a href="research_papers.html" class="dropdown__link">Research Papers</a>
@@ -99,7 +104,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- My Progress Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -141,7 +146,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- Help/Support -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -168,15 +173,15 @@
                     </li>
                 </ul>
             </div>
-    
+
             <div class="nav__data">
                 <div class="nav__background">
                 </div>
             </div>
         </nav>
     </header>
-    
-    
+
+
     <section class="section d-flex flex-column justify-content-center align-items-center position-relative">
         <h1 class="mb-4 text-center text-primary" id="quizTitle">AdIrassa Online</h1>
         <!-- Quiz Container -->
@@ -188,7 +193,7 @@
             <!-- Submit button will be added dynamically if the quiz is loaded -->
         </div>
     </section>
-    
+
     <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4 pb-0">
@@ -198,18 +203,23 @@
                 </div>
                 <div class="modal-body position-relative">
                     <div class="text-dark">
-                        <p class="mb-2"><strong class="text-primary">Score:</strong> <span id="score">Loading...</span></p>
-                        <p class="mb-2"><strong class="text-primary">Strengths:</strong> <span id="strengths">Probability, Linear Algebra</span></p>
-                        <p class="mb-2"><strong class="text-primary">Weaknesses:</strong> <span id="weaknesses">Programming, etc.</span></p>
+                        <p class="mb-2"><strong class="text-primary">Score:</strong> <span id="score">Loading...</span>
+                        </p>
+                        <p class="mb-2"><strong class="text-primary">Strengths:</strong> <span
+                                id="strengths">Probability, Linear Algebra</span></p>
+                        <p class="mb-2"><strong class="text-primary">Weaknesses:</strong> <span
+                                id="weaknesses">Programming, etc.</span></p>
                     </div>
                     <div class="mt-4 d-flex justify-content-center">
-                        <a href="preview.html" class="btn btn-dark mb-2 d-flex align-items-center">See My Learning Path<i class="ri-route-fill ms-2"></i></a>
+                        <a href="../learning_path.html" class="btn btn-dark mb-2 d-flex align-items-center">See My
+                            Learning Path<i class="ri-route-fill ms-2"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+    </div>
+
 
     <script>
         const userAnswers = []
@@ -249,16 +259,16 @@
                     populateQuestion(quizData, skillIndex, questionIndex - 1);
                 }
             });
-
+            window.evaluationResult;
             document.getElementById('nextBtn').addEventListener('click', () => {
                 const selectedOption = document.querySelector(`input[name="quizOption${questionIndex}"]:checked`);
                 userAnswers.push(selectedOption.value[0]);
                 if (questionIndex === skill.mcq_questions.length - 1) {
                     if (skillIndex === quizData.related_skills.length - 1) {
-                        
+
                         submitQuiz(quizData);
                         evaluationData = JSON.parse(localStorage.getItem('evaluationData'));
-                        data = {"skills_assessement" : evaluationData, "user_answers": userAnswers}
+                        data = { "skills_assessement": evaluationData, "user_answers": userAnswers }
                         console.log("data :", data)
                         fetch('http://localhost:8000/skills-evaluation', {
                             method: 'POST',
@@ -270,23 +280,28 @@
                                 user_answers: userAnswers
                             })
                         })
-                        .then(response => response.json())
-                        .then(result => {
-                            console.log('Success:', result);
-                            document.getElementById("score").textContent = result.score;
-                            document.getElementById("strengths").textContent = result.strengths.length > 0 ? result.strengths : 'No strengths identified';
-                            document.getElementById("weaknesses").textContent = result.weaknesses.length > 0 ? result.weaknesses : 'No weaknesses identified';
-                            // Handle the result as needed
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
+                            .then(response => response.json())
+                            .then(result => {
+                                console.log('Success:', result);
+                                window.evaluationResult = result; // Store the result
+
+                                // Update UI elements
+                                document.getElementById("score").textContent = result.score;
+                                document.getElementById("strengths").textContent = result.strengths.length > 0 ? result.strengths : 'No strengths identified';
+                                document.getElementById("weaknesses").textContent = result.weaknesses.length > 0 ? result.weaknesses : 'No weaknesses identified';
+
+                                // Show the course plan button after evaluation
+                                document.querySelector('.btn-dark.mb-2').style.display = 'block';
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
 
 
-                    } else {             
+                    } else {
                         populateQuestion(quizData, skillIndex + 1, 0);
                     }
-                } else {                  
+                } else {
                     populateQuestion(quizData, skillIndex, questionIndex + 1);
                 }
             });
@@ -306,7 +321,7 @@
                     answers[question.question_text] = selectedOption ? selectedOption.value : null;
                 });
             });
-            
+
             if (!allAnswered) {
                 const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
                 resultsModal.show();
@@ -334,6 +349,35 @@
             const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
             resultsModal.show();
         }
+        function handleCoursePlanGeneration(event) {
+            event.preventDefault();
+            if (!window.evaluationResult) {
+            console.error('No evaluation result available');
+            return;
+            }
+
+            fetch('http://localhost:8000/generate-course-plan', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(window.evaluationResult)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Course Plan:', data);
+                // Store the course plan data in localStorage
+                localStorage.setItem('coursePlanData', JSON.stringify(data));
+                // Redirect to learning path page
+                window.location.href = '../Frontend/learning_path.html';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Add event listener to the button
+        document.querySelector('.btn-dark.mb-2').addEventListener('click', handleCoursePlanGeneration);
 
         // Fetch the external JSON file and populate the first question
         // fetch('data/quiz_data.json')
@@ -358,21 +402,21 @@
     </script>
 
     <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Retrieve the data object from localStorage
-        const evaluationData = JSON.parse(localStorage.getItem('evaluationData'));
-        if (evaluationData) {
-            console.log("Evaluation Data:", evaluationData);
-            populateQuestion(evaluationData, 0, 0); // Assuming populateQuestion is the function to populate data
-        } else {
-            console.log("No evaluation data found.");
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            // Retrieve the data object from localStorage
+            const evaluationData = JSON.parse(localStorage.getItem('evaluationData'));
+            if (evaluationData) {
+                console.log("Evaluation Data:", evaluationData);
+                populateQuestion(evaluationData, 0, 0); // Assuming populateQuestion is the function to populate data
+            } else {
+                console.log("No evaluation data found.");
+            }
 
-    });
+        });
 
-    // ...existing code...
-</script>
-  
+        // ...existing code...
+    </script>
+
 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js" defer></script>
