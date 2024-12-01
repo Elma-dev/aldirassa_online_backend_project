@@ -4,6 +4,21 @@
 
 The AIdirassa Online platform is a multi-agent powered platform designed to create a fully AI-generated learning pathway. This includes assessments, course pathways, topics, exercises, quizzes, and more. The platform leverages advanced AI agents to provide a personalized and dynamic learning experience.
 
+## Abstract
+
+### Background and Problem Statement
+Morocco's education system faces many challenges that hinder its effectiveness and accessibility. Despite significant government investment, poor infrastructure, teacher shortages, outdated curricula, and socio-economic disparities persist.
+
+### Impact and Proposed Solution
+The AIdirassa Online platform aims to revolutionize the educational experience by using AI agents to generate personalized learning content. This approach saves time and ensures that each student receives a tailored learning experience that adapts to their progress and needs.
+
+### Project Outcomes and Deliverables
+- A fully functional AI-powered learning platform.
+- Dynamic generation of learning content including assessments, course pathways, topics, exercises, and quizzes.
+- RESTful API endpoints for data management and user interactions.
+- Integration of AI models for content generation.
+- Efficient database management for user data and progress tracking.
+
 ## Workflow
 ![image](https://github.com/user-attachments/assets/7b37a4af-0339-4ed2-b876-7891162ed6b0)
 
@@ -11,10 +26,9 @@ The AIdirassa Online platform is a multi-agent powered platform designed to crea
 
 The frontend of the AIdirassa Online platform is designed to provide an intuitive and engaging user interface. Key features include:
 
-
 ### Technologies Used
 
-HTML,CSS,JavaScript
+HTML, CSS, JavaScript
 
 ## Backend
 
@@ -35,7 +49,6 @@ Check out our demo video (Video 1) to see the AIdirassa Online platform in actio
 ## Getting Started
 
 To get started with the AIdirassa Online platform, follow these steps:
-
 
 1. **Clone the Repository:**
 ```bash
