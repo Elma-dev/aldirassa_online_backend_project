@@ -16,6 +16,7 @@
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
   --body-font: "Poppins", sans-serif;
+  
   --normal-font-size: .938rem;
   --small-font-size: .813rem;
   --smaller-font-size: .75rem;
@@ -550,4 +551,6 @@ section {
   z-index: 0;
   opacity: 0.05;
 }
-.arabic{font-family: 'Droid Arabic Kufi', serif;}
+.arabic{
+  font-family: 'Droid Arabic Kufi', serif;
+}
