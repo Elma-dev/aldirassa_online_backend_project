@@ -47,6 +47,12 @@ async def read_index():
 async def read_index():
     with open("../Frontend/evaluation.html", "r") as file:
         return HTMLResponse(content=file.read(), status_code=200)
+    
+@app.get("/learningpath", response_class=HTMLResponse)
+async def read_index():
+    with open("../Frontend/learning_path.html", "r") as file:
+        return HTMLResponse(content=file.read(), status_code=200)
+
 
 @app.post("/chek-relevence")
 def check_relevence(query: str):
