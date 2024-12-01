@@ -11,18 +11,17 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
         defer></script>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <script src="https://unpkg.com/scrollreveal"></script>
 
-    <title>AIDirassa</title>
+    <title>AdIrassa</title>
 </head>
 
 <body>
-    <header class="header reveal_top">
+    <header class="header">
         <nav class="nav d-flex justify-content-between">
             <div class="nav__data ms-md-5 ms-2 reveal_top">
                 <div class="d-flex flex-column align-items-center nav__logo">
                     <h4 class="mb-0">
-                        AIDirassa
+                        AdIrassa
                     </h4>
                     <small>
                         online
@@ -33,7 +32,7 @@
                     <i class="ri-close-line nav__toggle-close"></i>
                 </div>
             </div>
-    
+
             <!--=============== NAV MENU ===============-->
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
@@ -55,23 +54,27 @@
                                     <span class="dropdown__title">Available Courses</span>
                                     <ul class="dropdown__list ps-0">
                                         <li>
-                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine Learning</a>
+                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine Learning</a>
+                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine Learning</a>
+                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of Machine Learning</a>
+                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of
+                                                Machine Learning</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- Resources Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -89,7 +92,8 @@
                                             <a href="articles.html" class="dropdown__link">Articles</a>
                                         </li>
                                         <li>
-                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube Tutorials</a>
+                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube
+                                                Tutorials</a>
                                         </li>
                                         <li>
                                             <a href="research_papers.html" class="dropdown__link">Research Papers</a>
@@ -99,7 +103,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- My Progress Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -141,7 +145,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- Help/Support -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -168,8 +172,8 @@
                     </li>
                 </ul>
             </div>
-    
-            <div class="nav__data reveal_top">
+
+            <div class="nav__data">
                 <div class="nav__background">
                 </div>
             </div>
@@ -178,15 +182,15 @@
     <section class="section d-flex flex-column justify-content-center align-items-center position-relative reveal_top">
         <h1 class="mb-4 text-center text-primary" id="quizTitle">AIDirassa Online</h1>
         <!-- Quiz Container -->
-        <div id="quizContainer" class="col-lg-8 col-11 reveal_top">
+        <div id="quizContainer" class="col-lg-8 col-11">
             <!-- The quiz content will be populated here by JavaScript -->
         </div>
         <!-- Submit Button -->
-        <div id="submitContainer" class="text-center mt-4 reveal_top">
+        <div id="submitContainer" class="text-center mt-4">
             <!-- Submit button will be added dynamically if the quiz is loaded -->
         </div>
     </section>
-    
+
     <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4 pb-0">
@@ -196,18 +200,23 @@
                 </div>
                 <div class="modal-body position-relative">
                     <div class="text-dark">
-                        <p class="mb-2"><strong class="text-primary">Score:</strong> <span id="score">Loading...</span></p>
-                        <p class="mb-2"><strong class="text-primary">Strengths:</strong> <span id="strengths">Probability, Linear Algebra</span></p>
-                        <p class="mb-2"><strong class="text-primary">Weaknesses:</strong> <span id="weaknesses">Programming, etc.</span></p>
+                        <p class="mb-2"><strong class="text-primary">Score:</strong> <span id="score">Loading...</span>
+                        </p>
+                        <p class="mb-2"><strong class="text-primary">Strengths:</strong> <span
+                                id="strengths">Probability, Linear Algebra</span></p>
+                        <p class="mb-2"><strong class="text-primary">Weaknesses:</strong> <span
+                                id="weaknesses">Programming, etc.</span></p>
                     </div>
                     <div class="mt-4 d-flex justify-content-center">
-                        <a href="preview.html" class="btn btn-dark mb-2 d-flex align-items-center">See My Learning Path<i class="ri-route-fill ms-2"></i></a>
+                        <a href="../learning_path.html" class="btn btn-dark mb-2 d-flex align-items-center">See My
+                            Learning Path<i class="ri-route-fill ms-2"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+    </div>
+
 
     <script>
         const userAnswers = []
@@ -219,14 +228,14 @@
 
             // Clear the container and add the question content
             quizContainer.innerHTML = `
-                <h3 class="mb-4 text-center arabic">${quizData.main_skill} - ${skill.related_skill_name}</h3>
-                <div dir="rtl" class="mb-3 p-4 border rounded-4 border-white border-4">
-                    <h5 class="text-dark arabic reveal_top">${questionIndex + 1}: ${question.question_text}</h5>
+                <h3 class="mb-4 text-center">${quizData.main_skill} - ${skill.related_skill_name}</h3>
+                <div class="mb-3 p-4 border rounded-4 border-white border-4">
+                    <h5 class="text-dark">Q${questionIndex + 1}: ${question.question_text}</h5>
                     <div class="mb-3">
                         ${question.options.map((option, index) => `
-                            <div class="form-check reveal_top" style="display: flex; align-items: center;">
-                                <input class="form-check-input" type="radio" name="quizOption${questionIndex}" id="option${index}" value="${option}" ${index === 0 ? 'checked' : ''} style="margin-left: 10px;">
-                                <label class="form-check-label text-secondary arabic" for="option${index}" style="margin-left: 10px;">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="quizOption${questionIndex}" id="option${index}" value="${option}" ${index === 0 ? 'checked' : ''}>
+                                <label class="form-check-label text-secondary" for="option${index}">
                                     ${option}
                                 </label>
                             </div>
@@ -247,16 +256,16 @@
                     populateQuestion(quizData, skillIndex, questionIndex - 1);
                 }
             });
-
+            window.evaluationResult;
             document.getElementById('nextBtn').addEventListener('click', () => {
                 const selectedOption = document.querySelector(`input[name="quizOption${questionIndex}"]:checked`);
                 userAnswers.push(selectedOption.value[0]);
                 if (questionIndex === skill.mcq_questions.length - 1) {
                     if (skillIndex === quizData.related_skills.length - 1) {
-                        
+
                         submitQuiz(quizData);
                         evaluationData = JSON.parse(localStorage.getItem('evaluationData'));
-                        data = {"skills_assessement" : evaluationData, "user_answers": userAnswers}
+                        data = { "skills_assessement": evaluationData, "user_answers": userAnswers }
                         console.log("data :", data)
                         fetch('http://localhost:8000/skills-evaluation', {
                             method: 'POST',
@@ -268,23 +277,28 @@
                                 user_answers: userAnswers
                             })
                         })
-                        .then(response => response.json())
-                        .then(result => {
-                            console.log('Success:', result);
-                            document.getElementById("score").textContent = result.score;
-                            document.getElementById("strengths").textContent = result.strengths.length > 0 ? result.strengths : 'No strengths identified';
-                            document.getElementById("weaknesses").textContent = result.weaknesses.length > 0 ? result.weaknesses : 'No weaknesses identified';
-                            // Handle the result as needed
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
+                            .then(response => response.json())
+                            .then(result => {
+                                console.log('Success:', result);
+                                evaluationResult = result; // Store the result
+
+                                // Update UI elements
+                                document.getElementById("score").textContent = result.score;
+                                document.getElementById("strengths").textContent = result.strengths.length > 0 ? result.strengths : 'No strengths identified';
+                                document.getElementById("weaknesses").textContent = result.weaknesses.length > 0 ? result.weaknesses : 'No weaknesses identified';
+
+                                // Show the course plan button after evaluation
+                                document.querySelector('.btn-dark.mb-2').style.display = 'block';
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
 
 
-                    } else {             
+                    } else {
                         populateQuestion(quizData, skillIndex + 1, 0);
                     }
-                } else {                  
+                } else {
                     populateQuestion(quizData, skillIndex, questionIndex + 1);
                 }
             });
@@ -304,7 +318,7 @@
                     answers[question.question_text] = selectedOption ? selectedOption.value : null;
                 });
             });
-            
+
             if (!allAnswered) {
                 const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
                 resultsModal.show();
@@ -332,6 +346,33 @@
             const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
             resultsModal.show();
         }
+        function handleCoursePlanGeneration(event) {
+            event.preventDefault();
+            if (!evaluationResult) {
+                console.error('No evaluation result available');
+                return;
+            }
+
+            fetch('http://localhost:8000/generate-course-plan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(evaluationResult)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Course Plan:', data);
+                    localStorage.setItem('coursePlanData', JSON.stringify(data));
+                    window.location.href = 'learningpath';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Add event listener to the button
+        document.querySelector('.btn-dark.mb-2').addEventListener('click', handleCoursePlanGeneration);
 
         // Fetch the external JSON file and populate the first question
         // fetch('data/quiz_data.json')
@@ -356,30 +397,19 @@
     </script>
 
     <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Retrieve the data object from localStorage
-        const evaluationData = JSON.parse(localStorage.getItem('evaluationData'));
-        if (evaluationData) {
-            console.log("Evaluation Data:", evaluationData);
-            populateQuestion(evaluationData, 0, 0); // Assuming populateQuestion is the function to populate data
-        } else {
-            console.log("No evaluation data found.");
-        }
+        document.addEventListener("DOMContentLoaded", () => {
+            // Retrieve the data object from localStorage
+            const evaluationData = JSON.parse(localStorage.getItem('evaluationData'));
+            if (evaluationData) {
+                console.log("Evaluation Data:", evaluationData);
+                populateQuestion(evaluationData, 0, 0); // Assuming populateQuestion is the function to populate data
+            } else {
+                console.log("No evaluation data found.");
+            }
 
-    });
+        });
+    </script>
 
-    function setLanguage(lang) {
-        document.documentElement.lang = lang;
-        if (lang === 'ar') {
-            document.body.setAttribute('dir', 'rtl');
-        } else {
-            document.body.removeAttribute('dir');
-        }
-    }
-
-    // ...existing code...
-</script>
-  
 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js" defer></script>

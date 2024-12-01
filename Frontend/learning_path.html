@@ -193,28 +193,34 @@
         // Function to populate the module content
         function populateModules(data) {
             const moduleContent = document.getElementById('moduleContent');
+            console.log('Populating modules with data:', data);
 
             // Generate the content dynamically
             const contentHTML = `
             <div class="col-lg-7 mb-4 mt-3">
-                <h2 class="text-primary">${data.title}</h2>
-                <p class="mb-3"><strong>Level:</strong> ${data.level}</p>
+                <h2 class="text-primary">${data.course_name}</h2>
+                <p class="mb-3"><strong>Level:</strong> ${data.student_level}</p>
             </div>
             <div class="col-lg-2 text-center mb-4 mt-3">
                 <p class="mb-3">Your Progress</p>
                 <canvas id="progressChart" width="100" height="100"></canvas>
             </div>
             <div class="col-12 d-flex flex-column">
-                ${data.modules
-                    .map(
-                        (module) => `
-                            <a href="preview.html" class="module-item d-flex col-12 mb-3 p-3 border rounded-3 border-white border-2">
-                                <i class="ri-separator me-2"></i>
-                                <span>${module.name}</span>
-                            </a>
-                        `
-                    )
-                    .join('')}
+                ${data.learning_path && data.learning_path.length > 0
+                    ? data.learning_path
+                        .map(
+                            (module, index) => `
+                                <div class="module-item d-flex flex-column col-12 mb-3 p-3 border rounded-3 border-white border-2" data-index="${index}">
+                                    <h4>${module.module_name}</h4>
+                                    <ul>
+                                        ${module.topics.map(topic => `<li>${topic}</li>`).join('')}
+                                    </ul>
+                                    <p><strong>الهدف من الوحدة:</strong> ${module.milestone}</p>
+                                </div>
+                            `
+                        )
+                        .join('')
+                    : '<p>No modules available.</p>'}
             </div>
             <div class="mt-4 col-12 d-flex justify-content-end">
                 <button data-bs-toggle="modal" data-bs-target="#finalquizModal" class="d-flex btn btn-dark px-4 py-2">Final Quiz <i class="ri-question-mark ms-2"></i></button>
@@ -223,6 +229,17 @@
 
             // Insert content into the container
             moduleContent.innerHTML = contentHTML;
+
+            // Add click event listeners to each module
+            document.querySelectorAll('.module-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const index = item.getAttribute('data-index');
+                    const selectedModule = data.learning_path[index];
+                    localStorage.setItem('selectedModule', JSON.stringify(selectedModule));
+                    localStorage.setItem('courseName', data.course_name);
+                    window.location.href = 'preview';
+                });
+            });
 
             // Initialize Chart.js with progress data
             renderProgressChart(data.progress);
@@ -263,27 +280,22 @@
                 }
             });
         }
-
-        // Fetch data from JSON and populate the modules
-        fetch('data/modules_data.json')
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                populateModules(data);
-            })
-            .catch((error) => {
-                console.error('Error loading module data:', error);
+        // Fetch data from localStorage and populate the modules
+        document.addEventListener("DOMContentLoaded", () => {
+            const coursePlanData = JSON.parse(localStorage.getItem('coursePlanData'));
+            console.log('Loaded course plan data from localStorage:', coursePlanData);
+            if (coursePlanData) {
+                populateModules(coursePlanData);
+            } else {
+                console.error('No course plan data found.');
                 const moduleContent = document.getElementById('moduleContent');
                 moduleContent.innerHTML = `
                 <div class="alert alert-danger" role="alert">
-                    Failed to load module data. Please try again later.
+                    Failed to load course plan data. Please try again later.
                 </div>
             `;
-            });
+            }
+        });
     </script>
 
 

@@ -5,7 +5,7 @@ from langchain_community.tools import BraveSearch
 from dotenv import load_dotenv
 
 class ResourceRecommendationAgent():
-    def __init__(self, num_results=3, request_delay=1): # add request_delay parameter
+    def __init__(self, num_results=2, request_delay=1): # add request_delay parameter
         load_dotenv()
         self.api_key = os.getenv('BRAVE_API')
         if not self.api_key:
