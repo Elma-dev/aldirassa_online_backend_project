@@ -135,7 +135,7 @@ a {
   opacity: 0;
 }
 
-@media screen and (max-width: 1118px) {
+@media screen and (max-width: 900px) {
   .nav__menu {
     background-color: var(--body-color);
     position: absolute;
@@ -272,7 +272,7 @@ a {
 }
 
 /* For large devices */
-@media screen and (min-width: 1118px) {
+@media screen and (min-width: 900px) {
 
   /* Nav */
   .nav {

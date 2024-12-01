@@ -233,7 +233,7 @@
                 document.getElementById('query-state').innerText = "جارٍ تحميل التمارين...";
                 document.getElementById('query-preloader').style.display = 'inline';
     
-                const response = await fetch('http://localhost:8000/generate-exercises', {
+                const response = await fetch(`${window.location.origin}/generate-exercises`, {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json'

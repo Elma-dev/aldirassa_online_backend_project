@@ -183,8 +183,9 @@
         <div class="d-flex col-8 justify-content-center align-items-center">
             <div class="col-8 row mx-0 px-0 reveal_top">
                 <div class="col-12 text-center">
-                    <h1 class="mb-3">AIDirassa</h1>
-                    <h5 class="mb-4 text-secondary">Online</h5>
+                    <img src="assets/media/logo.png" alt="" srcset="" style="max-width: 250px;">
+                    <!-- <h1 class="mb-3">AIDirassa</h1>
+                    <h5 class="mb-4 text-secondary">Online</h5> -->
                     <p class="mb-2 text-muted arabic">سؤال واحد بعيدًا عن النجاح الأكاديمي</p>
                 </div>
                 <div class="col-md-12 text-center reveal_top">
@@ -269,7 +270,7 @@
             if (message.trim() !== "") {
                 queryState.innerText = "التحقق من التعليمات الخاصة بك";
                 queryPreloader.style.display = 'inline';
-                fetch(`http://localhost:8000/chek-relevence?query=${encodeURIComponent(message)}`, {
+                fetch(`${window.location.origin}/chek-relevence?query=${encodeURIComponent(message)}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -282,7 +283,7 @@
                         if (data.message === 'Relevant') {
                             queryState.innerText = "جاري إنشاء تقييم مخصص لك";
                             queryPreloader.style.display = 'inline';
-                            fetch(`http://localhost:8000/skills-assessment?query=${encodeURIComponent(message)}`, {
+                            fetch(`${window.location.origin}/skills-assessment?query=${encodeURIComponent(message)}`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'

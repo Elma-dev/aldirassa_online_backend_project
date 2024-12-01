@@ -238,7 +238,7 @@
                 }));
                 console.log('Prepared quiz inputs:', quizInputs);
 
-                const response = await fetch('http://localhost:8000/generate_quiz', {
+                const response = await fetch(`${window.location.origin}/generate_quiz`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(quizInputs)
