@@ -52,7 +52,7 @@ To get started with the AIdirassa Online platform, follow these steps:
 
 1. **Clone the Repository:**
 ```bash
-https://github.com/Elma-dev/aldirassa_online_backend_project.git
+git clone https://github.com/Elma-dev/aldirassa_online_backend_project.git
 ```
 
 2. **Navigate to the Project Directory:**
