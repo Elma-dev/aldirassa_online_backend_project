@@ -160,7 +160,6 @@ a {
 
 .nav__link {
   color: var(--title-color);
-  font-weight: var(--font-semi-bold);
   padding: 1.25rem 1.5rem;
   display: flex;
   justify-content: space-between;
