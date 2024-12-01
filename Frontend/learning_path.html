@@ -193,314 +193,136 @@
 
 
     <script>
-        // Function to populate the module conten
-                function populateModules(data) {
-            const moduleContent = document.getElementById('moduleContent');
-            console.log('Populating modules with data:', data);
+    // Function to populate the module content
+    function populateModules(data) {
+        const moduleContent = document.getElementById('moduleContent');
+        if (!moduleContent) return;
+        console.log('Populating modules with data:', data);
         
-            // Translate student level to Arabic
-            let studentLevelArabic;
-            switch (data.student_level) {
-                case 'Intermediate':
-                    studentLevelArabic = 'متوسط';
-                    break;
-                case 'Advanced':
-                    studentLevelArabic = 'متقدم';
-                    break;
-                case 'Beginner':
-                    studentLevelArabic = 'مبتدئ';
-                    break;
-                default:
-                    studentLevelArabic = data.student_level;
-            }
+        // Translate student level to Arabic
+        const levelMap = {
+            'Intermediate': 'متوسط',
+            'Advanced': 'متقدم',
+            'Beginner': 'مبتدئ'
+        };
+        const studentLevelArabic = levelMap[data.student_level] || data.student_level;
         
-            // Generate the content dynamically
-            const contentHTML = `
-<<<<<<< HEAD
-            <div class="col-lg-7 mb-4 mt-3">
-                <h2 class="text-primary">${data.course_name}</h2>
-                <p class="mb-3"><strong>Level:</strong> ${data.student_level}</p>
-            </div>
+        // Generate the content dynamically
+        const contentHTML = `
             <div class="col-lg-2 text-center mb-4 mt-3">
-                <p class="mb-3">Your Progress</p>
+                <p class="mb-3 arabic" dir='rtl'>تقدمك</p>
                 <canvas id="progressChart" width="100" height="100"></canvas>
             </div>
-            <div class="col-12 d-flex flex-column">
-                ${data.learning_path && data.learning_path.length > 0
-                    ? data.learning_path
-                        .map(
-                            (module, index) => `
-                                <div class="module-item d-flex flex-column col-12 mb-3 p-3 border rounded-3 border-white border-2" data-index="${index}">
-                                    <h4>${module.module_name}</h4>
-                                    <ul>
-                                        ${module.topics.map(topic => `<li>${topic}</li>`).join('')}
-                                    </ul>
-                                    <p><strong>الهدف من الوحدة:</strong> ${module.milestone}</p>
-                                </div>
-                            `
-                        )
-                        .join('')
-                    : '<p>No modules available.</p>'}
+            <div class="col-lg-7 mb-4 mt-3" dir='rtl'>
+                <h2 class="text-primary arabic">${data.course_name}</h2>
+                <p class="mb-3 arabic"><strong>المستوى:</strong> ${studentLevelArabic}</p>
             </div>
-            <div class="mt-4 col-12 d-flex justify-content-end">
-                <button id="startFinalQuiz" class="d-flex btn btn-dark px-4 py-2 arabic">الامتحان النهائي<i class="ri-question-mark ms-2"></i></button>
+            <div class="col-12 d-flex flex-column">
+                ${data.learning_path?.length ? data.learning_path
+                    .map((module, index) => `
+                        <div class="module-item d-flex flex-column col-12 mb-3 p-3 border rounded-3 border-white border-2" data-index="${index}" dir='rtl'>
+                            <h4 class="arabic"><i class="ri-article-line me-2"></i> ${module.module_name}</h4>
+                            <ul class="arabic">
+                                ${module.topics.map(topic => `<li>${topic}</li>`).join('')}
+                            </ul>
+                            <p class="arabic"><strong>الهدف من الوحدة:</strong> ${module.milestone}</p>
+                        </div>
+                    `).join('') 
+                    : '<p class="arabic">لا توجد وحدات متاحة.</p>'}
+            </div>
+            <div class="mt-4 col-12 d-flex justify-content-start">
+                <button id="finalQuizBtn" class="d-flex btn btn-dark px-4 py-2 arabic">
+                    <i class="ri-question-mark me-2"></i> الاختبار النهائي
+                </button>
             </div>
         `;
+        
+        moduleContent.innerHTML = contentHTML;
 
-=======
-                <div class="col-lg-2 text-center mb-4 mt-3">
-                    <p class="mb-3 arabic" dir='rtl'>تقدمك</p>
-                    <canvas id="progressChart" width="100" height="100"></canvas>
-                </div>
-                <div class="col-lg-7 mb-4 mt-3" dir='rtl'>
-                    <h2 class="text-primary arabic">${data.course_name}</h2>
-                    <p class="mb-3 arabic"><strong>المستوى:</strong> ${studentLevelArabic}</p>
-                </div>
-                <div class="col-12 d-flex flex-column">
-                    ${data.learning_path && data.learning_path.length > 0
-                        ? data.learning_path
-                            .map(
-                                (module, index) => `
-                                    <div class="module-item d-flex flex-column col-12 mb-3 p-3 border rounded-3 border-white border-2" data-index="${index}" dir='rtl'>
-                                        <h4 class="arabic"><i class="ri-article-line me-2"></i> ${module.module_name}</h4>
-                                        <ul class="arabic">
-                                            ${module.topics.map(topic => `<li>${topic}</li>`).join('')}
-                                        </ul>
-                                        <p class="arabic"><strong>الهدف من الوحدة:</strong> ${module.milestone}</p>
-                                    </div>
-                                `
-                            )
-                            .join('')
-                        : '<p class="arabic">لا توجد وحدات متاحة.</p>'}
-                </div>
-                <div class="mt-4 col-12 d-flex justify-content-start">
-                    <button data-bs-toggle="modal" data-bs-target="#finalquizModal" class="d-flex btn btn-dark px-4 py-2 arabic"> <i class="ri-question-mark me-2"></i> الاختبار النهائي</button>
-                </div>
-            `;
-        
->>>>>>> e5a07a85a51789089bba46e485b14fe1a37c4b8a
-            // Insert content into the container
-            moduleContent.innerHTML = contentHTML;
-        
-            // Add click event listeners to each module
-            document.querySelectorAll('.module-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const index = item.getAttribute('data-index');
-                    const selectedModule = data.learning_path[index];
-                    localStorage.setItem('selectedModule', JSON.stringify(selectedModule));
-                    localStorage.setItem('courseName', data.course_name);
-                    window.location.href = 'preview';
-                });
+        // Add click event listeners after content is added
+        document.querySelectorAll('.module-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const index = item.getAttribute('data-index');
+                const selectedModule = data.learning_path[index];
+                localStorage.setItem('selectedModule', JSON.stringify(selectedModule));
+                localStorage.setItem('courseName', data.course_name);
+                window.location.href = 'preview';
             });
-        
-            // Initialize Chart.js with progress data
+        });
+
+        // Add final quiz button listener
+        const finalQuizBtn = document.getElementById('finalQuizBtn');
+        if (finalQuizBtn) {
+            finalQuizBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const coursePlanData = JSON.parse(localStorage.getItem('coursePlanData'));
+                if (coursePlanData) {
+                    localStorage.setItem('quizCoursePlan', JSON.stringify(coursePlanData));
+                    window.location.href = '/final_quiz';  // Updated to use the backend endpoint
+                } else {
+                    alert('يرجى إكمال التقييم أولاً قبل بدء الاختبار النهائي');
+                }
+            });
+        }
+
+        // Initialize progress chart
+        if (data.progress !== undefined) {
             renderProgressChart(data.progress);
         }
-        // Function to render the Chart.js donut chart
-        function renderProgressChart(progress) {
-            const ctx = document.getElementById('progressChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Completed', 'Remaining'],
-                    datasets: [
-                        {
-                            data: [progress, 100 - progress],
-                            backgroundColor: ['#a16e3a', '#e7e7e7'], // Using first-color and body-color
-                            hoverBackgroundColor: ['#3e2417', '#e0e0e0'], // Slightly darker for hover
-                            borderWidth: 2,
-                            borderColor: '#ffffff'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    cutout: '70%',
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function (tooltipItem) {
-                                    return `${tooltipItem.label}: ${tooltipItem.raw}%`;
-                                }
+    }
+
+    // Function to render the Chart.js donut chart
+    function renderProgressChart(progress) {
+        const ctx = document.getElementById('progressChart')?.getContext('2d');
+        if (!ctx) return;
+        
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Completed', 'Remaining'],
+                datasets: [{
+                    data: [progress, 100 - progress],
+                    backgroundColor: ['#a16e3a', '#e7e7e7'],
+                    hoverBackgroundColor: ['#3e2417', '#e0e0e0'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: '70%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return `${tooltipItem.label}: ${tooltipItem.raw}%`;
                             }
                         }
                     }
                 }
-            });
-        }
-        // Fetch data from localStorage and populate the modules
-        document.addEventListener("DOMContentLoaded", () => {
-            const coursePlanData = JSON.parse(localStorage.getItem('coursePlanData'));
-            console.log('Loaded course plan data from localStorage:', coursePlanData);
-            if (coursePlanData) {
-                populateModules(coursePlanData);
-            } else {
-                console.error('No course plan data found.');
-                const moduleContent = document.getElementById('moduleContent');
-                moduleContent.innerHTML = `
-                <div class="alert alert-danger" role="alert">
-                    Failed to load course plan data. Please try again later.
-                </div>
-            `;
             }
         });
-    </script>
+    }
 
-<script>
-// Add this after your existing JavaScript code
-let quizData = [];
-let currentQuestionIndex = 0;
-let userAnswers = [];
-
-// Function to start the final quiz
-async function startFinalQuiz() {
-    const coursePlanData = JSON.parse(localStorage.getItem('coursePlanData'));
-    const quizInputs = coursePlanData.learning_path.map(module => ({
-        module_name: module.module_name,
-        course_name: coursePlanData.course_name,
-        topics: module.topics
-    }));
-
-    try {
-        const response = await fetch('http://localhost:8000/generate_quiz', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(quizInputs)
-        });
+    // Initialize when DOM is loaded
+    document.addEventListener("DOMContentLoaded", () => {
+        const coursePlanData = JSON.parse(localStorage.getItem('coursePlanData'));
+        console.log('Loaded course plan data from localStorage:', coursePlanData);
         
-        quizData = await response.json();
-        currentQuestionIndex = 0;
-        userAnswers = [];
-        showQuestion(0);
-        document.getElementById('quizNavigation').style.display = 'block';
-    } catch (error) {
-        console.error('Error generating quiz:', error);
-    }
-}
-
-// Function to show a question
-function showQuestion(index) {
-    const currentModule = quizData[Math.floor(index / 5)];
-    const questionIndex = index % 5;
-    const question = currentModule.questions[questionIndex];
-    
-    const quizContent = document.getElementById('quizContent');
-    quizContent.innerHTML = `
-        <h5 class="mb-3">${currentModule.module_name}</h5>
-        <p class="mb-3">${question.question}</p>
-        <div class="options">
-            ${question.options.map((option, i) => `
-                <div class="form-check mb-2">
-                    <input class="form-check-input" type="checkbox" value="${option}" id="option${i}">
-                    <label class="form-check-label" for="option${i}">${option}</label>
-                </div>
-            `).join('')}
-        </div>
-    `;
-
-    // Update navigation buttons
-    const prevBtn = document.getElementById('prevQuestionBtn');
-    const nextBtn = document.getElementById('nextQuestionBtn');
-    prevBtn.disabled = index === 0;
-    nextBtn.textContent = index === getTotalQuestions() - 1 ? 'Submit' : 'Next';
-}
-
-function getTotalQuestions() {
-    return quizData.reduce((total, module) => total + module.questions.length, 0);
-}
-
-// Navigation functions
-document.getElementById('prevQuestionBtn').addEventListener('click', () => {
-    if (currentQuestionIndex > 0) {
-        saveCurrentAnswers();
-        currentQuestionIndex--;
-        showQuestion(currentQuestionIndex);
-    }
-});
-
-document.getElementById('nextQuestionBtn').addEventListener('click', async () => {
-    saveCurrentAnswers();
-    if (currentQuestionIndex < getTotalQuestions() - 1) {
-        currentQuestionIndex++;
-        showQuestion(currentQuestionIndex);
-    } else {
-        // Submit quiz
-        await submitQuiz();
-    }
-});
-
-function saveCurrentAnswers() {
-    const selectedOptions = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
-        .map(input => input.value);
-    userAnswers[currentQuestionIndex] = selectedOptions;
-}
-
-async function submitQuiz() {
-    try {
-        const response = await fetch('http://localhost:8000/correct-quiz', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userAnswers)
-        });
-        
-        const results = await response.json();
-        showResults(results);
-    } catch (error) {
-        console.error('Error submitting quiz:', error);
-    }
-}
-
-function showResults(results) {
-    document.getElementById('overallScore').textContent = results.overall_score.toFixed(1);
-    
-    const moduleScoresHtml = Object.entries(results.module_scores)
-        .map(([module, score]) => `
-            <div class="mb-2">
-                <strong>${module}:</strong> ${score.toFixed(1)}%
-            </div>
-        `).join('');
-    
-    document.getElementById('moduleScores').innerHTML = moduleScoresHtml;
-    
-    // Hide quiz modal and show results modal
-    const finalquizModal = bootstrap.Modal.getInstance(document.getElementById('finalquizModal'));
-    finalquizModal.hide();
-    
-    const resultsModal = new bootstrap.Modal(document.getElementById('quizResultsModal'));
-    resultsModal.show();
-}
-
-// Add event listener to the Final Quiz button
-document.querySelector('[data-bs-target="#finalquizModal"]').addEventListener('click', startFinalQuiz);
-</script>
-
-<script>
-    // Update the Final Quiz button click handler
-    document.querySelector('[data-bs-target="#finalquizModal"]').addEventListener('click', (e) => {
-        e.preventDefault();
-        window.location.href = 'final_quiz.html';
+        if (coursePlanData) {
+            populateModules(coursePlanData);
+        } else {
+            const moduleContent = document.getElementById('moduleContent');
+            if (moduleContent) {
+                moduleContent.innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        Failed to load course plan data. Please try again later.
+                    </div>
+                `;
+            }
+        }
     });
-</script>
-
-<script>
-// Replace existing quiz-related code with this handler
-document.getElementById('startFinalQuiz').addEventListener('click', () => {
-    // Store current course data for the quiz
-    const coursePlanData = JSON.parse(localStorage.getItem('coursePlanData'));
-    if (coursePlanData) {
-        localStorage.setItem('quizCoursePlan', JSON.stringify(coursePlanData));
-        window.location.href = 'final_quiz.html';
-    } else {
-        alert('Course plan data not found. Please complete the evaluation first.');
-    }
-});
 </script>
 
     <!--=============== MAIN JS ===============-->

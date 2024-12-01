@@ -266,7 +266,7 @@
         sendButton.addEventListener("click", () => {
             const message = searchInput.value;
             if (message.trim() !== "") {
-                queryState.innerText = "Checking your prompt";
+                queryState.innerText = "جاري التحقق من طلبك";
                 queryPreloader.style.display = 'inline';
                 fetch(`http://localhost:8000/chek-relevence?query=${encodeURIComponent(message)}`, {
                     method: 'POST',
@@ -279,7 +279,7 @@
                         console.log("first endpoint return : ", data);
                         queryPreloader.style.display = 'none';
                         if (data.message === 'Relevant') {
-                            queryState.innerText = "Generating a customized assessment for you";
+                            queryState.innerText = "جاري إنشاء تقييم مخصص لك";
                             queryPreloader.style.display = 'inline';
                             fetch(`http://localhost:8000/skills-assessment?query=${encodeURIComponent(message)}`, {
                                 method: 'POST',
