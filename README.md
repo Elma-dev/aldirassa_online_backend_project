@@ -54,3 +54,21 @@ To get started with the AIdirassa Online platform, follow these steps:
 ```bash
 https://github.com/Elma-dev/aldirassa_online_backend_project.git
 ```
+
+2. **Navigate to the Project Directory:**
+```bash
+cd aldirassa_online_backend_project/Backend
+```
+
+3. **Install the Required Dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Run the Application:**
+```bash
+uvicorn main:app --reload
+```
+
+5. **Access the Platform:**
+Open your web browser and go to [http://localhost:8000](http://localhost:8000) to access the home page (index.html).
