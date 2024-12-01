@@ -1,5 +1,11 @@
+
+<div align="center">
+  
 # AIdirassa Online Platform
-![image](https://github.com/user-attachments/assets/5f7f729d-1f34-49bd-a874-d0705afbd0ac)
+
+<img src="https://github.com/user-attachments/assets/c529b5a8-21c5-4325-912c-aee4f6df31c3" alt="AIdirassa Platform Logo" width="100"/>
+
+</div>
 
 ## Project Overview
 
@@ -39,7 +45,7 @@ The AIdirassa Online platform aims to revolutionize the educational experience b
 
 ---
 
-**2. Create Your Own Learning Path**
+**2. Create Your Learning Path**
 - **Goal**: Construct a tailored learning path based on the diagnostic results.
 - **Process**:
   - The platform suggests a **learning path generator** to create a curriculum suitable for the user, offering options like:
@@ -75,6 +81,7 @@ The frontend of the AIdirassa Online platform is designed to provide an intuitiv
 ![FastApi](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=black)
 ![FastApi](https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white)
 ![FastApi](https://img.shields.io/badge/CSS3-1572B6.svg?style=for-the-badge&logo=CSS3&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 
 ## Backend
 The backend of the AIdirassa Online platform handles data processing, AI model integration, and user management. Key components include:
@@ -86,16 +93,90 @@ The backend of the AIdirassa Online platform handles data processing, AI model i
 ### Technologies Used
 
 ![FastApi](https://img.shields.io/badge/FastAPI-009688.svg?style=for-the-badge&logo=FastAPI&logoColor=white)
-![FastApi](https://img.shields.io/badge/PostgreSQL-4169E1.svg?style=for-the-badge&logo=PostgreSQL&logoColor=white)
 ![FastApi](https://img.shields.io/badge/LangChain-1C3C3C.svg?style=for-the-badge&logo=LangChain&logoColor=white)
 ![FastApi](https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python&logoColor=white)
 ![FastApi](https://img.shields.io/badge/Google%20Colab-F9AB00.svg?style=for-the-badge&logo=Google-Colab&logoColor=white)
-![FastApi](https://img.shields.io/badge/Ollama-000000.svg?style=for-the-badge&logo=Ollama&logoColor=white)
 ## Demo Video
 
-Check out our demo video (Video 1) to see the AIdirassa Online platform in action. The video showcases the user interface, interactive learning modules, and the dynamic content generation powered by AI agents.
+Check out our demo video  to see the AIdirassa Online platform in action. The video showcases the user interface, interactive learning modules, and the dynamic content generation powered by AI agents.
+
+[![Watch the demo](https://drive.google.com/uc?export=view&id=1ex9dpK6kq2eawZvtmPb8w26dfMjF9-1J)](https://drive.google.com/file/d/1ex9dpK6kq2eawZvtmPb8w26dfMjF9-1J/view)
 
 ## Getting Started
+
+### Folder structure
+
+```markdown
+D:.
+|   .env
+|   .gitignore
+|   README.md
+|
++---Backend
+|   |   main.py
+|   |   requirements.txt
+|   |
+|   +---agents
+|   |   |   agent_chek_relevence.py 
+|   |   |   exercice_agent.py       
+|   |   |   learning_path_agent.py  
+|   |   |   qa_topic_agent.py       
+|   |   |   quiz_agent.py
+|   |   |   resource_recommendation_agent.py
+|   |   |   skills_assessement_evaluator_agent.py
+|   |   |   skills_assessment_agent.py
+|   |   |   topic_content_agent.py
+|   |   |
+|   +---entities
+|   |   |   exercice_agent_entities.py
+|   |   |   learning_path_entities.py
+|   |   |   qa_entities.py
+|   |   |   quiz_entities.py        
+|   |   |   skills_entities.py      
+|   |   |   skills_evaluator_entities.py
+|   |   |   topic_content_entities.py
+|   |   |
+|   |
+|   +---utils
+|   |   |   check_model_status.py   
+|   |   |   quiz_correction_utils.py|   |   |
+|  
++---Frontend
+|   |   contact.html
+|   |   evaluation.html
+|   |   exercises.html
+|   |   faqs.html
+|   |   final_quiz.html
+|   |   index.html
+|   |   learning_path.html
+|   |   preview.html
+|   |
+|   +---assets
+|   |   +---css
+|   |   |       styles.css
+|   |   |
+|   |   +---js
+|   |   |       main.js
+|   |   |
+|   |   \---media
+|   |           contact.svg
+|   |           faqs.svg
+|   |           logo.png
+|   |           morocco.jpg
+|   |           morocco1.jpg        
+|   |           morocco2.jpg        
+|   |           moroccoreversed.jpg
+|   |           preloader.gif
+|   |           twitermorocco.jpg
+|   |
+|   \---data
+|           modules_data.json
+|           quiz_data.json
+|           section_data.json
+|
+\---Notebooks
+        Agents_Workflow.ipynb
+```
 
 To get started with the AIdirassa Online platform, follow these steps:
 
