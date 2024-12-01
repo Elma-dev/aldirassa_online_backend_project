@@ -6,7 +6,7 @@ from entities.qa_entities import *
 
 # ExerciseGenerator Class
 class ExerciseGenerator:
-    def __init__(self, model, topics: List[Topic], num_exercises: int = 5):
+    def __init__(self, model, topics: List[Topic], num_exercises: int = 2):
         self.model = model
         self.topics = topics
         self.num_exercises = num_exercises

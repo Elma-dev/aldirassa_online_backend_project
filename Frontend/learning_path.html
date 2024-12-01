@@ -297,10 +297,174 @@
         });
     </script>
 
+<!-- Final Quiz Modal -->
+<div class="modal fade" id="finalquizModal" tabindex="-1" aria-labelledby="finalquizModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4">
+            <div class="modal-header border-light border-2">
+                <h4 class="modal-title text-primary" id="quizTitle">Final Quiz</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="quizContent">
+                    <!-- Quiz questions will be loaded here -->
+                </div>
+                <div id="quizNavigation" class="text-center mt-4" style="display: none;">
+                    <button class="btn btn-dark" id="prevQuestionBtn">Previous</button>
+                    <button class="btn btn-dark" id="nextQuestionBtn">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Quiz Results Modal -->
+<div class="modal fade" id="quizResultsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4">
+            <div class="modal-header border-light border-2">
+                <h4 class="modal-title text-primary">Quiz Results</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h5>Overall Score: <span id="overallScore"></span>%</h5>
+                <div id="moduleScores"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+// Add this after your existing JavaScript code
+let quizData = [];
+let currentQuestionIndex = 0;
+let userAnswers = [];
 
+// Function to start the final quiz
+async function startFinalQuiz() {
+    const coursePlanData = JSON.parse(localStorage.getItem('coursePlanData'));
+    const quizInputs = coursePlanData.learning_path.map(module => ({
+        module_name: module.module_name,
+        course_name: coursePlanData.course_name,
+        topics: module.topics
+    }));
 
+    try {
+        const response = await fetch('http://localhost:8000/generate_quiz', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(quizInputs)
+        });
+        
+        quizData = await response.json();
+        currentQuestionIndex = 0;
+        userAnswers = [];
+        showQuestion(0);
+        document.getElementById('quizNavigation').style.display = 'block';
+    } catch (error) {
+        console.error('Error generating quiz:', error);
+    }
+}
+
+// Function to show a question
+function showQuestion(index) {
+    const currentModule = quizData[Math.floor(index / 5)];
+    const questionIndex = index % 5;
+    const question = currentModule.questions[questionIndex];
+    
+    const quizContent = document.getElementById('quizContent');
+    quizContent.innerHTML = `
+        <h5 class="mb-3">${currentModule.module_name}</h5>
+        <p class="mb-3">${question.question}</p>
+        <div class="options">
+            ${question.options.map((option, i) => `
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" value="${option}" id="option${i}">
+                    <label class="form-check-label" for="option${i}">${option}</label>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    // Update navigation buttons
+    const prevBtn = document.getElementById('prevQuestionBtn');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+    prevBtn.disabled = index === 0;
+    nextBtn.textContent = index === getTotalQuestions() - 1 ? 'Submit' : 'Next';
+}
+
+function getTotalQuestions() {
+    return quizData.reduce((total, module) => total + module.questions.length, 0);
+}
+
+// Navigation functions
+document.getElementById('prevQuestionBtn').addEventListener('click', () => {
+    if (currentQuestionIndex > 0) {
+        saveCurrentAnswers();
+        currentQuestionIndex--;
+        showQuestion(currentQuestionIndex);
+    }
+});
+
+document.getElementById('nextQuestionBtn').addEventListener('click', async () => {
+    saveCurrentAnswers();
+    if (currentQuestionIndex < getTotalQuestions() - 1) {
+        currentQuestionIndex++;
+        showQuestion(currentQuestionIndex);
+    } else {
+        // Submit quiz
+        await submitQuiz();
+    }
+});
+
+function saveCurrentAnswers() {
+    const selectedOptions = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(input => input.value);
+    userAnswers[currentQuestionIndex] = selectedOptions;
+}
+
+async function submitQuiz() {
+    try {
+        const response = await fetch('http://localhost:8000/correct-quiz', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userAnswers)
+        });
+        
+        const results = await response.json();
+        showResults(results);
+    } catch (error) {
+        console.error('Error submitting quiz:', error);
+    }
+}
+
+function showResults(results) {
+    document.getElementById('overallScore').textContent = results.overall_score.toFixed(1);
+    
+    const moduleScoresHtml = Object.entries(results.module_scores)
+        .map(([module, score]) => `
+            <div class="mb-2">
+                <strong>${module}:</strong> ${score.toFixed(1)}%
+            </div>
+        `).join('');
+    
+    document.getElementById('moduleScores').innerHTML = moduleScoresHtml;
+    
+    // Hide quiz modal and show results modal
+    const finalquizModal = bootstrap.Modal.getInstance(document.getElementById('finalquizModal'));
+    finalquizModal.hide();
+    
+    const resultsModal = new bootstrap.Modal(document.getElementById('quizResultsModal'));
+    resultsModal.show();
+}
+
+// Add event listener to the Final Quiz button
+document.querySelector('[data-bs-target="#finalquizModal"]').addEventListener('click', startFinalQuiz);
+</script>
 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js" defer></script>
