@@ -474,6 +474,23 @@ let currentTopics = [];
             console.error('Error fetching resources:', error);
         });
     }
+    
+    document.getElementById("exerciseButton").addEventListener("click", () => {
+    // Get the current topics from the content
+    if (currentTopics && currentTopics.length > 0) {
+        // Store the full topic objects with both name and explanation
+        const topicsToStore = currentTopics.map(topic => ({
+            topic_name: topic.topic_name,
+            explanation: topic.explanation
+        }));
+        
+        localStorage.setItem('exerciseTopics', JSON.stringify(topicsToStore));
+        window.location.href = 'exercises';
+    } else {
+        alert('Please wait for topics to load before accessing exercises');
+    }
+});
+
     </script>
 
 
