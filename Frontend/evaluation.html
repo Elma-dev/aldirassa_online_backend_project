@@ -271,7 +271,7 @@
                         evaluationData = JSON.parse(localStorage.getItem('evaluationData'));
                         data = {"skills_assessement" : evaluationData, "user_answers": userAnswers}
                         console.log("data :", data)
-                        fetch('http://localhost:8000/skills-evaluation', {
+                        fetch(`${window.location.origin}/skills-evaluation`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -360,7 +360,7 @@
             queryState.innerText = "جارٍ إنشاء خطة الدورة الخاصة بك";
             queryPreloader.style.display = 'inline';
 
-            fetch('http://localhost:8000/generate-course-plan', {
+            fetch(`${window.location.origin}/generate-course-plan`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

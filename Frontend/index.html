@@ -270,7 +270,7 @@
             if (message.trim() !== "") {
                 queryState.innerText = "التحقق من التعليمات الخاصة بك";
                 queryPreloader.style.display = 'inline';
-                fetch(`http://localhost:8000/chek-relevence?query=${encodeURIComponent(message)}`, {
+                fetch(`${window.location.origin}/chek-relevence?query=${encodeURIComponent(message)}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -283,7 +283,7 @@
                         if (data.message === 'Relevant') {
                             queryState.innerText = "جاري إنشاء تقييم مخصص لك";
                             queryPreloader.style.display = 'inline';
-                            fetch(`http://localhost:8000/skills-assessment?query=${encodeURIComponent(message)}`, {
+                            fetch(`${window.location.origin}/skills-assessment?query=${encodeURIComponent(message)}`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'

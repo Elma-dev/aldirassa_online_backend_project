@@ -393,7 +393,7 @@
                 // Show preloader
                 document.getElementById("query-preloader1").style.display = 'inline';
     
-                fetch('http://localhost:8000/generate-topic-content', {
+                fetch(`${window.location.origin}/generate-topic-content`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
