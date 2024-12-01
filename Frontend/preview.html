@@ -181,7 +181,7 @@
 
         </nav>
     </header>
-        <section class="section container mt-5" dir="rtl">
+        <section class="section container my-5" dir="rtl">
         <div class="row">
             <div class="col-md-12 text-center">
                 <img id="query-preloader1" class="img-fluid mb-2" src="assets/media/preloader.gif" style="height: 40px;">
@@ -189,7 +189,7 @@
             </div>
             <div class="col-12 text-center">
                 <h1 id="sectionTitle" class="text-primary arabic"></h1>
-                <h4 id="sectionSubtitle" class="text-secondary mb-4 arabic"></h4>
+                <h5 id="sectionSubtitle" class="text-secondary mb-4 arabic"></h5>
             </div>
     
             <div class="col-12">
@@ -231,6 +231,10 @@
                     </button>
                 </div>
                 <div id="chatMessages" class="chatbot-messages mb-3" style="max-height: 350px; overflow-y: auto;">
+                    <div class="d-flex justify-content-center flex-column align-items-center">
+                        <img src="assets/media/logo.png" alt="" srcset="" style="max-width: 200px;">
+                        <h4 class="mb-4 text-secondary arabic">كيف يمكنني مساعدتك اليوم؟</h4>
+                    </div>
                 </div>
                 <div class="input-group border-3 border border-gpt rounded-3 bg-light">
                     <input type="text" class="form-control py-2 px-3 bg-light border-0 arabic" placeholder="اكتب رسالة..."
@@ -327,8 +331,17 @@
         async function sendMessage() {
             const message = chatInput.value.trim(); // Get user input
             if (message) {
+                // Remove placeholder when messages start to be sent
+                chatInput.placeholder = "";
+
+                // Remove initial content
+                const initialContent = document.querySelector("#chatMessages > div");
+                if (initialContent) {
+                    initialContent.remove();
+                }
+
                 // Display user message in the chat
-                chatMessages.innerHTML += `<div class="text-end text-primary mb-2 arabic">${message}</div>`;
+                chatMessages.innerHTML += `<div class="text-end text-primary mb-2 arabic rounded-4 bg-white p-2 border border-3 px-3"><i class="ri-user-line ms-2"></i>${message}</div>`;
                 chatMessages.scrollTop = chatMessages.scrollHeight;
     
                 // Clear the input field
