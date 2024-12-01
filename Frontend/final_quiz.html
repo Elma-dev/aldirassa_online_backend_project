@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +12,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <!-- Add Bootstrap JS with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <title>Exercises - AIDirassa</title>
 </head>
 <body>
@@ -176,8 +178,8 @@
         </nav>
     </header>
 
-    <section class="section d-flex flex-col umn justify-content-center align-items-center position-relative reveal_top">
-        <h1 class="mb-4 text-center text-primary arabic">Final Quiz</h1>
+    <section class="section d-flex flex-column justify-content-center align-items-center position-relative reveal_top">
+        <h1 class="mb-4 text-center text-primary arabic">الاختبار النهائي</h1>
         
         <div class="col-lg-8 col-11">
             <div id="quizContent" class="p-4 border border-4 border-white rounded-4 bg-glass-dark">
@@ -185,25 +187,25 @@
             </div>
             
             <div id="quizNavigation" class="text-center mt-4">
-                <button class="btn btn-dark px-4 me-2" id="prevBtn" disabled>Previous</button>
-                <button class="btn btn-dark px-4" id="nextBtn">Next</button>
+                <button class="btn btn-dark px-4 me-2 arabic" id="prevBtn" disabled>السابق</button>
+                <button class="btn btn-dark px-4 arabic" id="nextBtn">التالي</button>
             </div>
         </div>
     </section>
 
     <!-- Results Modal -->
-    <div class="modal fade" id="resultsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="resultsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4">
                 <div class="modal-header border-light border-2">
-                    <h4 class="modal-title text-primary">Quiz Results</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title text-primary arabic" id="resultsModalLabel">نتائج الاختبار</h4>
                 </div>
-                <div class="modal-body">
-                    <h5>Overall Score: <span id="overallScore"></span>%</h5>
-                    <div id="moduleScores"></div>
+                <div class="modal-body text-end" dir="rtl">
+                    <h5 class="arabic">النتيجة الإجمالية: <span id="overallScore"></span>%</h5>
+                    <div id="moduleScores" class="arabic"></div>
                     <div class="mt-4 text-center">
-                        <a href="learning_path.html" class="btn btn-dark">Return to Learning Path</a>
+                        <a href="/learningpath" class="btn btn-dark arabic">العودة إلى مسار التعلم</a>
                     </div>
                 </div>
             </div>
@@ -216,46 +218,74 @@
         let userAnswers = [];
 
         async function loadQuiz() {
-            const coursePlanData = JSON.parse(localStorage.getItem('coursePlanData'));
-            const quizInputs = coursePlanData.learning_path.map(module => ({
-                module_name: module.module_name,
-                course_name: coursePlanData.course_name,
-                topics: module.topics
-            }));
-
+            const quizContent = document.getElementById('quizContent');
+            quizContent.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"></div><p class="mt-2">جاري تحميل الاختبار...</p></div>';
+            
             try {
+                console.log('Loading quiz...');
+                const coursePlanData = JSON.parse(localStorage.getItem('quizCoursePlan'));
+                console.log('Retrieved course plan:', coursePlanData);
+
+                if (!coursePlanData) {
+                    throw new Error('No quiz course plan found');
+                }
+
+                const quizInputs = coursePlanData.learning_path.map(module => ({
+                    module_name: module.module_name,
+                    course_name: coursePlanData.course_name,
+                    topics: module.topics
+                }));
+                console.log('Prepared quiz inputs:', quizInputs);
+
                 const response = await fetch('http://localhost:8000/generate_quiz', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(quizInputs)
                 });
                 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
                 quizData = await response.json();
+                console.log('Received quiz data:', quizData);
+                
+                if (!quizData || quizData.length === 0) {
+                    throw new Error('No quiz questions received');
+                }
+                
                 showQuestion(0);
             } catch (error) {
-                console.error('Error generating quiz:', error);
-                document.getElementById('quizContent').innerHTML = `
-                    <div class="alert alert-danger">Failed to load quiz. Please try again.</div>
+                console.error('Error loading quiz:', error);
+                quizContent.innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">خطأ في تحميل الاختبار</h4>
+                        <p>${error.message}</p>
+                        <hr>
+                        <a href="learning_path.html" class="btn btn-dark">العودة إلى مسار التعلم</a>
+                    </div>
                 `;
             }
         }
 
         function showQuestion(index) {
+            console.log(`Showing question ${index + 1}`);
             const currentModule = quizData[Math.floor(index / 5)];
             const question = currentModule.questions[index % 5];
+            const totalQuestions = getTotalQuestions();
             
             document.getElementById('quizContent').innerHTML = `
-                <h4 class="mb-4">${currentModule.module_name}</h4>
-                <div class="question mb-4">
-                    <h5 class="mb-3">Question ${index + 1}</h5>
-                    <p>${question.question}</p>
+                <h4 class="mb-4 arabic" dir="rtl">${currentModule.module_name}</h4>
+                <div class="question mb-4" dir="rtl">
+                    <h5 class="mb-3 arabic">السؤال ${index + 1} من ${totalQuestions}</h5>
+                    <p class="arabic">${question.question}</p>
                 </div>
-                <div class="options">
+                <div class="options" dir="rtl">
                     ${question.options.map((option, i) => `
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" id="option${i}" value="${option}"
                                 ${(userAnswers[index] || []).includes(option) ? 'checked' : ''}>
-                            <label class="form-check-label" for="option${i}">${option}</label>
+                            <label class="form-check-label arabic" for="option${i}">${option}</label>
                         </div>
                     `).join('')}
                 </div>
@@ -263,8 +293,9 @@
 
             // Update navigation buttons
             document.getElementById('prevBtn').disabled = index === 0;
-            document.getElementById('nextBtn').textContent = 
-                index === getTotalQuestions() - 1 ? 'Submit' : 'Next';
+            const nextBtn = document.getElementById('nextBtn');
+            nextBtn.textContent = index === totalQuestions - 1 ? 'إرسال' : 'التالي';
+            nextBtn.classList.toggle('btn-success', index === totalQuestions - 1);
         }
 
         function getTotalQuestions() {
@@ -275,9 +306,12 @@
             const selectedOptions = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
                 .map(input => input.value);
             userAnswers[currentQuestionIndex] = selectedOptions;
+            console.log(`Saved answers for question ${currentQuestionIndex + 1}:`, selectedOptions);
         }
 
         async function submitQuiz() {
+            console.log('Submitting quiz...');
+            console.log('Final answers:', userAnswers);
             try {
                 const response = await fetch('http://localhost:8000/correct-quiz', {
                     method: 'POST',
@@ -286,6 +320,7 @@
                 });
                 
                 const results = await response.json();
+                console.log('Quiz results:', results);
                 showResults(results);
             } catch (error) {
                 console.error('Error submitting quiz:', error);
@@ -293,34 +328,51 @@
         }
 
         function showResults(results) {
+            console.log('Displaying results:', results);
             document.getElementById('overallScore').textContent = results.overall_score.toFixed(1);
             
             const moduleScoresHtml = Object.entries(results.module_scores)
                 .map(([module, score]) => `
-                    <div class="mb-2">
-                        <strong>${module}:</strong> ${score.toFixed(1)}%
+                    <div class="mb-3">
+                        <strong class="arabic">${module}:</strong> 
+                        <span class="arabic">${score.toFixed(1)}%</span>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar bg-${score >= 70 ? 'success' : score >= 50 ? 'warning' : 'danger'}" 
+                                role="progressbar" 
+                                style="width: ${score}%" 
+                                aria-valuenow="${score}" 
+                                aria-valuemin="0" 
+                                aria-valuemax="100">
+                            </div>
+                        </div>
                     </div>
                 `).join('');
             
             document.getElementById('moduleScores').innerHTML = moduleScoresHtml;
             
-            const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
-            resultsModal.show();
+            const resultsModal = document.getElementById('resultsModal');
+            if (resultsModal) {
+                const modal = new bootstrap.Modal(resultsModal);
+                modal.show();
+            }
         }
 
-        // Event Listeners
+        // Event Listeners with logging
         document.getElementById('prevBtn').addEventListener('click', () => {
+            console.log('Navigation: Previous');
             saveCurrentAnswers();
             currentQuestionIndex--;
             showQuestion(currentQuestionIndex);
         });
 
         document.getElementById('nextBtn').addEventListener('click', async () => {
+            console.log('Navigation: Next/Submit');
             saveCurrentAnswers();
             if (currentQuestionIndex < getTotalQuestions() - 1) {
                 currentQuestionIndex++;
                 showQuestion(currentQuestionIndex);
             } else {
+                console.log('Quiz complete, submitting...');
                 await submitQuiz();
             }
         });
@@ -332,4 +384,4 @@
     <!-- Main JS -->
     <script src="assets/js/main.js" defer></script>
 </body>
-</html>
+</html>  

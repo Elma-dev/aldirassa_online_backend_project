@@ -268,7 +268,11 @@
         sendButton.addEventListener("click", () => {
             const message = searchInput.value;
             if (message.trim() !== "") {
+<<<<<<< HEAD
+                queryState.innerText = "جاري التحقق من طلبك";
+=======
                 queryState.innerText = "التحقق من التعليمات الخاصة بك";
+>>>>>>> 290fb5c0c7d8cbbe074de871f92f8a2cb70f3ea0
                 queryPreloader.style.display = 'inline';
                 fetch(`http://localhost:8000/chek-relevence?query=${encodeURIComponent(message)}`, {
                     method: 'POST',

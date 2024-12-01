@@ -64,6 +64,11 @@ async def read_exercises():
     with open("../Frontend/exercises.html", "r", encoding="utf-8") as file:
         return HTMLResponse(content=file.read(), status_code=200)
 
+@app.get("/final_quiz", response_class=HTMLResponse)
+async def read_final_quiz():
+    with open("../Frontend/final_quiz.html", "r", encoding="utf-8") as file:
+        return HTMLResponse(content=file.read(), status_code=200)
+
 @app.post("/chek-relevence")
 def check_relevence(query: str):
     result = check_relevence_agent(model,query)
@@ -152,7 +157,7 @@ async def generate_quiz(quiz_inputs: List[QuizInput]):
     items = []
     for quiz_input in quiz_inputs:
         try:
-            quiz_content = quiz_content_agent.generate_quiz_content(quiz_input, 5)
+            quiz_content = quiz_content_agent.generate_quiz_content(quiz_input, 1)
             items.append(quiz_content)
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
