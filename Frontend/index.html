@@ -10,13 +10,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
 
     <title>AdIrassa</title>
 </head>
 
 <body>
-    <header class="header">
+    <header class="header reveal_top">
         <nav class="nav d-flex justify-content-between">
             <div class="nav__data ms-md-5 ms-2">
                 <div class="d-flex flex-column align-items-center nav__logo">
@@ -32,7 +33,7 @@
                     <i class="ri-close-line nav__toggle-close"></i>
                 </div>
             </div>
-    
+
             <!--=============== NAV MENU ===============-->
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
@@ -40,7 +41,7 @@
                     <li>
                         <a href="index.html" class="nav__link">Home</a>
                     </li>
-    
+
                     <!-- Courses Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -55,23 +56,27 @@
                                     <span class="dropdown__title">Available Courses</span>
                                     <ul class="dropdown__list ps-0">
                                         <li>
-                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine Learning</a>
+                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine Learning</a>
+                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine Learning</a>
+                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of Machine Learning</a>
+                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of
+                                                Machine Learning</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- Resources Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -89,7 +94,8 @@
                                             <a href="articles.html" class="dropdown__link">Articles</a>
                                         </li>
                                         <li>
-                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube Tutorials</a>
+                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube
+                                                Tutorials</a>
                                         </li>
                                         <li>
                                             <a href="research_papers.html" class="dropdown__link">Research Papers</a>
@@ -99,7 +105,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- My Progress Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -141,7 +147,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- Help/Support -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -168,24 +174,24 @@
                     </li>
                 </ul>
             </div>
-    
+
             <div class="nav__data">
                 <div class="nav__background">
                 </div>
             </div>
         </nav>
     </header>
-    
-    <section class="section d-flex flex-column justify-content-center align-items-center position-relative">
+
+    <section class="section d-flex flex-column justify-content-center align-items-center position-relative reveal_top">
         <!-- Buttons in the top-right -->
-        <div class="position-absolute top-0 end-0 m-2 mt-5 pt-5">
+        <div class="position-absolute top-0 end-0 m-2 mt-5 pt-5 reveal_right">
             <button class="btn btn-sm border border-dark border-2 rounded-2 btn-dark me-2">English</button>
             <button class="btn btn-sm border border-dark border-2 rounded-2 btn-outline-dark me-2">Arabic</button>
             <button class="btn btn-sm border border-dark border-2 rounded-2 btn-outline-dark">French</button>
         </div>
 
         <!-- Content -->
-        <div class="text-center row d-flex justify-content-center">
+        <div class="text-center row d-flex justify-content-center reveal_top">
             <!-- Logo and Tagline -->
             <div class="col-10">
                 <h1 class="mb-3">AdIrassa</h1>
@@ -193,7 +199,7 @@
                 <p class="mb-4 text-muted">One query away from academic success</p>
 
             </div>
-            <div class="col-12">
+            <div class="col-12 reveal_top">
                 <div class="input-group mb-3 border-3 border-gpt border rounded-4 bg-light">
                     <input type="text" class="form-control py-3 px-3 bg-light border-0 rounded-start-4"
                         placeholder="Type a message..." id="searchInput" />

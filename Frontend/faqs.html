@@ -10,13 +10,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
 
     <title>AdIrassa</title>
 </head>
 
 <body>
-    <header class="header">
+    <header class="header reveal_top">
         <nav class="nav d-flex justify-content-between">
             <div class="nav__data ms-md-5 ms-2">
                 <div class="d-flex flex-column align-items-center nav__logo">
@@ -32,7 +33,7 @@
                     <i class="ri-close-line nav__toggle-close"></i>
                 </div>
             </div>
-    
+
             <!--=============== NAV MENU ===============-->
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
@@ -40,7 +41,7 @@
                     <li>
                         <a href="index.html" class="nav__link">Home</a>
                     </li>
-    
+
                     <!-- Courses Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -55,23 +56,27 @@
                                     <span class="dropdown__title">Available Courses</span>
                                     <ul class="dropdown__list ps-0">
                                         <li>
-                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine Learning</a>
+                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine Learning</a>
+                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine Learning</a>
+                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine
+                                                Learning</a>
                                         </li>
                                         <li>
-                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of Machine Learning</a>
+                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of
+                                                Machine Learning</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- Resources Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -89,7 +94,8 @@
                                             <a href="articles.html" class="dropdown__link">Articles</a>
                                         </li>
                                         <li>
-                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube Tutorials</a>
+                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube
+                                                Tutorials</a>
                                         </li>
                                         <li>
                                             <a href="research_papers.html" class="dropdown__link">Research Papers</a>
@@ -99,7 +105,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- My Progress Dropdown -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -141,7 +147,7 @@
                             </div>
                         </div>
                     </li>
-    
+
                     <!-- Help/Support -->
                     <li class="dropdown__item">
                         <div class="nav__link dropdown__button">
@@ -168,21 +174,19 @@
                     </li>
                 </ul>
             </div>
-    
+
             <div class="nav__data">
                 <div class="nav__background">
                 </div>
             </div>
         </nav>
     </header>
-    
-    
-    <section class="section d-flex flex-column justify-content-center align-items-center position-relative">
+    <section class="section d-flex flex-column justify-content-center align-items-center position-relative reveal_top">
         <!-- Quiz Container -->
-        <div class="col-lg-8 col-md-10 col-11 mt-md-5 my-3">
+        <div class="col-lg-8 col-md-10 col-11 mt-md-5 my-3 reveal_top">
             <!-- Dynamic Content Container -->
-            <div id="faqs" class="custom-bg-top p-4 border border-4 border-white rounded-4 bg-glass-dark">
-                <div class="rounded-4 faqs d-md-flex d-block justify-content-center align-items-center">
+            <div id="faqs" class="custom-bg-top p-4 border border-4 border-white rounded-4 bg-glass-dark reveal_top">
+                <div class="rounded-4 faqs d-md-flex d-block justify-content-center align-items-center reveal_top">
                     <div class="col-md-6 col-sm-12">
                         <img src="assets/media/faqs.svg" alt="FAQ Image" class="img-fluid">
                     </div>
@@ -192,7 +196,7 @@
                         </p>
                     </div>
                 </div>
-                <div id="qsts" class="row d-flex mt-md-0 mt-4 d-flex justify-content-center align-items-center pt-5">
+                <div id="qsts" class="row d-flex mt-md-0 mt-4 d-flex justify-content-center align-items-center pt-5 reveal_top">
                     <div class="col-md-8 col-12">
                         <div class="accordion" id="faqAccordion">
                             <!-- FAQ Items will be dynamically populated -->
@@ -206,37 +210,37 @@
     <script>
         // Example FAQ Data for AdIrassa
         const faqData = [
-    {
-        question: "What is AdIrassa?",
-        answer: "AdIrassa is an AI-powered online platform designed to enhance learning by providing educational resources, quizzes, and AI-driven models to guide students through their studies.",
-        icon: "ri-information-line"
-    },
-    {
-        question: "How do I register on AdIrassa?",
-        answer: "To register on AdIrassa, click on the 'Sign Up' button on the homepage and fill out your details. Once registered, you can access all the features of the platform.",
-        icon: "ri-user-add-line"
-    },
-    {
-        question: "Can I track my learning progress on AdIrassa?",
-        answer: "Yes, AdIrassa allows you to track your learning progress, including completed modules, quiz scores, and overall performance metrics, all powered by AI-driven analytics.",
-        icon: "ri-bar-chart-line"
-    },
-    {
-        question: "Are the learning resources on AdIrassa free?",
-        answer: "AdIrassa provides a mix of free and premium resources. Some modules and exercises are free, while others require a subscription.",
-        icon: "ri-money-dollar-circle-line"
-    },
-    {
-        question: "How can I access quizzes on AdIrassa?",
-        answer: "Quizzes are available within each module. Navigate to a specific topic, and you'll find AI-generated quizzes to test your knowledge and identify areas for improvement.",
-        icon: "ri-question-line"
-    },
-    {
-        question: "What if I encounter technical issues while using AdIrassa?",
-        answer: "If you experience any technical issues, you can contact our support team through the 'Help' section or email us at support@adirassa.com.",
-        icon: "ri-shield-check-line"
-    }
-];
+            {
+                question: "What is AdIrassa?",
+                answer: "AdIrassa is an AI-powered online platform designed to enhance learning by providing educational resources, quizzes, and AI-driven models to guide students through their studies.",
+                icon: "ri-information-line"
+            },
+            {
+                question: "How do I register on AdIrassa?",
+                answer: "To register on AdIrassa, click on the 'Sign Up' button on the homepage and fill out your details. Once registered, you can access all the features of the platform.",
+                icon: "ri-user-add-line"
+            },
+            {
+                question: "Can I track my learning progress on AdIrassa?",
+                answer: "Yes, AdIrassa allows you to track your learning progress, including completed modules, quiz scores, and overall performance metrics, all powered by AI-driven analytics.",
+                icon: "ri-bar-chart-line"
+            },
+            {
+                question: "Are the learning resources on AdIrassa free?",
+                answer: "AdIrassa provides a mix of free and premium resources. Some modules and exercises are free, while others require a subscription.",
+                icon: "ri-money-dollar-circle-line"
+            },
+            {
+                question: "How can I access quizzes on AdIrassa?",
+                answer: "Quizzes are available within each module. Navigate to a specific topic, and you'll find AI-generated quizzes to test your knowledge and identify areas for improvement.",
+                icon: "ri-question-line"
+            },
+            {
+                question: "What if I encounter technical issues while using AdIrassa?",
+                answer: "If you experience any technical issues, you can contact our support team through the 'Help' section or email us at support@adirassa.com.",
+                icon: "ri-shield-check-line"
+            }
+        ];
 
         // Populate FAQ Section
         const faqAccordion = document.getElementById("faqAccordion");
