@@ -11,15 +11,16 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
         defer></script>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
 
     <title>AdIrassa</title>
 </head>
 
 <body>
-    <header class="header">
+    <header class="header reveal_top">
         <nav class="nav d-flex justify-content-between">
             <div class="nav__data ms-md-5 ms-2">
-                <div class="d-flex flex-column align-items-center nav__logo">
+                <div class="d-flex flex-column align-items-center nav__logo reveal_top">
                     <h4 class="mb-0">
                         AdIrassa
                     </h4>
@@ -34,11 +35,11 @@
             </div>
     
             <!--=============== NAV MENU ===============-->
-            <div class="nav__menu" id="nav-menu">
+            <div class="nav__menu reveal_top" id="nav-menu">
                 <ul class="nav__list">
                     <!-- Home Link -->
                     <li>
-                        <a href="index.html" class="nav__link">Home</a>
+                        <a href="/" class="nav__link">Home</a>
                     </li>
     
                     <!-- Courses Dropdown -->
@@ -169,22 +170,20 @@
                 </ul>
             </div>
     
-            <div class="nav__data">
+            <div class="nav__data reveal_top">
                 <div class="nav__background">
                 </div>
             </div>
         </nav>
-    </header>
-    
-    
-    <section class="section d-flex flex-column justify-content-center align-items-center position-relative">
+    </header>    
+    <section class="section d-flex flex-column justify-content-center align-items-center position-relative reveal_top">
         <h1 class="mb-4 text-center text-primary" id="quizTitle">AdIrassa Online</h1>
         <!-- Quiz Container -->
-        <div id="quizContainer" class="col-lg-8 col-11">
+        <div id="quizContainer" class="col-lg-8 col-11 reveal_top">
             <!-- The quiz content will be populated here by JavaScript -->
         </div>
         <!-- Submit Button -->
-        <div id="submitContainer" class="text-center mt-4">
+        <div id="submitContainer" class="text-center mt-4 reveal_top">
             <!-- Submit button will be added dynamically if the quiz is loaded -->
         </div>
     </section>
@@ -221,14 +220,14 @@
 
             // Clear the container and add the question content
             quizContainer.innerHTML = `
-                <h3 class="mb-4 text-center">${quizData.main_skill} - ${skill.related_skill_name}</h3>
-                <div class="mb-3 p-4 border rounded-4 border-white border-4">
-                    <h5 class="text-dark">Q${questionIndex + 1}: ${question.question_text}</h5>
+                <h3 class="mb-4 text-center arabic">${quizData.main_skill} - ${skill.related_skill_name}</h3>
+                <div dir="rtl" class="mb-3 p-4 border rounded-4 border-white border-4">
+                    <h5 class="text-dark arabic reveal_top">${questionIndex + 1}: ${question.question_text}</h5>
                     <div class="mb-3">
                         ${question.options.map((option, index) => `
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="quizOption${questionIndex}" id="option${index}" value="${option}" ${index === 0 ? 'checked' : ''}>
-                                <label class="form-check-label text-secondary" for="option${index}">
+                            <div class="form-check reveal_top" style="display: flex; align-items: center;">
+                                <input class="form-check-input" type="radio" name="quizOption${questionIndex}" id="option${index}" value="${option}" ${index === 0 ? 'checked' : ''} style="margin-left: 10px;">
+                                <label class="form-check-label text-secondary arabic" for="option${index}" style="margin-left: 10px;">
                                     ${option}
                                 </label>
                             </div>
@@ -369,6 +368,15 @@
         }
 
     });
+
+    function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        if (lang === 'ar') {
+            document.body.setAttribute('dir', 'rtl');
+        } else {
+            document.body.removeAttribute('dir');
+        }
+    }
 
     // ...existing code...
 </script>
