@@ -336,13 +336,13 @@
             headers: {
                 "Content-Type": "application/json",
              },
-                body: JSON.stringify({ question: message }),
+                body: JSON.stringify({ question: message, topics: currentTopics }),
                 });
 
             if (response.ok) {
                 const data = await response.json();
-                // Display the bot response letter by letter
-                displayBotResponse(data.answer);
+                // Display the bot response
+                displayBotResponse(data.response); // Changed from data.answer to data.response
             } else {
                 const errorData = await response.json();
                 displayBotResponse("Sorry, I encountered an error: " + errorData.detail);
@@ -354,21 +354,126 @@
     }
 }
 
-        // Display bot response letter by letter
-        function displayBotResponse(response) {
-            let index = 0;
-            const interval = setInterval(() => {
+function displayBotResponse(response) {
+    if (!response) {
+        response = "Sorry, I couldn't generate a response.";
+    }
+    
+    let botMessageDiv = document.createElement('div');
+    botMessageDiv.className = 'text-start text-secondary mb-2';
+    chatMessages.appendChild(botMessageDiv);
+
+    let index = 0;
+    const interval = setInterval(() => {
         if (index < response.length) {
-            chatMessages.innerHTML += response.charAt(index);
+            botMessageDiv.textContent += response[index];
             chatMessages.scrollTop = chatMessages.scrollHeight;
             index++;
         } else {
             clearInterval(interval);
-            chatMessages.innerHTML += `<br/>`; // Add a line break after the response
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-    }, 50); // Adjust typing speed here
+    }, 50);
 }
 
+
+// Add global variable to store topics
+let currentTopics = [];
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const selectedModule = JSON.parse(localStorage.getItem('selectedModule'));
+        const courseName = localStorage.getItem('courseName');
+        console.log('Selected module:', selectedModule);
+        console.log('Course name:', courseName);
+
+        if (selectedModule && courseName) {
+            fetch('http://localhost:8000/generate-topic-content', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    module_name: selectedModule.module_name,
+                    course_name: courseName,
+                    topics: selectedModule.topics
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Topic content:', data);
+                    populateContent(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching topic content:', error);
+                });
+        } else {
+            console.error('No module or course name found in localStorage.');
+        }
+    });
+
+    function populateContent(data) {
+        document.getElementById("sectionTitle").textContent = data.module_name;
+        document.getElementById("sectionSubtitle").textContent = data.introduction;
+
+        const contentContainer = document.getElementById("contentContainer");
+        contentContainer.innerHTML = data.topics
+            .map(
+                (topic) => `
+                <div class="mb-4">
+                    <h5 class="text-primary">${topic.topic_name}</h5>
+                    <p class="text-secondary">${topic.explanation}</p>
+                </div>
+            `
+            )
+            .join("");
+
+        // Fetch and display resources for each topic
+        data.topics.forEach(topic => {
+            fetchResources(topic.topic_name);
+        });
+
+        // Store topics for chatbot use
+        currentTopics = data.topics.map(topic => ({
+            topic_name: topic.topic_name,
+            explanation: topic.explanation
+        }));
+    }
+
+    function fetchResources(topicName) {
+        const payload = { topic_name: topicName };
+        console.log('Sending payload:', payload); // Log the payload
+        fetch('/get-topic-resources', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(resources => {
+            console.log('Received resources:', resources); // Log the received resources
+            const resourcesContainer = document.getElementById("resourcesContainer");
+            if (Array.isArray(resources)) {
+                resources.forEach(resource => {
+                    resourcesContainer.innerHTML += `
+                        <a href="${resource.link}" target="_blank" class="btn btn-light border rounded-3 shadow-sm d-flex align-items-center gap-2">
+                            <i class="ri-link"></i> ${resource.title || resource.link}
+                        </a>
+                    `;
+                });
+            } else {
+                console.error('Resources is not an array:', resources);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching resources:', error);
+        });
+    }
     </script>
 
 
