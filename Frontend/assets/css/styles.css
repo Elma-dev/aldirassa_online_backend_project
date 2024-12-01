@@ -397,7 +397,7 @@ a {
   align-items: center;
   justify-content: start;
   height: 100%;
-  background-image: url('assets/media/twitermorocco.jpg');
+  background-image: url('../media/twitermorocco.jpg');
   background-size: cover;
   background-position: center;
   width: 250px;
@@ -465,7 +465,7 @@ section {
   width: 300px;
   height: 300px;
   rotate: -25deg;
-  background-image: url('assets/media/morocco1.jpg');
+  background-image: url('../media/morocco1.jpg');
   background-size: cover;
   background-position: center;
   z-index: 0;
@@ -480,7 +480,7 @@ section {
   right: 0;
   width: 150px;
   height: 150px;
-  background-image: url('assets/media/moroccoreversed.jpg');
+  background-image: url('../media/moroccoreversed.jpg');
   background-size: cover;
   background-position: center;
   z-index: 1;
@@ -545,7 +545,7 @@ section {
   width: 300px;
   height: 300px;
   rotate: -25deg;
-  background-image: url('assets/media/morocco1.jpg');
+  background-image: url('../media/morocco1.jpg');
   background-size: cover;
   background-position: center;
   z-index: 0;
