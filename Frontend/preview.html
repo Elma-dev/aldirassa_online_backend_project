@@ -183,6 +183,11 @@
     </header>
     <section class="section container mt-5">
         <div class="row">
+            <div class="col-md-12 text-center">
+                <img id="query-preloader1" class="img-fluid mb-2" src="assets/media/preloader.gif"
+                    style="height: 40px;">
+                <h5 class="mb-3" id="query-state"></h5>
+            </div>
             <div class="col-12 text-center">
                 <h1 id="sectionTitle" class="text-primary"></h1>
                 <h4 id="sectionSubtitle" class="text-secondary mb-4"></h4>
@@ -196,6 +201,11 @@
 
             <div class="col-12 mt-4 text-center">
                 <h5>Resources:</h5>
+                <div class="col-md-12 text-center">
+                    <img id="query-preloader2" class="img-fluid mb-2" src="assets/media/preloader.gif"
+                        style="height: 40px;">
+                    <h5 class="mb-3" id="query-state"></h5>
+                </div>
                 <div id="resourcesContainer" class="d-flex flex-wrap justify-content-center gap-3 mt-3">
                     <!-- Resources will be dynamically added -->
                 </div>
@@ -387,6 +397,9 @@ let currentTopics = [];
         console.log('Course name:', courseName);
 
         if (selectedModule && courseName) {
+            // Show preloader
+            document.getElementById("query-preloader1").style.display = 'inline';
+
             fetch('http://localhost:8000/generate-topic-content', {
                 method: 'POST',
                 headers: {
@@ -405,6 +418,10 @@ let currentTopics = [];
                 })
                 .catch(error => {
                     console.error('Error fetching topic content:', error);
+                })
+                .finally(() => {
+                    // Hide preloader
+                    document.getElementById("query-preloader1").style.display = 'none';
                 });
         } else {
             console.error('No module or course name found in localStorage.');
@@ -442,6 +459,10 @@ let currentTopics = [];
     function fetchResources(topicName) {
         const payload = { topic_name: topicName };
         console.log('Sending payload:', payload); // Log the payload
+
+        // Show preloader
+        document.getElementById("query-preloader2").style.display = 'inline';
+
         fetch('/get-topic-resources', {
             method: 'POST',
             headers: {
@@ -472,6 +493,10 @@ let currentTopics = [];
         })
         .catch(error => {
             console.error('Error fetching resources:', error);
+        })
+        .finally(() => {
+            // Hide preloader
+            document.getElementById("query-preloader2").style.display = 'none';
         });
     }
     </script>
