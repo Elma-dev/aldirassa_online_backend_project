@@ -266,38 +266,37 @@
         }
 
         // Initialize progress chart
-        if (data.progress !== undefined) {
-            renderProgressChart(data.progress);
-        }
-        // Function to render the Chart.js donut chart
-        function renderProgressChart(progress) {
-            const ctx = document.getElementById('progressChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Completed', 'Remaining'],
-                    datasets: [
-                        {
-                            data: [10, 90], // Static 10% progress
-                            backgroundColor: ['#a16e3a', '#e7e7e7'], // Using first-color and body-color
-                            hoverBackgroundColor: ['#3e2417', '#e0e0e0'], // Slightly darker for hover
-                            borderWidth: 2,
-                            borderColor: '#ffffff'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    cutout: '70%',
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function (tooltipItem) {
-                                    return `${tooltipItem.label}: ${tooltipItem.raw}%`;
-                                }
+        renderProgressChart();
+    }
+
+    // Function to render the Chart.js donut chart
+    function renderProgressChart() {
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Completed', 'Remaining'],
+                datasets: [
+                    {
+                        data: [10, 90], // Static 10% progress
+                        backgroundColor: ['#a16e3a', '#e7e7e7'], // Using first-color and body-color
+                        hoverBackgroundColor: ['#3e2417', '#e0e0e0'], // Slightly darker for hover
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return `${tooltipItem.label}: ${tooltipItem.raw}%`;
                             }
                         }
                     }
