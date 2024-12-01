@@ -15,6 +15,6 @@ class LearningPath(BaseModel):
 class LearningPathInput(BaseModel):
   course_name:str
   level:str
-  score:int
+  score:float
   weaknesses:List[str]
   strengths:List[str]
