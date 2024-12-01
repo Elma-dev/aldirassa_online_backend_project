@@ -173,7 +173,6 @@
                         online
                     </small>
                 </div>
-                <img src="assets/media/logo.png" alt="" srcset="" style="max-width: 80px;">
                 <div class="nav__toggle" id="nav-toggle">
                     <i class="ri-menu-line nav__toggle-menu"></i>
                     <i class="ri-close-line nav__toggle-close"></i>
@@ -194,10 +193,11 @@
 
 
     <script>
-        // Function to populate the module conten
-        function populateModules(data) {
-            const moduleContent = document.getElementById('moduleContent');
-            console.log('Populating modules with data:', data);
+    // Function to populate the module content
+    function populateModules(data) {
+        const moduleContent = document.getElementById('moduleContent');
+        if (!moduleContent) return;
+        console.log('Populating modules with data:', data);
         
         // Translate student level to Arabic
         const levelMap = {
@@ -278,7 +278,7 @@
                 labels: ['Completed', 'Remaining'],
                 datasets: [
                     {
-                        data: [67, 90], // Static 10% progress
+                        data: [60, 40], // Static 10% progress
                         backgroundColor: ['#a16e3a', '#e7e7e7'], // Using first-color and body-color
                         hoverBackgroundColor: ['#3e2417', '#e0e0e0'], // Slightly darker for hover
                         borderWidth: 2,

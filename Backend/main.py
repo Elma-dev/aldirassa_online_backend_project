@@ -20,6 +20,7 @@ from agents.quiz_agent import *
 from entities.quiz_entities import *
 from utils.quiz_correction_utils import *
 from pydantic import BaseModel
+from typing import List
 
 app = FastAPI()
 
@@ -33,7 +34,6 @@ app.add_middleware(
 )
 
 # Serve static files
-
 model = get_model("gpt-4o-mini")
 app.mount("/assets", StaticFiles(directory="../Frontend/assets"), name="assets")
 app.mount("/media", StaticFiles(directory="../Frontend/assets/media"), name="media")
@@ -71,13 +71,13 @@ async def read_final_quiz():
 
 @app.post("/chek-relevence")
 def check_relevence(query: str):
-    result = check_relevence_agent(model,query)
+    result = check_relevence_agent(model, query)
     return {"message": result}
 
 @app.post("/skills-assessment")
 def get_skills_assessment(query: str):
     try:
-        result = check_relevence_agent(model,query)
+        result = check_relevence_agent(model, query)
         if result == "Relevant":
             skills_assessment_agent = SkillAssessmentAgent(model)
             result = skills_assessment_agent.generate_skill_assessment(query)
@@ -88,11 +88,10 @@ def get_skills_assessment(query: str):
         return str(e)
 
 @app.post("/skills-evaluation")
-def skills_evaluation(skills_assessement:Skill,user_answers:List[str]):
+def skills_evaluation(skills_assessement: Skill, user_answers: List[str]):
     skills_evaluation_agent = SkillAssessmentEvaluator()
-    evaluation = skills_evaluation_agent.evaluate(skills_assessement,user_answers)
-    # return {"message": skills_assessement, "answers": user_answers}
-    report=skills_evaluation_agent.generate_report(evaluation)
+    evaluation = skills_evaluation_agent.evaluate(skills_assessement, user_answers)
+    report = skills_evaluation_agent.generate_report(evaluation)
     return report
 
 # Store the generated course plan in memory
@@ -101,9 +100,8 @@ course_plan_data = None
 @app.post("/generate-course-plan")
 def generate_course_plan(report: LearningPathInput):
     global course_plan_data
-    learning_path = report
     learning_path_agent = LearningPathAgent(model=model)
-    learning_path_result = learning_path_agent.generate_learning_path(learning_path)
+    learning_path_result = learning_path_agent.generate_learning_path(report)
     course_plan_data = learning_path_result  # Store the generated course plan
     return learning_path_result
 
@@ -135,7 +133,7 @@ def get_topic_resources(request: TopicRequest):
 async def ask_question(question: QuestionRequest):
     """Endpoint to ask a question and return a simple text response."""
     # Initialize the agent
-    agent = ChatTopicAgent(model,question.topics)
+    agent = ChatTopicAgent(model, question.topics)
     try:
         result = agent.ask_question(question.question)
         if "error" in result:
@@ -145,25 +143,83 @@ async def ask_question(question: QuestionRequest):
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
 @app.post("/generate-exercises")
-def generate_exercises(topics:List[Topic]):
-    exercice_agent=ExerciseGenerator(model,topics)
-    exercises=exercice_agent.generate_exercises()
+def generate_exercises(topics: List[Topic]):
+    exercice_agent = ExerciseGenerator(model, topics)
+    exercises = exercice_agent.generate_exercises()
     return exercises
 
 @app.post("/generate_quiz")
 async def generate_quiz(quiz_inputs: List[QuizInput]):
-    # Instantiate the agent with a model
-    quiz_content_agent = QuizContentAgent(model=model)
-    items = []
-    for quiz_input in quiz_inputs:
-        try:
-            quiz_content = quiz_content_agent.generate_quiz_content(quiz_input, 1)
-            items.append(quiz_content)
-        except Exception as e:
-            raise HTTPException(status_code=500, detail=str(e))
-    return items
+    try:
+        # Instantiate the agent with a model
+        quiz_content_agent = QuizContentAgent(model=model)
+        items = []
+        
+        for quiz_input in quiz_inputs:
+            try:
+                # Generate exactly 5 questions per module
+                quiz_content = quiz_content_agent.generate_quiz_content(quiz_input, 1)
+                
+                # Validate the generated content
+                if not quiz_content or not quiz_content.questions or len(quiz_content.questions) < 5:
+                    raise ValueError(f"Invalid quiz content generated for module {quiz_input.module_name}")
+                    
+                items.append(quiz_content)
+            except Exception as e:
+                raise HTTPException(
+                    status_code=500, 
+                    detail=f"Error generating quiz for module {quiz_input.module_name}: {str(e)}"
+                )
+                
+        if not items:
+            raise HTTPException(status_code=500, detail="No quiz content was generated")
+            
+        return items
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Quiz generation failed: {str(e)}")
 
 @app.post("/correct-quiz")
-def correct_quiz(user_answers: List[QuizUserAnswers]):
-    overall_score, module_scores = calculate_overall_score(user_answers)
-    return {"overall_score": overall_score, "module_scores": module_scores}
+def correct_quiz(user_answers: List[dict]):
+    try:
+        total_modules = len(user_answers)
+        module_scores = {}
+        total_score = 0
+
+        # Calculate score for each module
+        for module_data in user_answers:
+            module_name = module_data.get('module_name', 'Unknown Module')
+            questions = module_data.get('questions', [])
+            
+            if not questions:
+                continue
+
+            correct_count = 0
+            total_questions = len(questions)
+
+            # Calculate correct answers for this module
+            for q in questions:
+                user_answers_set = set(q.get('user_answers', []))
+                correct_answers_set = set(q.get('correct_answers', []))
+                if user_answers_set and correct_answers_set and user_answers_set == correct_answers_set:
+                    correct_count += 1
+
+            # Calculate module score
+            if total_questions > 0:
+                module_score = (correct_count / total_questions) * 100
+                module_scores[module_name] = round(module_score, 1)
+                total_score += module_score
+
+        # Calculate overall score
+        overall_score = round(total_score / total_modules if total_modules > 0 else 0, 1)
+
+        return {
+            "overall_score": overall_score,
+            "module_scores": module_scores
+        }
+    except Exception as e:
+        print(f"Error in correct_quiz: {str(e)}")  # Log the error
+        raise HTTPException(
+            status_code=500, 
+            detail={"error": "Failed to calculate quiz results", "message": str(e)}
+        )

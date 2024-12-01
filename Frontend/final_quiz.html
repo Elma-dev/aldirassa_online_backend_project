@@ -241,7 +241,7 @@
                 }));
                 console.log('Prepared quiz inputs:', quizInputs);
 
-                const response = await fetch('http://localhost:8000/generate_quiz', {
+                const response = await fetch(`${window.location.origin}/generate_quiz`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(quizInputs)
@@ -273,37 +273,77 @@
         }
 
         function showQuestion(index) {
-            console.log(`Showing question ${index + 1}`);
-            const currentModule = quizData[Math.floor(index / 5)];
-            const question = currentModule.questions[index % 5];
-            const totalQuestions = getTotalQuestions();
-            
-            document.getElementById('quizContent').innerHTML = `
-                <h4 class="mb-4 arabic" dir="rtl">${currentModule.module_name}</h4>
-                <div class="question mb-4" dir="rtl">
-                    <h5 class="mb-3 arabic">السؤال ${index + 1} من ${totalQuestions}</h5>
-                    <p class="arabic">${question.question}</p>
-                </div>
-                <div class="options" dir="rtl">
-                    ${question.options.map((option, i) => `
-                        <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" id="option${i}" value="${option}"
-                                ${(userAnswers[index] || []).includes(option) ? 'checked' : ''}>
-                            <label class="form-check-label arabic" for="option${i}">${option}</label>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
+            try {
+                console.log(`Showing question ${index + 1}`);
+                if (!quizData || !quizData.length) {
+                    throw new Error('Quiz data is not properly loaded');
+                }
 
-            // Update navigation buttons
-            document.getElementById('prevBtn').disabled = index === 0;
-            const nextBtn = document.getElementById('nextBtn');
-            nextBtn.textContent = index === totalQuestions - 1 ? 'إرسال' : 'التالي';
-            nextBtn.classList.toggle('btn-success', index === totalQuestions - 1);
+                const totalQuestions = getTotalQuestions();
+                
+                // Calculate module and question indices
+                let questionCount = 0;
+                let moduleIndex = 0;
+                let questionIndex = 0;
+
+                // Find the correct module and question index
+                for (let i = 0; i < quizData.length; i++) {
+                    const moduleQuestionCount = quizData[i].questions?.length || 0;
+                    if (questionCount + moduleQuestionCount > index) {
+                        moduleIndex = i;
+                        questionIndex = index - questionCount;
+                        break;
+                    }
+                    questionCount += moduleQuestionCount;
+                }
+
+                const currentModule = quizData[moduleIndex];
+                if (!currentModule?.questions?.[questionIndex]) {
+                    throw new Error('Question not found');
+                }
+
+                const question = currentModule.questions[questionIndex];
+                
+                document.getElementById('quizContent').innerHTML = `
+                    <h4 class="mb-4 arabic" dir="rtl">${currentModule.module_name}</h4>
+                    <div class="question mb-4" dir="rtl">
+                        <h5 class="mb-3 arabic">السؤال ${index + 1} من ${totalQuestions}</h5>
+                        <p class="arabic">${question.question}</p>
+                    </div>
+                    <div class="options" dir="rtl">
+                        ${question.options.map((option, i) => `
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="option${i}" value="${option}"
+                                    ${(userAnswers[index] || []).includes(option) ? 'checked' : ''}>
+                                <label class="form-check-label arabic" for="option${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                // Update navigation buttons
+                document.getElementById('prevBtn').disabled = index === 0;
+                const nextBtn = document.getElementById('nextBtn');
+                nextBtn.textContent = index === totalQuestions - 1 ? 'إرسال' : 'التالي';
+                nextBtn.classList.toggle('btn-success', index === totalQuestions - 1);
+            } catch (error) {
+                console.error('Error showing question:', error);
+                document.getElementById('quizContent').innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading arabic">خطأ في عرض السؤال</h4>
+                        <p class="arabic">${error.message}</p>
+                        <hr>
+                        <a href="/learningpath" class="btn btn-dark arabic">العودة إلى مسار التعلم</a>
+                    </div>
+                `;
+            }
         }
 
         function getTotalQuestions() {
-            return quizData.reduce((total, module) => total + module.questions.length, 0);
+            if (!quizData || !quizData.length) return 0;
+            return quizData.reduce((total, module) => {
+                return total + (module.questions?.length || 0);
+            }, 0);
         }
 
         function saveCurrentAnswers() {
@@ -315,49 +355,88 @@
 
         async function submitQuiz() {
             console.log('Submitting quiz...');
-            console.log('Final answers:', userAnswers);
             try {
+                // Group answers by module
+                const formattedAnswers = [];
+                let currentModuleIndex = 0;
+                let questionCount = 0;
+
+                for (const module of quizData) {
+                    const moduleAnswers = {
+                        module_name: module.module_name,
+                        questions: module.questions.map((question, qIdx) => {
+                            const globalIndex = questionCount + qIdx;
+                            return {
+                                question: question.question,
+                                user_answers: userAnswers[globalIndex] || [],
+                                correct_answers: question.correct_answers
+                            };
+                        })
+                    };
+                    questionCount += module.questions.length;
+                    formattedAnswers.push(moduleAnswers);
+                }
+
+                console.log('Formatted answers:', formattedAnswers);
+
                 const response = await fetch('http://localhost:8000/correct-quiz', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(userAnswers)
+                    body: JSON.stringify(formattedAnswers)
                 });
-                
+
+                if (!response.ok) throw new Error('Failed to submit quiz');
+
                 const results = await response.json();
                 console.log('Quiz results:', results);
                 showResults(results);
             } catch (error) {
                 console.error('Error submitting quiz:', error);
+                alert('حدث خطأ أثناء تقديم الاختبار. يرجى المحاولة مرة أخرى.');
             }
         }
 
         function showResults(results) {
-            console.log('Displaying results:', results);
-            document.getElementById('overallScore').textContent = results.overall_score.toFixed(1);
-            
-            const moduleScoresHtml = Object.entries(results.module_scores)
-                .map(([module, score]) => `
-                    <div class="mb-3">
-                        <strong class="arabic">${module}:</strong> 
-                        <span class="arabic">${score.toFixed(1)}%</span>
-                        <div class="progress" style="height: 10px;">
-                            <div class="progress-bar bg-${score >= 70 ? 'success' : score >= 50 ? 'warning' : 'danger'}" 
-                                role="progressbar" 
-                                style="width: ${score}%" 
-                                aria-valuenow="${score}" 
-                                aria-valuemin="0" 
-                                aria-valuemax="100">
+            console.log('Showing results:', results);
+            try {
+                const overallScore = results?.overall_score ?? 0;
+                const moduleScores = results?.module_scores ?? {};
+
+                // Update overall score
+                document.getElementById('overallScore').textContent = overallScore.toFixed(1);
+
+                // Generate module scores HTML
+                const moduleScoresHtml = Object.entries(moduleScores)
+                    .map(([module, score]) => {
+                        const scoreValue = parseFloat(score) || 0;
+                        const scoreColor = scoreValue >= 70 ? 'success' : 
+                                         scoreValue >= 50 ? 'warning' : 'danger';
+                        
+                        return `
+                            <div class="mb-3">
+                                <strong class="arabic">${module}:</strong> 
+                                <span class="arabic">${scoreValue.toFixed(1)}%</span>
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar bg-${scoreColor}" 
+                                        role="progressbar" 
+                                        style="width: ${scoreValue}%" 
+                                        aria-valuenow="${scoreValue}" 
+                                        aria-valuemin="0" 
+                                        aria-valuemax="100">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                `).join('');
-            
-            document.getElementById('moduleScores').innerHTML = moduleScoresHtml;
-            
-            const resultsModal = document.getElementById('resultsModal');
-            if (resultsModal) {
-                const modal = new bootstrap.Modal(resultsModal);
+                        `;
+                    }).join('') || '<p class="arabic">لم يتم العثور على نتائج</p>';
+
+                document.getElementById('moduleScores').innerHTML = moduleScoresHtml;
+
+                // Show modal
+                const modal = new bootstrap.Modal(document.getElementById('resultsModal'));
                 modal.show();
+            } catch (error) {
+                console.error('Error displaying results:', error);
+                alert('حدث خطأ في عرض النتائج');
             }
         }
 
@@ -388,4 +467,4 @@
     <!-- Main JS -->
     <script src="assets/js/main.js" defer></script>
 </body>
-</html>  
+</html>
