@@ -255,6 +255,7 @@
                     populateQuestion(quizData, skillIndex, questionIndex - 1);
                 }
             });
+            window.evaluationResult;
 
             document.getElementById('nextBtn').addEventListener('click', () => {
                 const selectedOption = document.querySelector(`input[name="quizOption${questionIndex}"]:checked`);
@@ -278,6 +279,7 @@
                         })
                         .then(response => response.json())
                         .then(result => {
+                            window.evaluationResult = result;
                             console.log('Success:', result);
                             document.getElementById("score").textContent = result.score;
                             document.getElementById("strengths").textContent = result.strengths.length > 0 ? result.strengths : 'No strengths identified';
@@ -346,7 +348,7 @@
             const queryState = document.getElementById("query-state");
 
             event.preventDefault();
-            if (!evaluationResult) {
+            if (!window.evaluationResult) {
                 console.error('No evaluation result available');
                 return;
             }
