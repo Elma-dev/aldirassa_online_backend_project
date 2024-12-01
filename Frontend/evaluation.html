@@ -171,6 +171,7 @@
                         online
                     </small>
                 </div>
+                <img src="assets/media/logo.png" alt="" srcset="" style="max-width: 70px;">
                 <div class="nav__toggle" id="nav-toggle">
                     <i class="ri-menu-line nav__toggle-menu"></i>
                     <i class="ri-close-line nav__toggle-close"></i>
@@ -179,14 +180,17 @@
 
         </nav>
     </header>
-    <section class="section d-flex flex-column justify-content-center align-items-center position-relative reveal_top">
-        <h1 class="mb-4 text-center text-primary" id="quizTitle">AIDirassa Online</h1>
+    <section class="section d-flex flex-column justify-content-center align-items-center position-relative reveal_top arabic" dir="rtl">
+        <div class="col-12 text-center normal">
+            <h1 class="mb-3">AIDirassa</h1>
+            <h5 class="mb-4 text-secondary">Online</h5>
+        </div>        
         <!-- Quiz Container -->
-        <div id="quizContainer" class="col-lg-8 col-11 reveal_top">
+        <div id="quizContainer" class="col-lg-8 col-11 reveal_top arabic" dir="rtl">
             <!-- The quiz content will be populated here by JavaScript -->
         </div>
         <!-- Submit Button -->
-        <div id="submitContainer" class="text-center mt-4 reveal_top">
+        <div id="submitContainer" class="text-center mt-4 reveal_top arabic" dir="rtl">
             <!-- Submit button will be added dynamically if the quiz is loaded -->
         </div>
     </section>
@@ -228,7 +232,7 @@
             // Clear the container and add the question content
             quizContainer.innerHTML = `
                 <h3 class="mb-4 text-center arabic">${quizData.main_skill} - ${skill.related_skill_name}</h3>
-                <div dir="rtl" class="mb-3 p-4 border rounded-4 border-white border-4">
+                <div dir="rtl" class="mb-3 p-4 border rounded-4 border-white border-4 arabic">
                     <h5 class="text-dark arabic reveal_top">${questionIndex + 1}: ${question.question_text}</h5>
                     <div class="mb-3">
                         ${question.options.map((option, index) => `
@@ -242,8 +246,8 @@
                     </div>
                 </div>
                 <div class="text-center mt-4">
-                    <button class="btn btn-dark px-3 py-2 arabic" id="nextBtn">${questionIndex === skill.mcq_questions.length - 1 && skillIndex === quizData.related_skills.length - 1 ? 'إرسال' : 'التالي'}</button> 
                     <button class="btn btn-dark px-3 py-2 arabic" id="prevBtn" ${questionIndex === 0 && skillIndex === 0 ? 'disabled' : ''}>السابق</button>
+                    <button class="btn btn-dark px-3 py-2 arabic" id="nextBtn">${questionIndex === skill.mcq_questions.length - 1 && skillIndex === quizData.related_skills.length - 1 ? 'إرسال' : 'التالي'}</button> 
                </div>
             `;
 
@@ -333,9 +337,9 @@
             // Update the modal content dynamically
             const modalBody = document.querySelector('#resultsModal .modal-body');
             modalBody.innerHTML = `
-                <p class="mb-2"><strong>Score:</strong> "${score}/${quizData.related_skills.reduce((acc, skill) => acc + skill.mcq_questions.length, 0)}"</p>
-                <p class="mb-2"><strong>Strengths:</strong> Probability, Linear Algebra</p>
-                <p class="mb-2"><strong>Weaknesses:</strong> Programming, etc.</p>
+                <p class="mb-2 arabic"><strong>النتيجة:</strong> "${score}/${quizData.related_skills.reduce((acc, skill) => acc + skill.mcq_questions.length, 0)}"</p>
+                <p class="mb-2 arabic"><strong>نقاط القوة:</strong> الاحتمالات، الجبر الخطي</p>
+                <p class="mb-2 arabic"><strong>نقاط الضعف:</strong> البرمجة، إلخ.</p>
             `;
 
             // Show the modal with results
@@ -353,7 +357,7 @@
                 return;
             }
 
-            queryState.innerText = "Generating your course plan";
+            queryState.innerText = "جارٍ إنشاء خطة الدورة الخاصة بك";
             queryPreloader.style.display = 'inline';
 
             fetch('http://localhost:8000/generate-course-plan', {
@@ -394,8 +398,8 @@
         //     .catch(error => {
         //         console.error("Error loading quiz data:", error);
         //         document.getElementById('quizContainer').innerHTML = `
-        //             <div class="alert alert-danger" role="alert">
-        //                 Failed to load quiz data. Please try again later.
+        //             <div class="alert alert-danger arabic" role="alert" dir="rtl">
+        //                 فشل في تحميل بيانات الاختبار. يرجى المحاولة مرة أخرى لاحقًا.
         //             </div>
         //         `;
         //     });
