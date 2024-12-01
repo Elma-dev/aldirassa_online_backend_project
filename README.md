@@ -59,6 +59,15 @@ https://github.com/Elma-dev/aldirassa_online_backend_project.git
 ```bash
 cd aldirassa_online_backend_project/Backend
 ```
+3. **Create a .env File:**
+```bash
+touch .env
+```
+Add the following content to the `.env` file:
+```
+OPENAI_API_KEY=""
+BRAVE_API=""
+```
 
 3. **Install the Required Dependencies:**
 ```bash
