@@ -202,11 +202,18 @@
                         <p class="mb-2"><strong class="text-primary">Weaknesses:</strong> <span id="weaknesses">Programming, etc.</span></p>
                     </div>
                     <div class="mt-4 d-flex justify-content-center">
-                        <a href="preview.html" class="btn btn-dark mb-2 d-flex align-items-center">See My Learning Path<i class="ri-route-fill ms-2"></i></a>
+                        <a href="../learning_path.html" class="btn btn-dark mb-2 d-flex align-items-center">See My
+                            Learning Path<i class="ri-route-fill ms-2"></i></a>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <img id="query-preloader" class="img-fluid mb-2" src="assets/media/preloader.gif"
+                            style="display: none;height: 40px;">
+                        <h5 class="mb-3" id="query-state"></h5>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     
 
@@ -333,6 +340,42 @@
             const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
             resultsModal.show();
         }
+        
+        function handleCoursePlanGeneration(event) {
+            const queryPreloader = document.getElementById("query-preloader");
+            const queryState = document.getElementById("query-state");
+
+            event.preventDefault();
+            if (!evaluationResult) {
+                console.error('No evaluation result available');
+                return;
+            }
+
+            queryState.innerText = "Generating your course plan";
+            queryPreloader.style.display = 'inline';
+
+            fetch('http://localhost:8000/generate-course-plan', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(evaluationResult)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Course Plan:', data);
+                    queryPreloader.style.display = 'none';
+                    localStorage.setItem('coursePlanData', JSON.stringify(data));
+                    window.location.href = 'learningpath';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    queryPreloader.style.display = 'none';
+                });
+            }
+
+        // Add event listener to the button
+        document.querySelector('.btn-dark.mb-2').addEventListener('click', handleCoursePlanGeneration);
 
         // Fetch the external JSON file and populate the first question
         // fetch('data/quiz_data.json')

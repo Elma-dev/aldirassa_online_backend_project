@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import HTMLResponse
 from agents.agent_chek_relevence import *
 from utils.check_model_status import *
 from agents.skills_assessment_agent import *
@@ -58,7 +58,11 @@ async def read_learningpath():
 async def preview():
     with open("../Frontend/preview.html", "r", encoding="utf-8") as file:
         return HTMLResponse(content=file.read(), status_code=200)
-     
+
+@app.get("/exercises", response_class=HTMLResponse)
+async def read_exercises():
+    with open("../Frontend/exercises.html", "r", encoding="utf-8") as file:
+        return HTMLResponse(content=file.read(), status_code=200)
 
 @app.post("/chek-relevence")
 def check_relevence(query: str):
