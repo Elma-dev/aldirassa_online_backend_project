@@ -81,7 +81,6 @@ const sr = ScrollReveal({
 });
 sr.reveal(`.reveal_top`, {
     origin: 'top',
-    interval: 200,
 })
 sr.reveal(`.reveal_left`, {
     origin: 'left'
