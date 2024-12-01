@@ -217,38 +217,6 @@
         
             // Generate the content dynamically
             const contentHTML = `
-<<<<<<< HEAD
-            <div class="col-lg-7 mb-4 mt-3">
-                <h2 class="text-primary">${data.course_name}</h2>
-                <p class="mb-3"><strong>Level:</strong> ${data.student_level}</p>
-            </div>
-            <div class="col-lg-2 text-center mb-4 mt-3">
-                <p class="mb-3">Your Progress</p>
-                <canvas id="progressChart" width="100" height="100"></canvas>
-            </div>
-            <div class="col-12 d-flex flex-column">
-                ${data.learning_path && data.learning_path.length > 0
-                    ? data.learning_path
-                        .map(
-                            (module, index) => `
-                                <div class="module-item d-flex flex-column col-12 mb-3 p-3 border rounded-3 border-white border-2" data-index="${index}">
-                                    <h4>${module.module_name}</h4>
-                                    <ul>
-                                        ${module.topics.map(topic => `<li>${topic}</li>`).join('')}
-                                    </ul>
-                                    <p><strong>الهدف من الوحدة:</strong> ${module.milestone}</p>
-                                </div>
-                            `
-                        )
-                        .join('')
-                    : '<p>No modules available.</p>'}
-            </div>
-            <div class="mt-4 col-12 d-flex justify-content-end">
-                <button id="startFinalQuiz" class="d-flex btn btn-dark px-4 py-2 arabic">الامتحان النهائي<i class="ri-question-mark ms-2"></i></button>
-            </div>
-        `;
-
-=======
                 <div class="col-lg-2 text-center mb-4 mt-3">
                     <p class="mb-3 arabic" dir='rtl'>تقدمك</p>
                     <canvas id="progressChart" width="100" height="100"></canvas>
@@ -279,7 +247,6 @@
                 </div>
             `;
         
->>>>>>> e5a07a85a51789089bba46e485b14fe1a37c4b8a
             // Insert content into the container
             moduleContent.innerHTML = contentHTML;
         
@@ -306,7 +273,7 @@
                     labels: ['Completed', 'Remaining'],
                     datasets: [
                         {
-                            data: [progress, 100 - progress],
+                            data: [10, 90], // Static 10% progress
                             backgroundColor: ['#a16e3a', '#e7e7e7'], // Using first-color and body-color
                             hoverBackgroundColor: ['#3e2417', '#e0e0e0'], // Slightly darker for hover
                             borderWidth: 2,
