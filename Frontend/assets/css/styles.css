@@ -437,10 +437,6 @@ section {
   box-shadow: #635c5332 0px 0px 0px 0.25rem;
 }
 
-.chat-input:focus {
-  outline: 0px;
-  box-shadow: inset !important;
-}
 
 /* Styling the modal content */
 .custom-bg {
@@ -512,7 +508,7 @@ section {
 }
 
 .chatbot {
-  width: 300px;
+  width: 400px;
   background-color: #ffffff;
 }
 
@@ -553,4 +549,8 @@ section {
 }
 .arabic{
   font-family: 'Droid Arabic Kufi', serif;
+}
+.normal{
+  font-family: "Poppins", sans-serif;
+
 }

@@ -1,24 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <!-- Include the same head content as evaluation.html -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+        defer></script>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <!-- Add CodeMirror for code editor -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
-    <title>Exercises - AIDirassa</title>
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <title>AIDirassa</title>
 </head>
 <body>
-    <!-- Include the same header as evaluation.html -->
-    <header class="header">
+    <header class="header reveal_top">
         <nav class="nav d-flex justify-content-between">
-            <div class="nav__data ms-md-5 ms-2">
+            <div class="nav__data reveal_top">
+                <div class="nav__background">
+                </div>
+            </div>
+            <!--=============== NAV MENU ===============-->
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <!-- Help/Support -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button arabic">
+                            <i class="ri-arrow-down-s-line dropdown__arrow"></i>المساعدة والدعم
+                        </div>
+                        <div class="dropdown__container" dir="rtl">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-chat-3-line"></i>
+                                    </div>
+                                    <span class="dropdown__title arabic">الدعم</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="contact.html" class="dropdown__link arabic">الدردشة معنا</a>
+                                        </li>
+                                        <li>
+                                            <a href="faqs.html" class="dropdown__link arabic">الأسئلة الشائعة</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- My Progress Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button arabic">
+                            <i class="ri-arrow-down-s-line dropdown__arrow"></i>تقدمي
+                        </div>
+                        <div class="dropdown__container" dir="rtl">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-road-map-line"></i>
+                                    </div>
+                                    <span class="dropdown__title arabic">أدوات التعلم</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="learning_path.html" class="dropdown__link arabic">مسار التعلم الخاص
+                                                بي</a>
+                                        </li>
+                                        <li>
+                                            <a href="exercises.html" class="dropdown__link arabic">تمارين</a>
+                                        </li>
+                                        <li>
+                                            <a href="evaluation.html" class="dropdown__link arabic">تقييم</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-question-line"></i>
+                                    </div>
+                                    <span class="dropdown__title arabic">اختبارات</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="ongoing_quizzes.html" class="dropdown__link arabic">اختبارات
+                                                جارية</a>
+                                        </li>
+                                        <li>
+                                            <a href="final_quiz.html" class="dropdown__link arabic">الاختبار النهائي</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Resources Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button arabic">
+                            <i class="ri-arrow-down-s-line dropdown__arrow"></i>الموارد
+                        </div>
+                        <div class="dropdown__container" dir="rtl">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-links-line"></i>
+                                    </div>
+                                    <span class="dropdown__title arabic">مواد التعلم</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="articles.html" class="dropdown__link arabic">مقالات</a>
+                                        </li>
+                                        <li>
+                                            <a href="youtube_tutorials.html" class="dropdown__link arabic">دروس
+                                                يوتيوب</a>
+                                        </li>
+                                        <li>
+                                            <a href="research_papers.html" class="dropdown__link arabic">أوراق بحثية</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Courses Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button arabic">
+                            <i class="ri-arrow-down-s-line dropdown__arrow"></i>الدورات
+                        </div>
+                        <div class="dropdown__container" dir="rtl">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-book-open-line"></i>
+                                    </div>
+                                    <span class="dropdown__title arabic">الدورات المتاحة</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="intro_to_ml.html" class="dropdown__link arabic">مقدمة في تعلم
+                                                الآلة</a>
+                                        </li>
+                                        <li>
+                                            <a href="python_for_ml.html" class="dropdown__link arabic">بايثون لتعلم
+                                                الآلة</a>
+                                        </li>
+                                        <li>
+                                            <a href="types_of_ml.html" class="dropdown__link arabic">أنواع تعلم
+                                                الآلة</a>
+                                        </li>
+                                        <li>
+                                            <a href="applications_of_ml.html" class="dropdown__link arabic">تطبيقات تعلم
+                                                الآلة</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Home Link -->
+                    <li>
+                        <a href="/" class="nav__link arabic">الرئيسية</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="nav__data me-md-5 me-2 reveal_top">
                 <div class="d-flex flex-column align-items-center nav__logo">
                     <h4 class="mb-0">
                         AIDirassa
@@ -27,180 +170,41 @@
                         online
                     </small>
                 </div>
+                <img src="assets/media/logo.png" alt="" srcset="" style="max-width: 80px;">
                 <div class="nav__toggle" id="nav-toggle">
                     <i class="ri-menu-line nav__toggle-menu"></i>
                     <i class="ri-close-line nav__toggle-close"></i>
                 </div>
             </div>
 
-            <!--=============== NAV MENU ===============-->
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <!-- Home Link -->
-                    <li>
-                        <a href="index.html" class="nav__link">Home</a>
-                    </li>
-
-                    <!-- Courses Dropdown -->
-                    <li class="dropdown__item">
-                        <div class="nav__link dropdown__button">
-                            Courses <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-                        <div class="dropdown__container">
-                            <div class="dropdown__content">
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-book-open-line"></i>
-                                    </div>
-                                    <span class="dropdown__title">Available Courses</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine Learning</a>
-                                        </li>
-                                        <li>
-                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine Learning</a>
-                                        </li>
-                                        <li>
-                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine Learning</a>
-                                        </li>
-                                        <li>
-                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of Machine Learning</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- Resources Dropdown -->
-                    <li class="dropdown__item">
-                        <div class="nav__link dropdown__button">
-                            Resources <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-                        <div class="dropdown__container">
-                            <div class="dropdown__content">
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-links-line"></i>
-                                    </div>
-                                    <span class="dropdown__title">Learning Materials</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="articles.html" class="dropdown__link">Articles</a>
-                                        </li>
-                                        <li>
-                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube Tutorials</a>
-                                        </li>
-                                        <li>
-                                            <a href="research_papers.html" class="dropdown__link">Research Papers</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- My Progress Dropdown -->
-                    <li class="dropdown__item">
-                        <div class="nav__link dropdown__button">
-                            My Progress <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-                        <div class="dropdown__container">
-                            <div class="dropdown__content">
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-road-map-line"></i>
-                                    </div>
-                                    <span class="dropdown__title">Learning Tools</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="learning_path.html" class="dropdown__link">My Learning Path</a>
-                                        </li>
-                                        <li>
-                                            <a href="exercises.html" class="dropdown__link">Exercises</a>
-                                        </li>
-                                        <li>
-                                            <a href="evaluation.html" class="dropdown__link">Evaluation</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-question-line"></i>
-                                    </div>
-                                    <span class="dropdown__title">Quizzes</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="ongoing_quizzes.html" class="dropdown__link">Ongoing Quizzes</a>
-                                        </li>
-                                        <li>
-                                            <a href="final_quiz.html" class="dropdown__link">Final Quiz</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <!-- Help/Support -->
-                    <li class="dropdown__item">
-                        <div class="nav__link dropdown__button">
-                            Help & Support <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-                        <div class="dropdown__container">
-                            <div class="dropdown__content">
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-chat-3-line"></i>
-                                    </div>
-                                    <span class="dropdown__title">Support</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="contact.html" class="dropdown__link">Chat with us</a>
-                                        </li>
-                                        <li>
-                                            <a href="faqs.html" class="dropdown__link">FAQs</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="nav__data">
-                <div class="nav__background">
-                </div>
-            </div>
         </nav>
     </header>
-    
-    <section class="section d-flex flex-column justify-content-center align-items-center position-relative">
-        <h1 class="mb-4 text-center text-primary">Exercises</h1>
+    <section class="section d-flex flex-column justify-content-center align-items-center position-relative arabic" dir="rtl">
+        <h1 class="mb-4 text-center text-primary arabic">التمارين</h1>
         <div class="col-md-12 text-center">
             <img id="query-preloader" class="img-fluid mb-2" src="assets/media/preloader.gif" style="display: none;height: 40px;">
-            <h5 class="mb-3" id="query-state"></h5>
+            <h5 class="mb-3 arabic" id="query-state"></h5>
         </div>
         
         <!-- Exercise Container -->
         <div id="exerciseContainer" class="col-lg-8 col-11">
             <!-- Exercises will be populated here -->
         </div>
-
+    
         <!-- Submit Button -->
         <div id="submitContainer" class="text-center mt-4">
-            <button id="submitExercises" class="btn btn-dark px-4 py-2 d-none">Submit Exercises</button>
+            <button id="submitExercises" class="btn btn-dark px-4 py-2 d-none arabic">إرسال التمارين</button>
         </div>
     </section>
-
     <!-- Results Modal -->
     <div class="modal fade" id="resultsModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
-            <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4">
-                <div class="modal-header border-light border-2">
-                    <h4 class="modal-title text-primary">Exercise Results</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <div class="modal-content rounded-4 custom-bg border border-4 border-white p-4" dir="rtl">
+
+                <div class="modal-header border-light border-2 pt-0 d-flex justify-content-between">
+                    <h4 class="modal-title text-primary arabic">نتائج التمارين</h4>
+                    <button type="button" class="btn btn-sm btn-danger border-0 d-flex" data-bs-dismiss="modal"><i class="ri-close-large-line"></i></button>
+
                 </div>
                 <div class="modal-body" id="resultsContent">
                     <!-- Results will be populated here -->
@@ -208,27 +212,27 @@
             </div>
         </div>
     </div>
-
+    
     <script>
         let exercises = [];
         let userAnswers = [];
         let currentExerciseIndex = 0;
-
+    
         document.addEventListener('DOMContentLoaded', async () => {
             const topics = JSON.parse(localStorage.getItem('exerciseTopics'));
             if (!topics || topics.length === 0) {
                 document.getElementById('exerciseContainer').innerHTML = `
-                    <div class="alert alert-warning" role="alert">
-                        No topics available. Please go back to the content page.
+                    <div class="alert alert-warning arabic" role="alert" dir="rtl">
+                        لا توجد مواضيع متاحة. يرجى العودة إلى صفحة المحتوى.
                     </div>
                 `;
                 return;
             }
-
+    
             try {
-                document.getElementById('query-state').innerText = "Loading exercises...";
+                document.getElementById('query-state').innerText = "جارٍ تحميل التمارين...";
                 document.getElementById('query-preloader').style.display = 'inline';
-
+    
                 const response = await fetch('http://localhost:8000/generate-exercises', {
                     method: 'POST',
                     headers: { 
@@ -249,24 +253,24 @@
             } catch (error) {
                 console.error('Error fetching exercises:', error);
                 document.getElementById('exerciseContainer').innerHTML = `
-                    <div class="alert alert-danger" role="alert">
-                        Error loading exercises. Please try again later.
+                    <div class="alert alert-danger arabic" role="alert" dir="rtl">
+                        حدث خطأ أثناء تحميل التمارين. يرجى المحاولة مرة أخرى لاحقًا.
                     </div>
                 `;
                 document.getElementById('query-preloader').style.display = 'none';
-                document.getElementById('query-state').innerText = "Error loading exercises.";
+                document.getElementById('query-state').innerText = "حدث خطأ أثناء تحميل التمارين.";
             }
         });
-
+    
         function showExercise(index) {
             const exercise = exercises[index];
             const container = document.getElementById('exerciseContainer');
             
             let html = `
-                <div dir="rtl" class="mb-3 p-4 border rounded-4 border-white border-4">
-                    <h5 class="text-dark mb-4">تمرين ${index + 1}/${exercises.length}</h5>
+                <div dir="rtl" class="mb-3 p-4 border rounded-4 border-white border-4 arabic">
+                    <h5 class="text-dark mb-4 arabic">تمرين ${index + 1}/${exercises.length}</h5>
             `;
-
+    
             switch (exercise.type) {
                 case 'mcq':
                     html += createMCQHtml(exercise, index);
@@ -278,49 +282,54 @@
                     html += createCodeHtml(exercise, index);
                     break;
             }
-
+    
             html += `
                 <div class="text-center mt-4">
-                    <button class="btn btn-dark px-3 py-2" onclick="previousExercise()" ${index === 0 ? 'disabled' : ''}>Previous</button>
-                    <button class="btn btn-dark px-3 py-2" onclick="nextExercise()" ${index === exercises.length - 1 ? 'disabled' : ''}>Next</button>
+                    <button class="btn btn-dark px-3 py-2 arabic" onclick="previousExercise()" ${index === 0 ? 'disabled' : ''}>السابق</button>
+                    <button class="btn btn-dark px-3 py-2 arabic" onclick="nextExercise()" ${index === exercises.length - 1 ? 'disabled' : ''}>التالي</button>
                 </div>
                 </div>
             `;
-
+    
             container.innerHTML = html;
-
+    
             if (exercise.type === 'code') {
                 initCodeMirror();
             }
         }
-
+    
         function createMCQHtml(exercise, index) {
             return `
-            <p class="mb-3 arabic">${exercise.question_text}</p>
-            ${exercise.options.map((option, i) => `
-                <div class="form-check mb-2">
-                <input class="form-check-input" type="radio" name="exercise${index}" 
-                       value="${String.fromCharCode(65 + i)}" id="option${i}">
-                <label class="form-check-label" for="option${i}">${option}</label>
+                <div dir="rtl">
+                    <h5 class="text-dark arabic reveal_top">${index + 1}: ${exercise.question_text}</h5>
+                    <div class="mb-3">
+                        ${exercise.options.map((option, i) => `
+                            <div class="form-check reveal_top" style="display: flex; align-items: center;">
+                                <input class="form-check-input" type="radio" name="exercise${index}" id="option${i}" value="${option}" ${i === 0 ? 'checked' : ''} style="margin-left: 10px;">
+                                <label class="form-check-label text-secondary arabic" for="option${i}" style="margin-left: 10px;">
+                                    ${option}
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
                 </div>
-            `).join('')}
             `;
         }
-
+    
         function createTheoreticalHtml(exercise, index) {
             return `
                 <p class="mb-3 arabic">${exercise.question}</p>
-                <textarea class="form-control" rows="4" id="answer${index}"></textarea>
+                <textarea class="form-control arabic" rows="4" id="answer${index}"></textarea>
             `;
         }
-
+    
         function createCodeHtml(exercise, index) {
             return `
                 <p class="mb-3 arabic">${exercise.question}</p>
-                <textarea class="code-editor" id="code${index}"></textarea>
+                <textarea class="code-editor arabic" id="code${index}"></textarea>
             `;
         }
-
+    
         function initCodeMirror() {
             const textareas = document.getElementsByClassName('code-editor');
             Array.from(textareas).forEach(textarea => {
@@ -333,23 +342,23 @@
                 });
             });
         }
-
+    
         function previousExercise() {
             saveCurrentAnswer();
             currentExerciseIndex--;
             showExercise(currentExerciseIndex);
         }
-
+    
         function nextExercise() {
             saveCurrentAnswer();
             currentExerciseIndex++;
             showExercise(currentExerciseIndex);
         }
-
+    
         function saveCurrentAnswer() {
             const exercise = exercises[currentExerciseIndex];
             let answer;
-
+    
             switch (exercise.type) {
                 case 'mcq':
                     const selected = document.querySelector(`input[name="exercise${currentExerciseIndex}"]:checked`);
@@ -363,39 +372,39 @@
                     answer = editor.getValue();
                     break;
             }
-
+    
             userAnswers[currentExerciseIndex] = answer;
         }
-
+    
         document.getElementById('submitExercises').addEventListener('click', () => {
             saveCurrentAnswer();
             showResults();
         });
-
+    
         function showResults() {
             const resultsContent = document.getElementById('resultsContent');
             let html = '';
-
+    
             exercises.forEach((exercise, index) => {
                 html += `
-                    <div class="mb-4">
-                        <h5>Question ${index + 1}</h5>
-                        <p><strong>Your Answer:</strong></p>
+                    <div class="mb-4 arabic">
+                        <h5 class="arabic">السؤال ${index + 1}</h5>
+                        <p class="arabic"><strong>إجابتك:</strong></p>
                         <div class="mb-2 p-3 border rounded bg-light">
                             ${formatAnswer(userAnswers[index], exercise.type)}
                         </div>
-                        <p><strong>Correct Answer:</strong></p>
+                        <p class="arabic"><strong>الإجابة الصحيحة:</strong></p>
                         <div class="mb-2 p-3 border rounded bg-light">
                             ${formatAnswer(exercise.answer || exercise.correct_answer, exercise.type)}
                         </div>
                     </div>
                 `;
             });
-
+    
             resultsContent.innerHTML = html;
             new bootstrap.Modal(document.getElementById('resultsModal')).show();
         }
-
+    
         function formatAnswer(answer, type) {
             if (type === 'code') {
                 return `<pre><code>${answer}</code></pre>`;
@@ -403,7 +412,6 @@
             return answer;
         }
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
