@@ -33,6 +33,11 @@ app.mount("/media", StaticFiles(directory="../Frontend/assets/media"), name="med
 async def read_index():
     with open("../Frontend/index.html", "r") as file:
         return HTMLResponse(content=file.read(), status_code=200)
+    
+@app.get("/evaluation", response_class=HTMLResponse)
+async def read_index():
+    with open("../Frontend/evaluation.html", "r") as file:
+        return HTMLResponse(content=file.read(), status_code=200)
 
 @app.post("/chek-relevence")
 def check_relevence(query: str):
@@ -56,6 +61,7 @@ def get_skills_assessment(query: str):
 def skills_evaluation(skills_assessement:Skill,user_answers:List[str]):
     skills_evaluation_agent = SkillAssessmentEvaluator()
     evaluation = skills_evaluation_agent.evaluate(skills_assessement,user_answers)
+    # return {"message": skills_assessement, "answers": user_answers}
     report=skills_evaluation_agent.generate_report(evaluation)
     return report
 
