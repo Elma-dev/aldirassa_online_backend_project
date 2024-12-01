@@ -1,6 +1,6 @@
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-
+@import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
 /*=============== VARIABLES CSS ===============*/
 :root {
   --header-height: 3.5rem;
@@ -16,6 +16,7 @@
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
   --body-font: "Poppins", sans-serif;
+  
   --normal-font-size: .938rem;
   --small-font-size: .813rem;
   --smaller-font-size: .75rem;
@@ -134,7 +135,7 @@ a {
   opacity: 0;
 }
 
-@media screen and (max-width: 1118px) {
+@media screen and (max-width: 900px) {
   .nav__menu {
     background-color: var(--body-color);
     position: absolute;
@@ -160,7 +161,6 @@ a {
 
 .nav__link {
   color: var(--title-color);
-  font-weight: var(--font-semi-bold);
   padding: 1.25rem 1.5rem;
   display: flex;
   justify-content: space-between;
@@ -272,7 +272,7 @@ a {
 }
 
 /* For large devices */
-@media screen and (min-width: 1118px) {
+@media screen and (min-width: 900px) {
 
   /* Nav */
   .nav {
@@ -437,10 +437,6 @@ section {
   box-shadow: #635c5332 0px 0px 0px 0.25rem;
 }
 
-.chat-input:focus {
-  outline: 0px;
-  box-shadow: inset !important;
-}
 
 /* Styling the modal content */
 .custom-bg {
@@ -512,7 +508,7 @@ section {
 }
 
 .chatbot {
-  width: 300px;
+  width: 400px;
   background-color: #ffffff;
 }
 
@@ -550,4 +546,11 @@ section {
   background-position: center;
   z-index: 0;
   opacity: 0.05;
+}
+.arabic{
+  font-family: 'Droid Arabic Kufi', serif;
+}
+.normal{
+  font-family: "Poppins", sans-serif;
+
 }

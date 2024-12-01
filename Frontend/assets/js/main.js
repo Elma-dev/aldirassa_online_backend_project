@@ -77,18 +77,14 @@ addEventListener('resize', removeStyle)
 const sr = ScrollReveal({
     distance: '30px',
     duration: 1800,
-    reset: true,
+    reset: false,
 });
-
 sr.reveal(`.reveal_top`, {
     origin: 'top',
-    interval: 200,
 })
-
 sr.reveal(`.reveal_left`, {
     origin: 'left'
 })
-
 sr.reveal(`.reveal_right`, {
     origin: 'right'
 })
