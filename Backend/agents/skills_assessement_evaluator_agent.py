@@ -11,7 +11,7 @@ class SkillAssessmentEvaluator:
         }
 
     def evaluate(self, skill_data: 'Skill', user_answers: List[str]) -> DetailedEvaluation:
-        print("len(user_answers): ", len(user_answers))
+
         question_index = 0
         skill_results = {}
 

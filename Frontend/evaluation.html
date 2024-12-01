@@ -198,9 +198,9 @@
                 </div>
                 <div class="modal-body position-relative">
                     <div class="text-dark">
-                        <p class="mb-2"><strong class="text-primary">Score:</strong> <span id="scorePlaceholder">Loading...</span></p>
-                        <p class="mb-2"><strong class="text-primary">Strengths:</strong> Probability, Linear Algebra</p>
-                        <p class="mb-2"><strong class="text-primary">Weaknesses:</strong> Programming, etc.</p>
+                        <p class="mb-2"><strong class="text-primary">Score:</strong> <span id="score">Loading...</span></p>
+                        <p class="mb-2"><strong class="text-primary">Strengths:</strong> <span id="strengths">Probability, Linear Algebra</span></p>
+                        <p class="mb-2"><strong class="text-primary">Weaknesses:</strong> <span id="weaknesses">Programming, etc.</span></p>
                     </div>
                     <div class="mt-4 d-flex justify-content-center">
                         <a href="preview.html" class="btn btn-dark mb-2 d-flex align-items-center">See My Learning Path<i class="ri-route-fill ms-2"></i></a>
@@ -212,44 +212,82 @@
     
 
     <script>
+        const userAnswers = []
         // Function to populate a single question
-        function populateQuestion(quizData, questionIndex) {
+        function populateQuestion(quizData, skillIndex, questionIndex) {
             const quizContainer = document.getElementById('quizContainer');
-            const question = quizData.questions[questionIndex];
+            const skill = quizData.related_skills[skillIndex];
+            const question = skill.mcq_questions[questionIndex];
 
             // Clear the container and add the question content
             quizContainer.innerHTML = `
-                <h3 class="mb-4 text-center">${quizData.quiz_title}</h3>
+                <h3 class="mb-4 text-center">${quizData.main_skill} - ${skill.related_skill_name}</h3>
                 <div class="mb-3 p-4 border rounded-4 border-white border-4">
-                    <h5 class="text-dark">Q${question.id}: ${question.question}</h5>
-                    <p class="text-secondary">${question.description}</p>
+                    <h5 class="text-dark">Q${questionIndex + 1}: ${question.question_text}</h5>
                     <div class="mb-3">
-                        ${question.options.map(option => `
+                        ${question.options.map((option, index) => `
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="quizOption${question.id}" id="option${option.id}" value="${option.id}">
-                                <label class="form-check-label text-secondary" for="option${option.id}">
-                                    ${option.id}) ${option.text}
+                                <input class="form-check-input" type="radio" name="quizOption${questionIndex}" id="option${index}" value="${option}" ${index === 0 ? 'checked' : ''}>
+                                <label class="form-check-label text-secondary" for="option${index}">
+                                    ${option}
                                 </label>
                             </div>
                         `).join('')}
                     </div>
                 </div>
                 <div class="text-center mt-4">
-                    <button class="btn btn-dark px-3 py-2" id="prevBtn" ${questionIndex === 0 ? 'disabled' : ''}>Previous</button>
-                    <button class="btn btn-dark px-3 py-2" id="nextBtn">${questionIndex === quizData.questions.length - 1 ? 'Submit' : 'Next'}</button>
+                    <button class="btn btn-dark px-3 py-2" id="prevBtn" ${questionIndex === 0 && skillIndex === 0 ? 'disabled' : ''}>Previous</button>
+                    <button class="btn btn-dark px-3 py-2" id="nextBtn">${questionIndex === skill.mcq_questions.length - 1 && skillIndex === quizData.related_skills.length - 1 ? 'Submit' : 'Next'}</button>
                 </div>
             `;
 
             // Add event listeners for navigation buttons
             document.getElementById('prevBtn').addEventListener('click', () => {
-                populateQuestion(quizData, questionIndex - 1);
+                if (questionIndex === 0) {
+                    populateQuestion(quizData, skillIndex - 1, quizData.related_skills[skillIndex - 1].mcq_questions.length - 1);
+                } else {
+                    populateQuestion(quizData, skillIndex, questionIndex - 1);
+                }
             });
 
             document.getElementById('nextBtn').addEventListener('click', () => {
-                if (questionIndex === quizData.questions.length - 1) {
-                    submitQuiz(quizData);
-                } else {
-                    populateQuestion(quizData, questionIndex + 1);
+                const selectedOption = document.querySelector(`input[name="quizOption${questionIndex}"]:checked`);
+                userAnswers.push(selectedOption.value[0]);
+                if (questionIndex === skill.mcq_questions.length - 1) {
+                    if (skillIndex === quizData.related_skills.length - 1) {
+                        
+                        submitQuiz(quizData);
+                        evaluationData = JSON.parse(localStorage.getItem('evaluationData'));
+                        data = {"skills_assessement" : evaluationData, "user_answers": userAnswers}
+                        console.log("data :", data)
+                        fetch('http://localhost:8000/skills-evaluation', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                skills_assessement: evaluationData,
+                                user_answers: userAnswers
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            console.log('Success:', result);
+                            document.getElementById("score").textContent = result.score;
+                            document.getElementById("strengths").textContent = result.strengths.length > 0 ? result.strengths : 'No strengths identified';
+                            document.getElementById("weaknesses").textContent = result.weaknesses.length > 0 ? result.weaknesses : 'No weaknesses identified';
+                            // Handle the result as needed
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+
+
+                    } else {             
+                        populateQuestion(quizData, skillIndex + 1, 0);
+                    }
+                } else {                  
+                    populateQuestion(quizData, skillIndex, questionIndex + 1);
                 }
             });
         }
@@ -259,32 +297,35 @@
             const answers = {};
             let allAnswered = true;
 
-            quizData.questions.forEach(question => {
-                const selectedOption = document.querySelector(`input[name="quizOption${question.id}"]:checked`);
-                if (!selectedOption) {
-                    allAnswered = false;
-                }
-                answers[question.id] = selectedOption ? selectedOption.value : null;
+            quizData.related_skills.forEach(skill => {
+                skill.mcq_questions.forEach((question, questionIndex) => {
+                    const selectedOption = document.querySelector(`input[name="quizOption${questionIndex}"]:checked`);
+                    if (!selectedOption) {
+                        allAnswered = false;
+                    }
+                    answers[question.question_text] = selectedOption ? selectedOption.value : null;
+                });
             });
-
+            
             if (!allAnswered) {
-
                 const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
                 resultsModal.show();
                 return;
             }
 
             let score = 0;
-            quizData.questions.forEach(question => {
-                if (answers[question.id] === question.correct_option) {
-                    score++;
-                }
+            quizData.related_skills.forEach(skill => {
+                skill.mcq_questions.forEach(question => {
+                    if (answers[question.question_text] === question.correct_answer) {
+                        score++;
+                    }
+                });
             });
 
             // Update the modal content dynamically
             const modalBody = document.querySelector('#resultsModal .modal-body');
             modalBody.innerHTML = `
-                <p class="mb-2"><strong>Score:</strong> ${score}/${quizData.questions.length}</p>
+                <p class="mb-2"><strong>Score:</strong> "${score}/${quizData.related_skills.reduce((acc, skill) => acc + skill.mcq_questions.length, 0)}"</p>
                 <p class="mb-2"><strong>Strengths:</strong> Probability, Linear Algebra</p>
                 <p class="mb-2"><strong>Weaknesses:</strong> Programming, etc.</p>
             `;
@@ -295,26 +336,42 @@
         }
 
         // Fetch the external JSON file and populate the first question
-        fetch('data/quiz_data.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Quiz Data:", data);
-                populateQuestion(data, 0); // Start with the first question
-            })
-            .catch(error => {
-                console.error("Error loading quiz data:", error);
-                document.getElementById('quizContainer').innerHTML = `
-                    <div class="alert alert-danger" role="alert">
-                        Failed to load quiz data. Please try again later.
-                    </div>
-                `;
-            });
+        // fetch('data/quiz_data.json')
+        //     .then(response => {
+        //         if (!response.ok) {
+        //             throw new Error(`HTTP error! Status: ${response.status}`);
+        //         }
+        //         return response.json();
+        //     })
+        //     .then(data => {
+        //         console.log("Quiz Data:", data);
+        //         populateQuestion(data, 0, 0); // Start with the first question of the first skill
+        //     })
+        //     .catch(error => {
+        //         console.error("Error loading quiz data:", error);
+        //         document.getElementById('quizContainer').innerHTML = `
+        //             <div class="alert alert-danger" role="alert">
+        //                 Failed to load quiz data. Please try again later.
+        //             </div>
+        //         `;
+        //     });
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Retrieve the data object from localStorage
+        const evaluationData = JSON.parse(localStorage.getItem('evaluationData'));
+        if (evaluationData) {
+            console.log("Evaluation Data:", evaluationData);
+            populateQuestion(evaluationData, 0, 0); // Assuming populateQuestion is the function to populate data
+        } else {
+            console.log("No evaluation data found.");
+        }
+
+    });
+
+    // ...existing code...
+</script>
   
 
     <!--=============== MAIN JS ===============-->
