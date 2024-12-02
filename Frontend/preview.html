@@ -12,7 +12,8 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="https://unpkg.com/scrollreveal"></script>
-
+    <link rel="shortcut icon" href="assets/media/logo.png" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.js"></script>
     <title>AIDirassa</title>
 </head>
 
@@ -183,7 +184,10 @@
         <section class="section container my-5" dir="rtl">
         <div class="row">
             <div class="col-md-12 text-center">
-                <img id="query-preloader1" class="img-fluid mb-2" src="assets/media/preloader.gif" style="height: 40px;">
+                <div id="query-preloader1" class="skeleton">
+                    <div class="skeleton-title"></div>
+                    <div class="skeleton-text"></div>
+                </div>
                 <h5 class="mb-3 arabic" id="query-state"></h5>
             </div>
             <div class="col-12 text-center">
@@ -193,17 +197,25 @@
     
             <div class="col-12">
                 <div id="contentContainer" class="p-4 border-4 border border-gpt rounded-4 bg-light">
+                    <!-- Skeleton loader -->
+                    <div id="skeletonLoader" class="skeleton">
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-text"></div>
+                        <div class="skeleton-text"></div>
+                        <div class="skeleton-text"></div>
+                    </div>
                     <!-- Content will be dynamically loaded -->
                 </div>
             </div>
     
             <div class="col-12 mt-4 text-center">
                 <h5 class="arabic">الموارد:</h5>
-                <div class="col-md-12 text-center">
-                    <img id="query-preloader2" class="img-fluid mb-2" src="assets/media/preloader.gif" style="height: 40px;">
-                    <h5 class="mb-3 arabic" id="query-state"></h5>
-                </div>
                 <div id="resourcesContainer" class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+                    <!-- Skeleton loader -->
+                    <div id="query-preloader2" class="skeleton">
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-text"></div>
+                    </div>
                     <!-- Resources will be dynamically added -->
                 </div>
             </div>
@@ -266,6 +278,11 @@
     
         // Populate section content dynamically
         function populateSection(data) {
+            // Hide skeleton loader
+            document.getElementById("skeletonLoader").style.display = 'none';
+            document.getElementById("query-preloader1").style.display = 'none';
+            document.getElementById("query-preloader2").style.display = 'none';
+
             // Title and subtitle
             document.getElementById("sectionTitle").textContent = data.title;
             document.getElementById("sectionSubtitle").textContent = data.subtitle;
