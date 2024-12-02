@@ -450,6 +450,14 @@
     <script>
         const sendButton = document.getElementById("sendButton");
 
+        // Add event listener for Enter key
+        searchInput.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent default form submission
+                sendButton.click(); // Trigger the send button click
+            }
+        });
+
         sendButton.addEventListener("click", () => {
             const message = searchInput.value;
             if (message.trim() !== "") {

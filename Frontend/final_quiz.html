@@ -217,56 +217,68 @@
     </div>
 
     <script>
-        let quizData = [];
+        let quizData = [];  // Global quiz data array
         let currentQuestionIndex = 0;
         let userAnswers = [];
 
         async function loadQuiz() {
             const quizContent = document.getElementById('quizContent');
-            quizContent.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"></div><p class="mt-2">جاري تحميل الاختبار...</p></div>';
+            quizContent.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"></div><p class="mt-2 arabic">جاري تحميل الاختبار...</p></div>';
             
             try {
-                console.log('Loading quiz...');
+                // Get course plan from localStorage
                 const coursePlanData = JSON.parse(localStorage.getItem('quizCoursePlan'));
                 console.log('Retrieved course plan:', coursePlanData);
 
-                if (!coursePlanData) {
-                    throw new Error('No quiz course plan found');
+                if (!coursePlanData || !coursePlanData.learning_path) {
+                    throw new Error('بيانات الخطة الدراسية غير صالحة');
                 }
 
+                // Format the quiz inputs
                 const quizInputs = coursePlanData.learning_path.map(module => ({
                     module_name: module.module_name,
-                    course_name: coursePlanData.course_name,
-                    topics: module.topics
+                    course_name: coursePlanData.course_name || '',
+                    topics: Array.isArray(module.topics) ? module.topics : []
                 }));
-                console.log('Prepared quiz inputs:', quizInputs);
 
-                const response = await fetch(`${window.location.origin}/generate_quiz`, {
+                console.log('Sending quiz inputs:', quizInputs);
+
+                // Make the API call
+                const response = await fetch('/generate_quiz', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(quizInputs)
                 });
-                
+
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`خطأ في الخادم: ${response.status}`);
                 }
-                
-                quizData = await response.json();
-                console.log('Received quiz data:', quizData);
-                
-                if (!quizData || quizData.length === 0) {
-                    throw new Error('No quiz questions received');
+
+                const data = await response.json();
+                console.log('Received quiz data:', data);
+
+                if (!Array.isArray(data) || data.length === 0) {
+                    throw new Error('لم يتم استلام بيانات الاختبار بشكل صحيح');
                 }
-                
+
+                // Store quiz data globally
+                quizData = data;
+                console.log('Quiz data loaded:', quizData);
+
+                // Initialize user answers array
+                userAnswers = new Array(getTotalQuestions()).fill([]);
+
+                // Show first question
                 showQuestion(0);
+
             } catch (error) {
-                console.error('Error loading quiz:', error);
+                console.error('Quiz loading error:', error);
                 quizContent.innerHTML = `
                     <div class="alert alert-danger" role="alert">
-                        <h4 class="alert-heading">خطأ في تحميل الاختبار</h4>
-                        <p>${error.message}</p>
+                        <h4 class="alert-heading arabic">خطأ في تحميل الاختبار</h4>
+                        <p class="arabic">${error.message}</p>
                         <hr>
-                        <a href="learning_path.html" class="btn btn-dark">العودة إلى مسار التعلم</a>
+                        <a href="/learningpath" class="btn btn-dark arabic">العودة إلى مسار التعلم</a>
                     </div>
                 `;
             }
@@ -274,44 +286,47 @@
 
         function showQuestion(index) {
             try {
+                console.log('Quiz data at show question:', quizData);
                 console.log(`Showing question ${index + 1}`);
-                if (!quizData || !quizData.length) {
-                    throw new Error('Quiz data is not properly loaded');
+                
+                if (!Array.isArray(quizData) || quizData.length === 0) {
+                    throw new Error('بيانات الاختبار غير متوفرة');
                 }
 
                 const totalQuestions = getTotalQuestions();
-                
-                // Calculate module and question indices
-                let questionCount = 0;
-                let moduleIndex = 0;
-                let questionIndex = 0;
+                if (index >= totalQuestions) {
+                    throw new Error('رقم السؤال غير صالح');
+                }
 
-                // Find the correct module and question index
-                for (let i = 0; i < quizData.length; i++) {
-                    const moduleQuestionCount = quizData[i].questions?.length || 0;
-                    if (questionCount + moduleQuestionCount > index) {
-                        moduleIndex = i;
-                        questionIndex = index - questionCount;
+                // Find the module and question for the current index
+                let questionCount = 0;
+                let currentModule = null;
+                let currentQuestion = null;
+
+                for (const module of quizData) {
+                    if (!module.questions) continue;
+                    
+                    if (questionCount + module.questions.length > index) {
+                        currentModule = module;
+                        currentQuestion = module.questions[index - questionCount];
                         break;
                     }
-                    questionCount += moduleQuestionCount;
+                    questionCount += module.questions.length;
                 }
 
-                const currentModule = quizData[moduleIndex];
-                if (!currentModule?.questions?.[questionIndex]) {
-                    throw new Error('Question not found');
+                if (!currentModule || !currentQuestion) {
+                    throw new Error('لم يتم العثور على السؤال');
                 }
 
-                const question = currentModule.questions[questionIndex];
-                
+                // Update the UI
                 document.getElementById('quizContent').innerHTML = `
                     <h4 class="mb-4 arabic" dir="rtl">${currentModule.module_name}</h4>
                     <div class="question mb-4" dir="rtl">
                         <h5 class="mb-3 arabic">السؤال ${index + 1} من ${totalQuestions}</h5>
-                        <p class="arabic">${question.question}</p>
+                        <p class="arabic">${currentQuestion.question}</p>
                     </div>
                     <div class="options" dir="rtl">
-                        ${question.options.map((option, i) => `
+                        ${currentQuestion.options.map((option, i) => `
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" id="option${i}" value="${option}"
                                     ${(userAnswers[index] || []).includes(option) ? 'checked' : ''}>
@@ -322,21 +337,26 @@
                 `;
 
                 // Update navigation buttons
-                document.getElementById('prevBtn').disabled = index === 0;
-                const nextBtn = document.getElementById('nextBtn');
-                nextBtn.textContent = index === totalQuestions - 1 ? 'إرسال' : 'التالي';
-                nextBtn.classList.toggle('btn-success', index === totalQuestions - 1);
+                updateNavigationButtons(index, totalQuestions);
+
             } catch (error) {
                 console.error('Error showing question:', error);
                 document.getElementById('quizContent').innerHTML = `
                     <div class="alert alert-danger" role="alert">
                         <h4 class="alert-heading arabic">خطأ في عرض السؤال</h4>
                         <p class="arabic">${error.message}</p>
-                        <hr>
-                        <a href="/learningpath" class="btn btn-dark arabic">العودة إلى مسار التعلم</a>
                     </div>
                 `;
             }
+        }
+
+        function updateNavigationButtons(currentIndex, totalQuestions) {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.textContent = currentIndex === totalQuestions - 1 ? 'إرسال' : 'التالي';
+            nextBtn.classList.toggle('btn-success', currentIndex === totalQuestions - 1);
         }
 
         function getTotalQuestions() {

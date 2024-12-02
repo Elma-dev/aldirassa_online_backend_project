@@ -151,75 +151,51 @@ def generate_exercises(topics: List[Topic]):
 @app.post("/generate_quiz")
 async def generate_quiz(quiz_inputs: List[QuizInput]):
     try:
-        # Instantiate the agent with a model
         quiz_content_agent = QuizContentAgent(model=model)
-        items = []
-        
+        quiz_items = []
+
         for quiz_input in quiz_inputs:
-            try:
-                # Generate exactly 5 questions per module
-                quiz_content = quiz_content_agent.generate_quiz_content(quiz_input, 1)
-                
-                # Validate the generated content
-                if not quiz_content or not quiz_content.questions or len(quiz_content.questions) < 5:
-                    raise ValueError(f"Invalid quiz content generated for module {quiz_input.module_name}")
-                    
-                items.append(quiz_content)
-            except Exception as e:
-                raise HTTPException(
-                    status_code=500, 
-                    detail=f"Error generating quiz for module {quiz_input.module_name}: {str(e)}"
-                )
-                
-        if not items:
-            raise HTTPException(status_code=500, detail="No quiz content was generated")
-            
-        return items
-        
+            quiz_content = quiz_content_agent.generate_quiz_content(quiz_input, 1)  # Generate 3 questions per module
+            if quiz_content and quiz_content.questions:
+                quiz_items.append(quiz_content)
+
+        if not quiz_items:
+            raise HTTPException(status_code=400, detail="No valid quiz content could be generated")
+
+        return quiz_items
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Quiz generation failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to generate quiz: {str(e)}")
 
 @app.post("/correct-quiz")
 def correct_quiz(user_answers: List[dict]):
     try:
-        total_modules = len(user_answers)
+        total_questions = sum(len(module.get('questions', [])) for module in user_answers)
+        if total_questions == 0:
+            raise HTTPException(status_code=400, detail="No questions provided")
+
         module_scores = {}
         total_score = 0
 
-        # Calculate score for each module
         for module_data in user_answers:
             module_name = module_data.get('module_name', 'Unknown Module')
             questions = module_data.get('questions', [])
             
-            if not questions:
-                continue
-
-            correct_count = 0
-            total_questions = len(questions)
-
-            # Calculate correct answers for this module
-            for q in questions:
-                user_answers_set = set(q.get('user_answers', []))
-                correct_answers_set = set(q.get('correct_answers', []))
-                if user_answers_set and correct_answers_set and user_answers_set == correct_answers_set:
-                    correct_count += 1
-
-            # Calculate module score
-            if total_questions > 0:
-                module_score = (correct_count / total_questions) * 100
+            if questions:
+                correct_count = sum(
+                    1 for q in questions 
+                    if set(q.get('user_answers', [])) == set(q.get('correct_answers', []))
+                )
+                module_score = (correct_count / len(questions)) * 100
                 module_scores[module_name] = round(module_score, 1)
                 total_score += module_score
 
-        # Calculate overall score
-        overall_score = round(total_score / total_modules if total_modules > 0 else 0, 1)
+        overall_score = round(total_score / len(user_answers), 1)
 
         return {
             "overall_score": overall_score,
             "module_scores": module_scores
         }
+
     except Exception as e:
-        print(f"Error in correct_quiz: {str(e)}")  # Log the error
-        raise HTTPException(
-            status_code=500, 
-            detail={"error": "Failed to calculate quiz results", "message": str(e)}
-        )
+        raise HTTPException(status_code=500, detail=str(e))

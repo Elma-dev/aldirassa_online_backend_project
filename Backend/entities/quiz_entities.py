@@ -26,3 +26,12 @@ class QuizUserAnswers(BaseModel):
     module_name: str
     questions: List[QuizQAResponse]
 
+class ModuleQuizResponse(BaseModel):
+    module_name: str
+    overall_score: float
+    questions: List[QuizQAResponse]
+
+class QuizResults(BaseModel):
+    overall_score: float
+    module_scores: dict[str, float]
+

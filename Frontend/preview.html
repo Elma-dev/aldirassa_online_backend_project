@@ -114,6 +114,23 @@
             max-width: 900px;
             margin: 0 auto;
         }
+
+        .section-subtitle {
+            color: #183153;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 1.5rem auto 2rem;
+            line-height: 1.8;
+            position: relative;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, transparent, rgba(24, 49, 83, 0.05), transparent);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(24, 49, 83, 0.03);
+        }
+
+        .section-subtitle::after {
+            display: none;
+        }
     </style>
 </head>
 
@@ -292,21 +309,14 @@
             </div>
             <div class="col-12 text-center">
                 <h1 id="sectionTitle" class="text-primary arabic"></h1>
-                <h5 id="sectionSubtitle" class="text-secondary mb-4 arabic text-end"></h5>
+                <h5 id="sectionSubtitle" class="section-subtitle arabic"></h5>
+                <div class="topic-navigation mb-4"></div>
             </div>
     <div id="topicCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#topicCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#topicCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
     
             <div class="col-12">

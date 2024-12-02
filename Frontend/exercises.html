@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="shortcut icon" href="assets/media/logo.png" type="image/x-icon">
+    <!-- Add CodeMirror CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
     <title>AIDirassa</title>
 </head>
 <body>
@@ -217,6 +223,7 @@
         let exercises = [];
         let userAnswers = [];
         let currentExerciseIndex = 0;
+        let codeMirrorInstances = {};
     
         document.addEventListener('DOMContentLoaded', async () => {
             const topics = JSON.parse(localStorage.getItem('exerciseTopics'));
@@ -333,13 +340,22 @@
         function initCodeMirror() {
             const textareas = document.getElementsByClassName('code-editor');
             Array.from(textareas).forEach(textarea => {
-                CodeMirror.fromTextArea(textarea, {
+                const instance = CodeMirror.fromTextArea(textarea, {
                     mode: 'python',
                     theme: 'monokai',
                     lineNumbers: true,
                     autoCloseBrackets: true,
-                    indentUnit: 4
+                    indentUnit: 4,
+                    lineWrapping: true,
+                    viewportMargin: Infinity,
+                    height: 'auto'
                 });
+                
+                // Store the instance for later use
+                codeMirrorInstances[textarea.id] = instance;
+                
+                // Set size after initialization
+                instance.setSize(null, 200);
             });
         }
     
@@ -368,8 +384,8 @@
                     answer = document.getElementById(`answer${currentExerciseIndex}`).value;
                     break;
                 case 'code':
-                    const editor = document.querySelector('.CodeMirror').CodeMirror;
-                    answer = editor.getValue();
+                    const editorInstance = codeMirrorInstances[`code${currentExerciseIndex}`];
+                    answer = editorInstance ? editorInstance.getValue() : '';
                     break;
             }
     
