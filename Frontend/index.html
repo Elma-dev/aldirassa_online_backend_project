@@ -205,10 +205,179 @@
                             id="searchInput" placeholder="اريد ان اتعلم اللغه العربيه" />
                     </div>
                 </div>
+                <div class="col-12 mt-4 text-center reveal_top">
+                    <p class="text-muted arabic mb-2">أمثلة على الأسئلة:</p>
+                    <div class="example-prompts d-flex flex-wrap justify-content-center gap-2 mb-4">
+                        <span class="badge bg-light text-dark p-2 arabic example-prompt" role="button">بغيت نتعلم الدكاء الاصطناعي</span>
+                        <span class="badge bg-light text-dark p-2 arabic example-prompt" role="button">بغيت نتعلم اللغة العربية</span>
+                        <span class="badge bg-light text-dark p-2 arabic example-prompt" role="button">بغيت نتعلم الامن السيبراني</span>
+                    </div>
+                    <div class="scroll-indicator">
+                        <p class="text-muted arabic mb-2"> فريق العمل </p>
+                        <a href="#team" class="text-dark">
+                            <i class="ri-arrow-down-line animate-bounce" style="font-size: 2rem;"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-
     </section>
+
+
+
+    <section id="team" class="section py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 arabic">فريق العمل</h2>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-3 col-sm-6 reveal_left">
+                    <div class="card team-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/media/oussama.jpg" class="card-img-top rounded-circle" alt="Oussama Qouti">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Oussama Qouti</h5>
+                            <p class="card-text mb-2">Team Lead GenAI Developer</p>
+                            <p class="card-text text-muted mb-2">GenAI with LLMs Certified</p>
+                            <div class="social-links">
+                                <a href="#" class="text-dark mx-1"><i class="ri-linkedin-box-fill"></i></a>
+                                <a href="https://github.com/QoutiOussama13" class="text-dark mx-1"><i class="ri-github-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 reveal_top">
+                    <div class="card team-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/media/azdin.jpg" class="card-img-top rounded-circle" alt="Azedin Sahir">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Azedin Sahir</h5>
+                            <p class="card-text mb-2">GenAI Developer</p>
+                            <p class="card-text text-muted mb-2">GenAI with LLMs Certified</p>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/azeddin-sahir/" class="text-dark mx-1"><i class="ri-linkedin-box-fill"></i></a>
+                                <a href="https://github.com/Azeddin1717" class="text-dark mx-1"><i class="ri-github-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 reveal_top">
+                    <div class="card team-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/media/mahmoud.jpg" class="card-img-top rounded-circle" alt="Mahmoud Bidry">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Mahmoud Bidry</h5>
+                            <p class="card-text mb-2">PhD Candidate</p>
+                            <p class="card-text text-muted mb-2">GenAI Developer<br>GenAI with LLMs Certified</p>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/mahmoudbidry/" class="text-dark mx-1"><i class="ri-linkedin-box-fill"></i></a>
+                                <a href="https://github.com/mahmoudBidry" class="text-dark mx-1"><i class="ri-github-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 reveal_right">
+                    <div class="card team-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="assets/media/abdo.png" class="card-img-top rounded-circle" alt="Abdeljalil EL MAJJODI">
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Abdeljalil EL MAJJODI</h5>
+                            <p class="card-text mb-2">GenAI Engineer</p>
+                            <p class="card-text text-muted mb-2">Backend Developer</p>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/abdeljalil-el-majjodi/" class="text-dark mx-1"><i class="ri-linkedin-box-fill"></i></a>
+                                <a href="https://github.com/Elma-dev?tab=repositories" class="text-dark mx-1"><i class="ri-github-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .team-card {
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .example-prompt {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .example-prompt:hover {
+            background-color: #e9ecef !important;
+            transform: translateY(-2px);
+        }
+        
+        .card-img-wrapper {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .card-img-top {
+            width: 180px;
+            height: 180px;
+            border-radius: 50% !important;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+
+        .scroll-indicator {
+            margin-top: 2rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .scroll-indicator p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #0d6efd !important;
+        }
+    </style>
 
     <script>
 
@@ -311,12 +480,14 @@
             }
         });
 
+        document.querySelectorAll('.example-prompt').forEach(prompt => {
+            prompt.addEventListener('click', () => {
+                const searchInput = document.getElementById('searchInput');
+                searchInput.value = prompt.textContent;
+                searchInput.focus();
+            });
+        });
     </script>
-
-    <!-- ...existing code... -->
-    <button class="btn btn-dark px-3 py-2 arabic" id="prevBtn" ${questionIndex === 0 && skillIndex === 0 ? 'disabled' : ''}>السابق</button>
-    <button class="btn btn-dark px-3 py-2 arabic" id="nextBtn">${questionIndex === skill.mcq_questions.length - 1 && skillIndex === quizData.related_skills.length - 1 ? 'إرسال' : 'التالي'}</button>
-    <!-- ...existing code... -->
 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js"></script>
