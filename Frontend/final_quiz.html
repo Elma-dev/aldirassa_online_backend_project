@@ -376,6 +376,11 @@
         async function submitQuiz() {
             console.log('Submitting quiz...');
             try {
+                // Show loading state
+                const nextBtn = document.getElementById('nextBtn');
+                nextBtn.disabled = true;
+                nextBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> جاري الإرسال...';
+
                 // Group answers by module
                 const formattedAnswers = [];
                 let currentModuleIndex = 0;
@@ -399,20 +404,35 @@
 
                 console.log('Formatted answers:', formattedAnswers);
 
-                const response = await fetch('http://localhost:8000/correct-quiz', {
+                const response = await fetch('/correct-quiz', { // Changed from absolute URL to relative
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formattedAnswers)
                 });
 
-                if (!response.ok) throw new Error('Failed to submit quiz');
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => null);
+                    throw new Error(errorData?.detail || `Error: ${response.status}`);
+                }
 
                 const results = await response.json();
                 console.log('Quiz results:', results);
                 showResults(results);
             } catch (error) {
                 console.error('Error submitting quiz:', error);
-                alert('حدث خطأ أثناء تقديم الاختبار. يرجى المحاولة مرة أخرى.');
+                document.getElementById('quizContent').innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading arabic">خطأ في تقديم الاختبار</h4>
+                        <p class="arabic">${error.message}</p>
+                        <hr>
+                        <button class="btn btn-dark arabic" onclick="location.reload()">إعادة المحاولة</button>
+                    </div>
+                `;
+            } finally {
+                // Reset button state
+                const nextBtn = document.getElementById('nextBtn');
+                nextBtn.disabled = false;
+                nextBtn.textContent = 'إرسال';
             }
         }
 
