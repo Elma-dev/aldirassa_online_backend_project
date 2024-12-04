@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="https://unpkg.com/scrollreveal"></script>
-
+    <link rel="shortcut icon" href="assets/media/logo.png" type="image/x-icon">
     <title>AIDirassa</title>
 </head>
 
@@ -41,10 +41,10 @@
                                     <span class="dropdown__title arabic">الدعم</span>
                                     <ul class="dropdown__list ps-0">
                                         <li>
-                                            <a href="contact.html" class="dropdown__link arabic">الدردشة معنا</a>
+                                            <a href="/contact" class="dropdown__link arabic">الدردشة معنا</a>
                                         </li>
                                         <li>
-                                            <a href="faqs.html" class="dropdown__link arabic">الأسئلة الشائعة</a>
+                                            <a href="/faqs" class="dropdown__link arabic">الأسئلة الشائعة</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -122,45 +122,14 @@
                             </div>
                         </div>
                     </li>
-                    <!-- Courses Dropdown -->
-                    <li class="dropdown__item">
-                        <div class="nav__link dropdown__button arabic">
-                            <i class="ri-arrow-down-s-line dropdown__arrow"></i>الدورات
-                        </div>
-                        <div class="dropdown__container" dir="rtl">
-                            <div class="dropdown__content">
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-book-open-line"></i>
-                                    </div>
-                                    <span class="dropdown__title arabic">الدورات المتاحة</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="intro_to_ml.html" class="dropdown__link arabic">مقدمة في تعلم
-                                                الآلة</a>
-                                        </li>
-                                        <li>
-                                            <a href="python_for_ml.html" class="dropdown__link arabic">بايثون لتعلم
-                                                الآلة</a>
-                                        </li>
-                                        <li>
-                                            <a href="types_of_ml.html" class="dropdown__link arabic">أنواع تعلم
-                                                الآلة</a>
-                                        </li>
-                                        <li>
-                                            <a href="applications_of_ml.html" class="dropdown__link arabic">تطبيقات تعلم
-                                                الآلة</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- About Us Link -->
+                    <li>
+                        <a href="/about_us" class="nav__link arabic">معلومات عنا</a>
                     </li>
                     <!-- Home Link -->
                     <li>
                         <a href="/" class="nav__link arabic">الرئيسية</a>
                     </li>
-
                 </ul>
             </div>
             <div class="nav__data me-md-5 me-2 reveal_top">
@@ -181,45 +150,66 @@
 
         </nav>
     </header>
-        <section class="section container my-5" dir="rtl">
+    <section class="section container my-5" dir="rtl">
         <div class="row">
             <div class="col-md-12 text-center">
-                <img id="query-preloader1" class="img-fluid mb-2" src="assets/media/preloader.gif" style="height: 40px;">
+                <div id="query-preloader1" class="skeleton">
+                    <div class="skeleton-title"></div>
+                    <div class="skeleton-text"></div>
+                </div>
                 <h5 class="mb-3 arabic" id="query-state"></h5>
             </div>
             <div class="col-12 text-center">
                 <h1 id="sectionTitle" class="text-primary arabic"></h1>
-                <h5 id="sectionSubtitle" class="text-secondary mb-4 arabic"></h5>
+                <h5 id="sectionSubtitle" class="section-subtitle arabic"></h5>
+                <div class="topic-navigation mb-4"></div>
             </div>
-    
-            <div class="col-12">
-                <div id="contentContainer" class="p-4 border-4 border border-gpt rounded-4 bg-light">
-                    <!-- Content will be dynamically loaded -->
+            <div id="topicCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    </div>
                 </div>
             </div>
-    
+
+            <div class="col-12">
+                <div class="section-container">
+                    <div id="contentLoader" class="text-center mb-4 loader-container">
+                        <span class="loader"></span>
+                        <span class="loader-label arabic">جاري تحميل المحتوى...</span>
+                    </div>
+                    <div id="contentContainer" class="content-hidden">
+                        <!-- Content will be dynamically loaded -->
+                    </div>
+                </div>
+            </div>
+
             <div class="col-12 mt-4 text-center">
                 <h5 class="arabic">الموارد:</h5>
-                <div class="col-md-12 text-center">
-                    <img id="query-preloader2" class="img-fluid mb-2" src="assets/media/preloader.gif" style="height: 40px;">
-                    <h5 class="mb-3 arabic" id="query-state"></h5>
+                <div id="resourceLoader" class="text-center mb-4 loader-container">
+                    <span class="loader"></span>
+                    <span class="loader-label arabic">جاري تحميل الموارد...</span>
                 </div>
-                <div id="resourcesContainer" class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+                <div id="resourcesContainer" class="d-flex flex-wrap justify-content-center gap-3 mt-3 content-hidden">
+                    <!-- Skeleton loader -->
+                    <div id="query-preloader2" class="skeleton">
+                        <div class="skeleton-title"></div>
+                        <div class="skeleton-text"></div>
+                    </div>
                     <!-- Resources will be dynamically added -->
                 </div>
             </div>
-    
+
             <div class="col-12 text-center mt-4">
                 <button class="btn btn-dark px-4 py-2 arabic" id="exerciseButton">التمارين</button>
             </div>
         </div>
-    
+
         <!-- Chatbot Toggle Button -->
         <button id="chatbotToggle" class="btn btn-dark rounded-circle position-fixed bottom-0 end-0 m-4 shadow arabic"
             data-bs-toggle="tooltip" data-bs-placement="left" title="مرحبًا، كيف يمكنني مساعدتك اليوم؟">
             <i class="ri-robot-2-line"></i>
         </button>
-    
+
         <!-- Chatbot -->
         <div class="chatbot position-fixed custom-bg-chat bottom-0 end-0 m-3 border border-white border-4 rounded-3 bg-light p-2 d-none"
             id="chatbot">
@@ -237,8 +227,8 @@
                     </div>
                 </div>
                 <div class="input-group border-3 border border-gpt rounded-3 bg-light">
-                    <input type="text" class="form-control py-2 px-3 bg-light border-0 arabic" placeholder="اكتب رسالة..."
-                        id="chatInput" autocomplete="off" />
+                    <input type="text" class="form-control py-2 px-3 bg-light border-0 arabic"
+                        placeholder="اكتب رسالة..." id="chatInput" autocomplete="off" />
                     <button class="border-0 btn-dark btn px-2 rounded-3 m-1" id="sendChat">
                         <i class="ri-arrow-up-line"></i>
                     </button>
@@ -256,7 +246,7 @@
         const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl);
         });
-    
+
         // Fetch data from external JSON file and populate the section
         fetch('data/section_data.json')
             .then((response) => response.json())
@@ -264,13 +254,17 @@
                 populateSection(data);
             })
             .catch((error) => console.error("Error loading section data:", error));
-    
+
         // Populate section content dynamically
         function populateSection(data) {
+            // Remove reference to non-existent skeletonLoader
+            document.getElementById("query-preloader1").style.display = 'none';
+            document.getElementById("query-preloader2").style.display = 'none';
+
             // Title and subtitle
             document.getElementById("sectionTitle").textContent = data.title;
             document.getElementById("sectionSubtitle").textContent = data.subtitle;
-    
+
             // Descriptions
             const contentContainer = document.getElementById("contentContainer");
             contentContainer.innerHTML = data.description
@@ -283,7 +277,7 @@
                 `
                 )
                 .join("");
-    
+
             // Resources
             const resourcesContainer = document.getElementById("resourcesContainer");
             resourcesContainer.innerHTML = data.resources
@@ -296,7 +290,7 @@
                 )
                 .join("");
         }
-    
+
         // Chatbot Logic
         const chatbotToggle = document.getElementById("chatbotToggle");
         const chatbot = document.getElementById("chatbot");
@@ -304,7 +298,7 @@
         const chatInput = document.getElementById("chatInput");
         const chatMessages = document.getElementById("chatMessages");
         const sendChat = document.getElementById("sendChat");
-    
+
         // Toggle chatbot visibility
         chatbotToggle.addEventListener("click", () => {
             chatbot.classList.toggle("d-none");
@@ -312,22 +306,22 @@
                 tooltipList.forEach(tooltip => tooltip.hide()); // Hide tooltip when chatbot is shown
             }
         });
-    
+
         // Close chatbot
         closeChatbot.addEventListener("click", () => {
             chatbot.classList.add("d-none");
         });
-    
+
         // Send chat message
         sendChat.addEventListener("click", sendMessage);
-    
+
         // Send message on Enter key press
         chatInput.addEventListener("keypress", (event) => {
             if (event.key === "Enter") {
                 sendMessage();
             }
         });
-    
+
         async function sendMessage() {
             const message = chatInput.value.trim(); // Get user input
             if (message) {
@@ -343,10 +337,10 @@
                 // Display user message in the chat
                 chatMessages.innerHTML += `<div class="text-end text-primary mb-2 arabic rounded-4 bg-white p-2 border border-3 px-3"><i class="ri-user-line ms-2"></i>${message}</div>`;
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-    
+
                 // Clear the input field
                 chatInput.value = "";
-    
+
                 // Call the backend API
                 try {
                     const response = await fetch("/ask", {
@@ -356,7 +350,7 @@
                         },
                         body: JSON.stringify({ question: message, topics: currentTopics }),
                     });
-    
+
                     if (response.ok) {
                         const data = await response.json();
                         // Display the bot response
@@ -371,16 +365,16 @@
                 }
             }
         }
-    
+
         function displayBotResponse(response) {
             if (!response) {
                 response = "عذرًا، لم أتمكن من توليد استجابة.";
             }
-    
+
             let botMessageDiv = document.createElement('div');
             botMessageDiv.className = 'text-start text-secondary mb-2 arabic';
             chatMessages.appendChild(botMessageDiv);
-    
+
             let index = 0;
             const interval = setInterval(() => {
                 if (index < response.length) {
@@ -393,20 +387,20 @@
                 }
             }, 50);
         }
-    
+
         // Add global variable to store topics
         let currentTopics = [];
-    
+
         document.addEventListener("DOMContentLoaded", () => {
             const selectedModule = JSON.parse(localStorage.getItem('selectedModule'));
             const courseName = localStorage.getItem('courseName');
             console.log('Selected module:', selectedModule);
             console.log('Course name:', courseName);
-    
+
             if (selectedModule && courseName) {
                 // Show preloader
                 document.getElementById("query-preloader1").style.display = 'inline';
-    
+
                 fetch(`${window.location.origin}/generate-topic-content`, {
                     method: 'POST',
                     headers: {
@@ -434,27 +428,35 @@
                 console.error('No module or course name found in localStorage.');
             }
         });
-    
+
         function populateContent(data) {
-            document.getElementById("sectionTitle").textContent = data.module_name;
-            document.getElementById("sectionSubtitle").textContent = data.introduction;
-    
+            const contentLoader = document.getElementById("contentLoader");
             const contentContainer = document.getElementById("contentContainer");
+
+            // Hide loader and show content with animation
+            contentLoader.style.display = 'none';
             contentContainer.innerHTML = data.topics
                 .map(
                     (topic) => `
-                    <div class="mb-4">
-                        <h5 class="text-primary arabic">${topic.topic_name}</h5>
-                        <p class="text-secondary arabic">${topic.explanation}</p>
+                    <div class="content-card">
+                        <h5 class="topic-title arabic" style="color: orange;">${topic.topic_name}</h5>
+
+                        <p class="topic-content arabic">${topic.explanation}</p>
                     </div>
                 `
                 )
                 .join("");
+
+            setTimeout(() => {
+                contentContainer.classList.remove('content-hidden');
+                contentContainer.classList.add('content-visible');
+            }, 100);
+
+            document.getElementById("sectionTitle").textContent = data.module_name;
+            document.getElementById("sectionSubtitle").textContent = data.introduction;
     
-            // Fetch and display resources for each topic
-            data.topics.forEach(topic => {
-                fetchResources(topic.topic_name);
-            });
+            // Fetch resources only once for the section title
+            fetchResources(data.module_name);
     
             // Store topics for chatbot use
             currentTopics = data.topics.map(topic => ({
@@ -463,50 +465,85 @@
             }));
         }
     
-        function fetchResources(topicName) {
-            const payload = { topic_name: topicName };
-            console.log('Sending payload:', payload); // Log the payload
-    
-            // Show preloader
-            document.getElementById("query-preloader2").style.display = 'inline';
-    
-            fetch('/get-topic-resources', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(resources => {
-                    console.log('Received resources:', resources); // Log the received resources
-                    const resourcesContainer = document.getElementById("resourcesContainer");
-                    if (Array.isArray(resources)) {
-                        resources.forEach(resource => {
-                            resourcesContainer.innerHTML += `
-                                <a href="${resource.link}" target="_blank" class="btn btn-light border rounded-3 shadow-sm d-flex align-items-center gap-2">
-                                    <i class="ri-link"></i> ${resource.title || resource.link}
-                                </a>
-                            `;
-                        });
-                    } else {
-                        console.error('Resources is not an array:', resources);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching resources:', error);
-                })
-                .finally(() => {
-                    // Hide preloader
-                    document.getElementById("query-preloader2").style.display = 'none';
+        async function fetchResources(sectionTitle) {
+            const payload = { topic_name: sectionTitle };
+            console.log('Sending payload:', payload);
+        
+            const resourceLoader = document.getElementById("resourceLoader");
+            const resourcesContainer = document.getElementById("resourcesContainer");
+            
+            if (resourceLoader) resourceLoader.style.display = 'block';
+            if (resourcesContainer) resourcesContainer.classList.add('content-hidden');
+        
+            try {
+                const response = await fetch('/get-topic-resources', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
                 });
+        
+                if (response.status === 429) {
+                    // Handle rate limiting
+                    console.log('Rate limit reached, waiting before retrying...');
+                    // Add fallback content while rate-limited
+                    resourcesContainer.innerHTML += `
+                        <div class="alert alert-warning arabic" role="alert">
+                            جاري تحميل الموارد... يرجى الانتظار
+                        </div>
+                    `;
+                    // Wait for 1 second before retrying
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return fetchResources(topicName);
+                }
+        
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+        
+                const resources = await response.json();
+                console.log('Received resources:', resources);
+        
+                resourcesContainer.innerHTML = ''; // Clear existing resources
+                if (Array.isArray(resources)) {
+                    resources.forEach(resource => {
+                        resourcesContainer.innerHTML += `
+                            <a href="${resource.link}" 
+                               target="_blank" 
+                               class="resource-link btn border rounded-3 shadow-sm d-flex align-items-center gap-2 px-4 py-2">
+                                <i class="ri-link"></i>
+                                <span class="arabic">${resource.title || resource.link}</span>
+                            </a>
+                        `;
+                    });
+                } else {
+                    console.error('Resources is not an array:', resources);
+                }
+        
+            } catch (error) {
+                console.error('Error fetching resources:', error);
+                if (resourcesContainer) {
+                    resourcesContainer.innerHTML = `
+                        <div class="alert alert-danger arabic" role="alert">
+                            عذراً، حدث خطأ أثناء تحميل الموارد
+                        </div>
+                    `;
+                }
+            } finally {
+                if (resourceLoader) resourceLoader.style.display = 'none';
+                const preloader2 = document.getElementById("query-preloader2");
+                if (preloader2) preloader2.style.display = 'none';
+                
+                setTimeout(() => {
+                    if (resourcesContainer) {
+                        resourcesContainer.classList.remove('content-hidden');
+                        resourcesContainer.classList.add('content-visible');
+                    }
+                }, 100);
+            }
         }
-    
+
         document.getElementById("exerciseButton").addEventListener("click", () => {
             // Get the current topics from the content
             if (currentTopics && currentTopics.length > 0) {
@@ -515,7 +552,7 @@
                     topic_name: topic.topic_name,
                     explanation: topic.explanation
                 }));
-    
+
                 localStorage.setItem('exerciseTopics', JSON.stringify(topicsToStore));
                 window.location.href = 'exercises';
             } else {
@@ -526,6 +563,125 @@
 
     <!--=============== MAIN JS ===============-->
     <script src="assets/js/main.js"></script>
+    <style>
+        
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #e9ecef;
+    border-bottom-color: #6c757d;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.loader-label {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.content-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.content-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.6s ease-out;
+}
+
+@keyframes rotation {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}
+
+.content-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+}
+
+.topic-title {
+    color: #183153;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.topic-content {
+    color: #495057;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.resources-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+.resources-title:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #183153;
+    border-radius: 2px;
+}
+
+.resource-link {
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.resource-link:hover {
+    background: #183153;
+    color: white;
+}
+
+.section-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-subtitle {
+    color: #183153;
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 1.5rem auto 2rem;
+    line-height: 1.8;
+    position: relative;
+    padding: 1rem 2rem;
+    background: linear-gradient(to right, transparent, rgba(24, 49, 83, 0.05), transparent);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(24, 49, 83, 0.03);
+}
+
+.section-subtitle::after {
+    display: none;
+}
+
+    </style>
 </body>
 
 </html>
