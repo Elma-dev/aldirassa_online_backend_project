@@ -86,6 +86,8 @@ async def read_contact():
         return HTMLResponse(content=file.read(), status_code=200)
 
 
+
+
 @app.post("/chek-relevence")
 def check_relevence(query: str):
     result = check_relevence_agent(model, query)
