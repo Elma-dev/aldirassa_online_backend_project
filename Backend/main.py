@@ -32,14 +32,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 # Serve static files
 model = get_model("gpt-4o-mini")
 app.mount("/assets", StaticFiles(directory="../Frontend/assets"), name="assets")
 app.mount("/media", StaticFiles(directory="../Frontend/assets/media"), name="media")
 
+model = get_model("gpt-4o-mini")
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 async def read_index():
     with open("../Frontend/index.html", "r", encoding="utf-8") as file:
         return HTMLResponse(content=file.read(), status_code=200)
