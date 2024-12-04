@@ -24,10 +24,10 @@ from typing import List
 
 app = FastAPI()
 
-# Enable CORS
+# Enable CORS with specific origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Adjust this to the specific origins you want to allow
+    allow_origins=["*"],  # In production, replace with specific origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -216,3 +216,7 @@ def correct_quiz(user_answers: List[dict]):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="localhost", port=8000)

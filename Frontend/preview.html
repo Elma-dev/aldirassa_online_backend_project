@@ -256,8 +256,7 @@
 
         // Populate section content dynamically
         function populateSection(data) {
-            // Hide skeleton loader
-            document.getElementById("skeletonLoader").style.display = 'none';
+            // Remove reference to non-existent skeletonLoader
             document.getElementById("query-preloader1").style.display = 'none';
             document.getElementById("query-preloader2").style.display = 'none';
 
@@ -454,75 +453,94 @@
 
             document.getElementById("sectionTitle").textContent = data.module_name;
             document.getElementById("sectionSubtitle").textContent = data.introduction;
-
-            // Fetch and display resources for each topic
-            data.topics.forEach(topic => {
-                fetchResources(topic.topic_name);
-            });
-
+    
+            // Fetch resources only once for the section title
+            fetchResources(data.module_name);
+    
             // Store topics for chatbot use
             currentTopics = data.topics.map(topic => ({
                 topic_name: topic.topic_name,
                 explanation: topic.explanation
             }));
         }
-
-        function fetchResources(topicName) {
-            const payload = { topic_name: topicName };
-            console.log('Sending payload:', payload); // Log the payload
-
+    
+        async function fetchResources(sectionTitle) {
+            const payload = { topic_name: sectionTitle };
+            console.log('Sending payload:', payload);
+        
             const resourceLoader = document.getElementById("resourceLoader");
             const resourcesContainer = document.getElementById("resourcesContainer");
-
-            resourceLoader.style.display = 'block';
-            resourcesContainer.classList.add('content-hidden');
-
-            // Show preloader
-            document.getElementById("query-preloader2").style.display = 'inline';
-
-            fetch('/get-topic-resources', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(resources => {
-                    resourceLoader.style.display = 'none';
-                    console.log('Received resources:', resources); // Log the received resources
-                    const resourcesContainer = document.getElementById("resourcesContainer");
-                    if (Array.isArray(resources)) {
-                        resources.forEach(resource => {
-                            resourcesContainer.innerHTML += `
-                                <a href="${resource.link}" 
-                                   target="_blank" 
-                                   class="resource-link btn border rounded-3 shadow-sm d-flex align-items-center gap-2 px-4 py-2">
-                                    <i class="ri-link"></i>
-                                    <span class="arabic">${resource.title || resource.link}</span>
-                                </a>
-                            `;
-                        });
-                        setTimeout(() => {
-                            resourcesContainer.classList.remove('content-hidden');
-                            resourcesContainer.classList.add('content-visible');
-                        }, 100);
-                    } else {
-                        console.error('Resources is not an array:', resources);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching resources:', error);
-                })
-                .finally(() => {
-                    // Hide preloader
-                    document.getElementById("query-preloader2").style.display = 'none';
+            
+            if (resourceLoader) resourceLoader.style.display = 'block';
+            if (resourcesContainer) resourcesContainer.classList.add('content-hidden');
+        
+            try {
+                const response = await fetch('/get-topic-resources', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
                 });
+        
+                if (response.status === 429) {
+                    // Handle rate limiting
+                    console.log('Rate limit reached, waiting before retrying...');
+                    // Add fallback content while rate-limited
+                    resourcesContainer.innerHTML += `
+                        <div class="alert alert-warning arabic" role="alert">
+                            جاري تحميل الموارد... يرجى الانتظار
+                        </div>
+                    `;
+                    // Wait for 1 second before retrying
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return fetchResources(topicName);
+                }
+        
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+        
+                const resources = await response.json();
+                console.log('Received resources:', resources);
+        
+                resourcesContainer.innerHTML = ''; // Clear existing resources
+                if (Array.isArray(resources)) {
+                    resources.forEach(resource => {
+                        resourcesContainer.innerHTML += `
+                            <a href="${resource.link}" 
+                               target="_blank" 
+                               class="resource-link btn border rounded-3 shadow-sm d-flex align-items-center gap-2 px-4 py-2">
+                                <i class="ri-link"></i>
+                                <span class="arabic">${resource.title || resource.link}</span>
+                            </a>
+                        `;
+                    });
+                } else {
+                    console.error('Resources is not an array:', resources);
+                }
+        
+            } catch (error) {
+                console.error('Error fetching resources:', error);
+                if (resourcesContainer) {
+                    resourcesContainer.innerHTML = `
+                        <div class="alert alert-danger arabic" role="alert">
+                            عذراً، حدث خطأ أثناء تحميل الموارد
+                        </div>
+                    `;
+                }
+            } finally {
+                if (resourceLoader) resourceLoader.style.display = 'none';
+                const preloader2 = document.getElementById("query-preloader2");
+                if (preloader2) preloader2.style.display = 'none';
+                
+                setTimeout(() => {
+                    if (resourcesContainer) {
+                        resourcesContainer.classList.remove('content-hidden');
+                        resourcesContainer.classList.add('content-visible');
+                    }
+                }, 100);
+            }
         }
 
         document.getElementById("exerciseButton").addEventListener("click", () => {
