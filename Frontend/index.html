@@ -10,7 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="shortcut icon" href="assets/media/logo.png" type="image/x-icon">
@@ -41,10 +40,10 @@
                                     <span class="dropdown__title arabic">الدعم</span>
                                     <ul class="dropdown__list ps-0">
                                         <li>
-                                            <a href="/contact" class="dropdown__link arabic">الدردشة معنا</a>
+                                            <a href="contact.html" class="dropdown__link arabic">الدردشة معنا</a>
                                         </li>
                                         <li>
-                                            <a href="/faqs" class="dropdown__link arabic">الأسئلة الشائعة</a>
+                                            <a href="faqs.html" class="dropdown__link arabic">الأسئلة الشائعة</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -122,14 +121,45 @@
                             </div>
                         </div>
                     </li>
-                    <!-- About Us Link -->
-                    <li>
-                        <a href="/about_us" class="nav__link arabic">معلومات عنا</a>
+                    <!-- Courses Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button arabic">
+                            <i class="ri-arrow-down-s-line dropdown__arrow"></i>الدورات
+                        </div>
+                        <div class="dropdown__container" dir="rtl">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-book-open-line"></i>
+                                    </div>
+                                    <span class="dropdown__title arabic">الدورات المتاحة</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="intro_to_ml.html" class="dropdown__link arabic">مقدمة في تعلم
+                                                الآلة</a>
+                                        </li>
+                                        <li>
+                                            <a href="python_for_ml.html" class="dropdown__link arabic">بايثون لتعلم
+                                                الآلة</a>
+                                        </li>
+                                        <li>
+                                            <a href="types_of_ml.html" class="dropdown__link arabic">أنواع تعلم
+                                                الآلة</a>
+                                        </li>
+                                        <li>
+                                            <a href="applications_of_ml.html" class="dropdown__link arabic">تطبيقات تعلم
+                                                الآلة</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                     <!-- Home Link -->
                     <li>
                         <a href="/" class="nav__link arabic">الرئيسية</a>
                     </li>
+
                 </ul>
             </div>
             <div class="nav__data me-md-5 me-2 reveal_top">
@@ -157,8 +187,7 @@
                     <img src="assets/media/logo.png" alt="" srcset="" style="max-width: 250px;">
                     <!-- <h1 class="mb-3">AIDirassa</h1>
                     <h5 class="mb-4 text-secondary">Online</h5> -->
-                    <p class="mb-2 text-muted arabic">سؤال واحد بعيدًا عن النجاح الأكاديمي
-                    </p>
+                    <p class="mb-2 text-muted arabic">سؤال واحد بعيدًا عن النجاح الأكاديمي</p>
                 </div>
                 <div class="col-md-12 text-center reveal_top">
                     <img id="query-preloader" class="img-fluid mb-2" src="assets/media/preloader.gif"
@@ -173,22 +202,351 @@
                         <button class="btn btn-lg btn-light rounded-4 m-1 border-0" id="micButton">
                             <i class="ri-mic-line" id="micIcon"></i>
                         </button>
-                        <input type="text" dir="rtl"
-                            class="form-control py-3 arabic px-3 bg-light border-0 rounded-end-4" id="searchInput"
-                            id="searchInput" value="بغيت نتعلم اللغة العربية" />
+                        <input type="text" dir="rtl" class="form-control py-3 arabic px-3 bg-light border-0 rounded-end-4"
+                            id="searchInput" value = "بغيت نتعلم اللغة العربية" />
                     </div>
                 </div>
                 <div class="col-12 mt-4 text-center reveal_top">
                     <p class="text-muted arabic mb-2">أمثلة على الأسئلة:</p>
                     <div class="example-prompts d-flex flex-wrap justify-content-center gap-2 mb-4">
-                        <span class="badge bg-light text-dark p-2 arabic example-prompt" role="button">بغيت نتعلم الدكاءالاصطناعي</span>
-                        <span class="badge bg-light text-dark p-2 arabic example-prompt" role="button">بغيت نتعلم تحليل البيانات</span>
+                        <span class="badge bg-light text-dark p-2 arabic example-prompt" role="button">بغيت نتعلم الدكاء الاصطناعي</span>
+                        <span class="badge bg-light text-dark p-2 arabic example-prompt" role="button">بغيت نتعلم تحليل البيانات </span>
                         <span class="badge bg-light text-dark p-2 arabic example-prompt" role="button">بغيت نتعلم الامن السيبراني</span>
+                    </div>
+                    <div class="scroll-indicator">
+                        <a href="#aboutus" class="text-dark scroll-link">
+                            <p class="text-muted arabic mb-2">  تعرف علينا </p>
+                            <i class="ri-arrow-down-line animate-bounce" style="font-size: 2rem;"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+
+    <section class="section d-flex flex-column justify-content-center align-items-center my-5 reveal_top" dir="rtl">
+        <div class="container reveal_top">
+            <!-- About Us Section -->
+            <div class="row align-items-center justify-content-center mb-5 reveal_top">
+                <!-- Image Column -->
+                <div class="col-md-6 text-center reveal_top">
+                    <img src="assets/media/logo.png" alt="Logo" class="img-fluid">
+                </div>
+                <!-- Text Column -->
+                <div class="col-md-6 reveal_top">
+                    <h1 id = 'aboutus' class="mb-3 arabic reveal_top">معلومات عنا</h1>
+                    <p class="text-muted arabic reveal_top" style="font-size: 1.1rem; line-height: 1.8;">
+                        نحن فريق من المطورين المغاربة الملتزمين بتقديم أفضل تجربة تعليمية باستخدام تقنية الذكاء الاصطناعي. 
+                        هدفنا هو تمكين المتعلمين بأدوات وموارد متطورة تجعل التعلم أكثر فاعلية وجاذبية.
+                    </p>
+                    <p class="text-muted arabic reveal_top" style="font-size: 1.1rem; line-height: 1.8;">
+                        نحن نؤمن بأن التعليم هو المفتاح لتحقيق النجاح والتقدم، ولذلك نسعى جاهدين لتوفير بيئة تعليمية تفاعلية 
+                        وشاملة تلبي احتياجات جميع المتعلمين.
+                    </p>
+                    <p class="text-muted arabic reveal_top" style="font-size: 1.1rem; line-height: 1.8;">
+                        من خلال منصتنا، نقدم مجموعة متنوعة من الدروس والتمارين والاختبارات التي تساعد المتعلمين على تحسين 
+                        مهاراتهم ومعرفتهم في مجالات مختلفة. نحن هنا لدعمك في كل خطوة من خطوات رحلتك التعليمية.
+                    </p>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <a href="#team" class="text-dark scroll-link">
+                    <p class="text-muted arabic mb-2"> من وراء هذا العمل؟</p>
+                    <i class="ri-arrow-down-line animate-bounce" style="font-size: 2rem;"></i>
+                    <div style="margin-bottom: 60px;"></div>
+
+                </a>
+         </div>
+            </div>
+            <!-- Team Section -->
+            <div class="reveal_top">
+                <h2 id="team"  class="text-center mb-5 arabic reveal_top">فريق العمل</h2>
+                <div class="row justify-content-center g-4 reveal_top">
+                    <div class="col-md-4 col-sm-6 reveal_top">
+                        <div class="border border-4 rounded-4 p-3 bg-light h-100 reveal_top">
+                            <div class="d-flex justify-content-center py-3">
+                                <img src="assets/media/azdin.jpg" style="height: 200px;width: 200px;"
+                                    class="border border-3 rounded-4 reveal_top" alt="Azedin Sahir">
+                            </div>
+                            <div class="card-body text-center reveal_top">
+                                <h5 class="mb-2">Azedin Sahir</h5>
+                                <p class="mb-0">GenAI Developer</p>
+                                <p class="card-text text-muted mb-2">GenAI with LLMs Certified</p>
+                                <div class="my-2">
+                                    <a href="https://www.linkedin.com/in/azeddin-sahir/" class="btn btn-dark btn-sm rounded-2"><i
+                                            class="ri-linkedin-box-fill"></i></a>
+                                    <a href="https://github.com/Azeddin1717" class="btn btn-dark btn-sm rounded-2"><i
+                                            class="ri-github-fill"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 reveal_top">
+                        <div class="border border-4 rounded-4 p-3 bg-light h-100 reveal_top">
+                            <div class="d-flex justify-content-center py-3">
+                                <img src="assets/media/oussama.jpg" style="height: 200px;width: 200px;"
+                                    class="border border-3 rounded-4 reveal_top" alt="Azedin Sahir">
+                            </div>
+                            <div class="card-body text-center reveal_top">
+                                <h5 class="mb-2 mb-1 d-flex justify-content-center">Oussama Qouti<i class="ri-vip-crown-line text-warning me-2"></i></h5>
+                                <p class="mb-0">GenAI Developer</p>
+                                <p class="mb-0">GenAI with LLMs Certified</p>
+                                <div class="my-2">
+                                    <a href="https://www.linkedin.com/in/oussama-qouti-105bb820a/" class="btn btn-dark btn-sm rounded-2"><i class="ri-linkedin-box-fill"></i></a>
+                                    <a href="https://github.com/QoutiOussama13" class="btn btn-dark btn-sm rounded-2"><i class="ri-github-fill"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 reveal_top">
+                        <div class="border border-4 rounded-4 p-3 bg-light h-100 reveal_top">
+                            <div class="d-flex justify-content-center py-3">
+                                <img src="assets/media/mahmoud.jpg" style="height: 200px;width: 200px;"
+                                    class="border border-3 rounded-4 reveal_top" alt="Mahmoud Bidry">
+                            </div>
+                            <div class="card-body text-center reveal_top">
+                                <h5 class="mb-2">Mahmoud Bidry</h5>
+                                <p class="mb-0">PhD Candidate</p>
+                                <p class="card-text text-muted mb-2">GenAI Developer | GenAI with LLMs Certified</p>
+                                <div class="my-2">
+                                    <a href="https://www.linkedin.com/in/mahmoudbidry/" class="btn btn-dark btn-sm rounded-2"><i
+                                            class="ri-linkedin-box-fill"></i></a>
+                                    <a href="https://github.com/mahmoudBidry" class="btn btn-dark btn-sm rounded-2"><i
+                                            class="ri-github-fill"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 reveal_right reveal_top">
+                        <div class="border border-4 rounded-4 p-3 bg-light h-100 reveal_top">
+                            <div class="d-flex justify-content-center py-3">
+                                <img src="assets/media/abdo.png" style="height: 200px;width: 200px;"
+                                    class="border border-3 rounded-4 reveal_top" alt="Abdeljalil EL MAJJODI">
+                            </div>
+                            <div class="card-body text-center reveal_top">
+                                <h5 class="mb-2">Abdeljalil EL Majjoudi</h5>
+                                <p class="mb-0">GenAI Engineer </p>
+                                <p class="mb-0">Backend Developer</p>
+                                <div class="my-2">
+                                    <a href="https://www.linkedin.com/in/abdeljalil-el-majjodi/" class="btn btn-dark btn-sm rounded-2"><i
+                                            class="ri-linkedin-box-fill"></i></a>
+                                    <a href="https://github.com/Elma-dev?tab=repositories" class="btn btn-dark btn-sm rounded-2"><i
+                                            class="ri-github-fill"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 reveal_right reveal_top">
+                        <div class="border border-4 rounded-4 p-3 bg-light h-100 reveal_top">
+                            <div class="d-flex justify-content-center py-3">
+                                <img src="assets/media/yassir.jpg" style="height: 200px;width: 200px;"
+                                    class="border border-3 rounded-4 reveal_top" alt="Yassir Loukilia">
+                            </div>
+                            <div class="card-body text-center reveal_top">
+                                <h5 class="mb-2">Yassir Loukilia</h5>
+                                <p class="mb-0">Frontend Developer </p>
+                                <p class="mb-0">UI/UX Design Certified</p>
+                                <div class="my-2">
+                                    <a href="https://www.linkedin.com/in/yassir-loukilia/" class="btn btn-dark btn-sm rounded-2"><i
+                                            class="ri-linkedin-box-fill"></i></a>
+                                    <a href="https://github.com/YASSIR-LOUKILIA" class="btn btn-dark btn-sm rounded-2"><i
+                                            class="ri-github-fill"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <style>
+        .animate-bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .team-card {
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .example-prompt {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .example-prompt:hover {
+            background-color: #e9ecef !important;
+            transform: translateY(-2px);
+        }
+        
+        .card-img-wrapper {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .card-img-top {
+            width: 180px;
+            height: 180px;
+            border-radius: 50% !important;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin: 0 auto;
+        }
+
+        .scroll-indicator {
+            margin-top: 2rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .scroll-indicator p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: #0d6efd !important;
+        }
+
+        .team-member {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-img {
+            position: relative;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .member-img img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .member-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .member-info .position {
+            display: block;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-info p {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 0.3rem;
+        }
+
+        .member-info .certification {
+            color: #28a745;
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+            height: 35px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            margin: 0 5px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #333;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .social-links i {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .team-member {
+                margin-bottom: 2rem;
+            }
+        }
+
+        .scroll-link {
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .scroll-link:hover {
+            transform: scale(1.1);
+        }
+    </style>
 
     <script>
 
