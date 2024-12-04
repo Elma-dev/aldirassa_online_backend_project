@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -19,7 +19,119 @@
 <body>
     <header class="header reveal_top">
         <nav class="nav d-flex justify-content-between">
-            <div class="nav__data ms-md-5 ms-2 reveal_top">
+            <div class="nav__data reveal_top">
+                <div class="nav__background">
+                </div>
+            </div>
+            <!--=============== NAV MENU ===============-->
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <!-- Help/Support -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button arabic">
+                            <i class="ri-arrow-down-s-line dropdown__arrow"></i>المساعدة والدعم
+                        </div>
+                        <div class="dropdown__container" dir="rtl">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-chat-3-line"></i>
+                                    </div>
+                                    <span class="dropdown__title arabic">الدعم</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="/contact" class="dropdown__link arabic">الدردشة معنا</a>
+                                        </li>
+                                        <li>
+                                            <a href="/faqs" class="dropdown__link arabic">الأسئلة الشائعة</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- My Progress Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button arabic">
+                            <i class="ri-arrow-down-s-line dropdown__arrow"></i>تقدمي
+                        </div>
+                        <div class="dropdown__container" dir="rtl">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-road-map-line"></i>
+                                    </div>
+                                    <span class="dropdown__title arabic">أدوات التعلم</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="learning_path.html" class="dropdown__link arabic">مسار التعلم الخاص
+                                                بي</a>
+                                        </li>
+                                        <li>
+                                            <a href="exercises.html" class="dropdown__link arabic">تمارين</a>
+                                        </li>
+                                        <li>
+                                            <a href="evaluation.html" class="dropdown__link arabic">تقييم</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-question-line"></i>
+                                    </div>
+                                    <span class="dropdown__title arabic">اختبارات</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="ongoing_quizzes.html" class="dropdown__link arabic">اختبارات
+                                                جارية</a>
+                                        </li>
+                                        <li>
+                                            <a href="final_quiz.html" class="dropdown__link arabic">الاختبار النهائي</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Resources Dropdown -->
+                    <li class="dropdown__item">
+                        <div class="nav__link dropdown__button arabic">
+                            <i class="ri-arrow-down-s-line dropdown__arrow"></i>الموارد
+                        </div>
+                        <div class="dropdown__container" dir="rtl">
+                            <div class="dropdown__content">
+                                <div class="dropdown__group">
+                                    <div class="dropdown__icon">
+                                        <i class="ri-links-line"></i>
+                                    </div>
+                                    <span class="dropdown__title arabic">مواد التعلم</span>
+                                    <ul class="dropdown__list ps-0">
+                                        <li>
+                                            <a href="articles.html" class="dropdown__link arabic">مقالات</a>
+                                        </li>
+                                        <li>
+                                            <a href="youtube_tutorials.html" class="dropdown__link arabic">دروس
+                                                يوتيوب</a>
+                                        </li>
+                                        <li>
+                                            <a href="research_papers.html" class="dropdown__link arabic">أوراق بحثية</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- About Us Link -->
+                    <li>
+                        <a href="/about_us" class="nav__link arabic">معلومات عنا</a>
+                    </li>
+                    <!-- Home Link -->
+                    <li>
+                        <a href="/" class="nav__link arabic">الرئيسية</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav__data me-md-5 me-2 reveal_top">
                 <div class="d-flex flex-column align-items-center nav__logo">
                     <h4 class="mb-0">
                         AIDirassa
@@ -28,154 +140,16 @@
                         online
                     </small>
                 </div>
+                <img src="assets/media/logo.png" alt="" srcset="" style="max-width: 80px;">
                 <div class="nav__toggle" id="nav-toggle">
                     <i class="ri-menu-line nav__toggle-menu"></i>
                     <i class="ri-close-line nav__toggle-close"></i>
                 </div>
             </div>
-    
-            <!--=============== NAV MENU ===============-->
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <!-- Home Link -->
-                    <li>
-                        <a href="index.html" class="nav__link">Home</a>
-                    </li>
-                    <!-- Courses Dropdown -->
-                    <li class="dropdown__item">
-                        <div class="nav__link dropdown__button">
-                            Courses <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-                        <div class="dropdown__container">
-                            <div class="dropdown__content">
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-book-open-line"></i>
-                                    </div>
-                                    <span class="dropdown__title">Available Courses</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="intro_to_ml.html" class="dropdown__link">Introduction to Machine Learning</a>
-                                        </li>
-                                        <li>
-                                            <a href="python_for_ml.html" class="dropdown__link">Python for Machine Learning</a>
-                                        </li>
-                                        <li>
-                                            <a href="types_of_ml.html" class="dropdown__link">Types of Machine Learning</a>
-                                        </li>
-                                        <li>
-                                            <a href="applications_of_ml.html" class="dropdown__link">Applications of Machine Learning</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-    
-                    <!-- Resources Dropdown -->
-                    <li class="dropdown__item">
-                        <div class="nav__link dropdown__button">
-                            Resources <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-                        <div class="dropdown__container">
-                            <div class="dropdown__content">
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-links-line"></i>
-                                    </div>
-                                    <span class="dropdown__title">Learning Materials</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="articles.html" class="dropdown__link">Articles</a>
-                                        </li>
-                                        <li>
-                                            <a href="youtube_tutorials.html" class="dropdown__link">YouTube Tutorials</a>
-                                        </li>
-                                        <li>
-                                            <a href="research_papers.html" class="dropdown__link">Research Papers</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-    
-                    <!-- My Progress Dropdown -->
-                    <li class="dropdown__item">
-                        <div class="nav__link dropdown__button">
-                            My Progress <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-                        <div class="dropdown__container">
-                            <div class="dropdown__content">
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-road-map-line"></i>
-                                    </div>
-                                    <span class="dropdown__title">Learning Tools</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="learning_path.html" class="dropdown__link">My Learning Path</a>
-                                        </li>
-                                        <li>
-                                            <a href="exercises.html" class="dropdown__link">Exercises</a>
-                                        </li>
-                                        <li>
-                                            <a href="evaluation.html" class="dropdown__link">Evaluation</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-question-line"></i>
-                                    </div>
-                                    <span class="dropdown__title">Quizzes</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="ongoing_quizzes.html" class="dropdown__link">Ongoing Quizzes</a>
-                                        </li>
-                                        <li>
-                                            <a href="final_quiz.html" class="dropdown__link">Final Quiz</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-    
-                    <!-- Help/Support -->
-                    <li class="dropdown__item">
-                        <div class="nav__link dropdown__button">
-                            Help & Support <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-                        </div>
-                        <div class="dropdown__container">
-                            <div class="dropdown__content">
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-chat-3-line"></i>
-                                    </div>
-                                    <span class="dropdown__title">Support</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="contact.html" class="dropdown__link">Chat with us</a>
-                                        </li>
-                                        <li>
-                                            <a href="faqs.html" class="dropdown__link">FAQs</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-    
-            <div class="nav__data reveal_top">
-                <div class="nav__background">
-                </div>
-            </div>
+
         </nav>
     </header>
-    <section class="section d-flex flex-column justify-content-center align-items-center position-relative">
+    <section class="section d-flex flex-column justify-content-center align-items-center position-relative" dir="rtl">
         <!-- Quiz Container -->
         <div class="col-lg-8 col-md-10 col-11 mt-md-5 my-3">
             <!-- Dynamic Content Container -->
@@ -184,10 +158,9 @@
                     <div class="col-md-6 col-sm-12">
                         <img src="assets/media/faqs.svg" alt="FAQ Image" class="img-fluid">
                     </div>
-                    <div class="col-md-6 col-sm-12 p-md-5 p-3 text-dark mt-md-0 mt-4">
-                        <h1 class="text-capitalize">Frequently Asked Questions</h1>
-                        <p>Find answers to the most common questions about AIDirassa and our online educational services.
-                        </p>
+                    <div class="col-md-6 col-sm-12 p-md-5 p-3 text-dark mt-md-0 mt-4 arabic">
+                        <h1 class="text-capitalize arabic">الأسئلة الشائعة</h1>
+                        <p class="arabic">اعثر على إجابات لأكثر الأسئلة شيوعًا حول <span class="normal me-2">AIDirassa</span> وخدماتنا التعليمية عبر الإنترنت.</p>
                     </div>
                 </div>
                 <div id="qsts" class="row d-flex mt-md-0 mt-4 d-flex justify-content-center align-items-center pt-5">
@@ -205,33 +178,33 @@
         // Example FAQ Data for AIDirassa
         const faqData = [
     {
-        question: "What is AIDirassa?",
-        answer: "AIDirassa is an AI-powered online platform designed to enhance learning by providing educational resources, quizzes, and AI-driven models to guide students through their studies.",
+        question: "ما هو <span class='normal me-2'>AIDirassa</span>؟",
+        answer: "<span class='normal me-2'>AIDirassa</span> هو منصة تعليمية عبر الإنترنت مدعومة بالذكاء الاصطناعي تهدف إلى تحسين التعلم من خلال توفير الموارد التعليمية والاختبارات والنماذج المدعومة بالذكاء الاصطناعي لتوجيه الطلاب خلال دراستهم.",
         icon: "ri-information-line"
     },
     {
-        question: "How do I register on AIDirassa?",
-        answer: "To register on AIDirassa, click on the 'Sign Up' button on the homepage and fill out your details. Once registered, you can access all the features of the platform.",
+        question: "كيف أسجل في <span class='normal me-2'>AIDirassa</span>؟",
+        answer: "للتسجيل في <span class='normal me-2'>AIDirassa</span>، انقر على زر 'التسجيل' في الصفحة الرئيسية واملأ بياناتك. ب��جرد التسجيل، يمكنك الوصول إلى جميع ميزات المنصة.",
         icon: "ri-user-add-line"
     },
     {
-        question: "Can I track my learning progress on AIDirassa?",
-        answer: "Yes, AIDirassa allows you to track your learning progress, including completed modules, quiz scores, and overall performance metrics, all powered by AI-driven analytics.",
+        question: "هل يمكنني تتبع تقدمي التعليمي على <span class='normal me-2'>AIDirassa</span>؟",
+        answer: "نعم، يتيح لك <span class='normal me-2'>AIDirassa</span> تتبع تقدمك التعليمي، بما في ذلك الوحدات المكتملة، ودرجات الاختبارات، ومقاييس الأداء العامة، وكلها مدعومة بتحليلات الذكاء الاصطناعي.",
         icon: "ri-bar-chart-line"
     },
     {
-        question: "Are the learning resources on AIDirassa free?",
-        answer: "AIDirassa provides a mix of free and premium resources. Some modules and exercises are free, while others require a subscription.",
+        question: "هل الموارد التعليمية على <span class='normal me-2'>AIDirassa</span> مجانية؟",
+        answer: "يوفر <span class='normal me-2'>AIDirassa</span> مزيجًا من الموارد المجانية والمتميزة. بعض الوحدات والتمارين مجانية، بينما يتطلب البعض الآخر اشتراكًا.",
         icon: "ri-money-dollar-circle-line"
     },
     {
-        question: "How can I access quizzes on AIDirassa?",
-        answer: "Quizzes are available within each module. Navigate to a specific topic, and you'll find AI-generated quizzes to test your knowledge and identify areas for improvement.",
+        question: "كيف يمكنني الوصول إلى الاختبارات على <span class='normal me-2'>AIDirassa</span>؟",
+        answer: "الاختبارات متاحة داخل كل وحدة. انتقل إلى موضوع معين، وستجد اختبارات مدعومة بالذكاء الاصطناعي لاختبار معرفتك وتحديد مجالات التحسين.",
         icon: "ri-question-line"
     },
     {
-        question: "What if I encounter technical issues while using AIDirassa?",
-        answer: "If you experience any technical issues, you can contact our support team through the 'Help' section or email us at support@AIDirassa.com.",
+        question: "ماذا أفعل إذا واجهت مشاكل تقنية أثناء استخدام <span class='normal me-2'>AIDirassa</span>؟",
+        answer: "إذا واجهت أي مشاكل تقنية، يمكنك الاتصال بفريق الدعم لدينا من خلال قسم 'المساعدة' أو إرسال بريد إلكتروني إلى support@<span class='normal me-2'>AIDirassa</span>.com.",
         icon: "ri-shield-check-line"
     }
 ];
@@ -242,12 +215,12 @@
         faqData.forEach((item, index) => {
             faqAccordion.innerHTML += `
                 <div class="mb-3 border-bottom border-3 module-item border-white">
-                    <h5 class="text-dark d-flex" data-bs-toggle="collapse" data-bs-target="#faq${index + 1}" aria-expanded="false">
+                    <h5 class="text-dark d-flex arabic" data-bs-toggle="collapse" data-bs-target="#faq${index + 1}" aria-expanded="false">
                         <i class="${item.icon} faq-icon me-3"></i>
                         ${item.question}
                     </h5>
                     <div id="faq${index + 1}" class="collapse" data-bs-parent="#faqAccordion">
-                        <div class="p-2 px-md-4">
+                        <div class="p-2 px-md-4 arabic">
                             ${item.answer}
                         </div>
                     </div>

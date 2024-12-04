@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="https://unpkg.com/scrollreveal"></script>
     <link rel="shortcut icon" href="assets/media/logo.png" type="image/x-icon">
-
     <title>AIDirassa</title>
 </head>
 
@@ -41,10 +40,10 @@
                                     <span class="dropdown__title arabic">الدعم</span>
                                     <ul class="dropdown__list ps-0">
                                         <li>
-                                            <a href="contact.html" class="dropdown__link arabic">الدردشة معنا</a>
+                                            <a href="/contact" class="dropdown__link arabic">الدردشة معنا</a>
                                         </li>
                                         <li>
-                                            <a href="faqs.html" class="dropdown__link arabic">الأسئلة الشائعة</a>
+                                            <a href="/faqs" class="dropdown__link arabic">الأسئلة الشائعة</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -122,45 +121,14 @@
                             </div>
                         </div>
                     </li>
-                    <!-- Courses Dropdown -->
-                    <li class="dropdown__item">
-                        <div class="nav__link dropdown__button arabic">
-                            <i class="ri-arrow-down-s-line dropdown__arrow"></i>الدورات
-                        </div>
-                        <div class="dropdown__container" dir="rtl">
-                            <div class="dropdown__content">
-                                <div class="dropdown__group">
-                                    <div class="dropdown__icon">
-                                        <i class="ri-book-open-line"></i>
-                                    </div>
-                                    <span class="dropdown__title arabic">الدورات المتاحة</span>
-                                    <ul class="dropdown__list ps-0">
-                                        <li>
-                                            <a href="intro_to_ml.html" class="dropdown__link arabic">مقدمة في تعلم
-                                                الآلة</a>
-                                        </li>
-                                        <li>
-                                            <a href="python_for_ml.html" class="dropdown__link arabic">بايثون لتعلم
-                                                الآلة</a>
-                                        </li>
-                                        <li>
-                                            <a href="types_of_ml.html" class="dropdown__link arabic">أنواع تعلم
-                                                الآلة</a>
-                                        </li>
-                                        <li>
-                                            <a href="applications_of_ml.html" class="dropdown__link arabic">تطبيقات تعلم
-                                                الآلة</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- About Us Link -->
+                    <li>
+                        <a href="/about_us" class="nav__link arabic">معلومات عنا</a>
                     </li>
                     <!-- Home Link -->
                     <li>
                         <a href="/" class="nav__link arabic">الرئيسية</a>
                     </li>
-
                 </ul>
             </div>
             <div class="nav__data me-md-5 me-2 reveal_top">
@@ -184,24 +152,24 @@
     <section id="contact" class="row d-flex justify-content-center m-md-0 m-3 contact">
         <div class="col-md-10 col-sm-12 border border-white border-4 rounded-4">
             <div class="row col-12 m-0 d-flex justify-content-center align-items-center rounded-4 p-md-5 p-3">
-                <h1 class="text-capitalize text-center mb-4">Contact Us</h1>
+                <h1 class="text-capitalize text-center mb-4 arabic" dir="rtl">اتصل بنا</h1>
                 <div class="col-md-7 col-sm-12 text-dark">
-                    <p>We'd love to hear from you! Please fill out the form below to get in touch with us.</p>
-                    <form method="POST" action="/submitContact" class="mx-md-5 mx-2">
+                    <p class="arabic" dir="rtl">نود أن نسمع منك! يرجى ملء النموذج أدناه للتواصل معنا.</p>
+                    <form method="POST" action="/submitContact" class="mx-md-5 mx-2" dir="rtl">
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control rounded-3 py-2 px-3 border-0" id="name" name="name" placeholder="Your Name" required>
+                            <label for="name" class="form-label arabic" dir="rtl">الاسم</label>
+                            <input type="text" class="arabic form-control rounded-3 py-2 px-3 border-0" id="name" name="name" placeholder="اسمك" required>
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control rounded-3 py-2 px-3 border-0" id="email" name="email" placeholder="Your Email" required>
+                            <label for="email" class="form-label arabic" dir="rtl">البريد الإلكتروني</label>
+                            <input type="email" class="arabic form-control rounded-3 py-2 px-3 border-0" id="email" name="email" placeholder="بريدك الإلكتروني" required>
                         </div>
                         <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control rounded-3 py-2 px-3 border-0" id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
+                            <label for="message" class="form-label arabic" dir="rtl">الرسالة</label>
+                            <textarea class="arabic form-control rounded-3 py-2 px-3 border-0" id="message" name="message" rows="4" placeholder="رسالتك" required></textarea>
                         </div>
                         <div class="d-flex justify-content-center mt-4">
-                            <button type="submit" class="btn btn-dark px-3 py-2 d-flex">Send Message<i class="ri-send-plane-fill ms-2"></i></button>
+                            <button type="submit" class="btn btn-dark px-3 py-2 d-flex arabic" dir="rtl">إرسال الرسالة<i class="ri-send-plane-fill me-2"></i></button>
                         </div>
                     </form>
                 </div>

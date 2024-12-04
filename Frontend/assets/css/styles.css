@@ -315,7 +315,7 @@ a {
     left: 0;
     right: 0;
     top: 6.5rem;
-    background-color: #e7e7e754;
+    background-color: var(--body-color);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
     pointer-events: none;
     opacity: 0;
@@ -553,4 +553,11 @@ section {
 .normal{
   font-family: "Poppins", sans-serif;
 
+}
+
+.border-primary-1{
+  border-color: #a16e3a !important;
+}
+.border-primary-light-1{
+  border-color: var(--text-color) !important;
 }

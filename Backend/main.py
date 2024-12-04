@@ -64,10 +64,27 @@ async def read_exercises():
     with open("../Frontend/exercises.html", "r", encoding="utf-8") as file:
         return HTMLResponse(content=file.read(), status_code=200)
 
+@app.get("/about_us", response_class=HTMLResponse)
+async def read_about_us():
+    with open("../Frontend/about_us.html", "r", encoding="utf-8") as file:
+        return HTMLResponse(content=file.read(), status_code=200)
+
 @app.get("/final_quiz", response_class=HTMLResponse)
 async def read_final_quiz():
     with open("../Frontend/final_quiz.html", "r", encoding="utf-8") as file:
         return HTMLResponse(content=file.read(), status_code=200)
+
+@app.get("/faqs", response_class=HTMLResponse)
+async def read_faqs():
+    with open("../Frontend/faqs.html", "r", encoding="utf-8") as file:
+        return HTMLResponse(content=file.read(), status_code=200)
+
+
+@app.get("/contact", response_class=HTMLResponse)
+async def read_contact():
+    with open("../Frontend/contact.html", "r", encoding="utf-8") as file:
+        return HTMLResponse(content=file.read(), status_code=200)
+
 
 @app.post("/chek-relevence")
 def check_relevence(query: str):
